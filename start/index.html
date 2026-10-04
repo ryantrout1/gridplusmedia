@@ -93,12 +93,27 @@
         <label for="fax">Leave this empty</label>
         <input id="fax" name="fax" type="text" tabindex="-1" autocomplete="off">
       </div>
+      <div id="bot-check"></div>
       <button class="btn" type="submit">Send it</button>
       <p class="form-note">We only use this to get your setup started.</p>
     </form>
   </div>
 </section>
 </main>
+<script>
+// Paste the Cloudflare Turnstile site key between the quotes to turn the bot check on.
+var TURNSTILE_SITE_KEY = '';
+if (TURNSTILE_SITE_KEY) {
+  var box = document.getElementById('bot-check');
+  box.className = 'cf-turnstile';
+  box.setAttribute('data-sitekey', TURNSTILE_SITE_KEY);
+  var t = document.createElement('script');
+  t.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+  t.async = true;
+  t.defer = true;
+  document.head.appendChild(t);
+}
+</script>
 <footer class="site-footer">
   <div class="wrap foot-bar">
     <a class="brand" href="/">

@@ -23,3 +23,7 @@ Every call-to-action goes to `/start/`. The form posts to `api/start.js`, which 
 - `NOTIFY_TO`: the email that receives submissions. With Resend's test sender this must be the email the Resend account was created with.
 
 You then email the person a scheduling link by hand.
+
+## Bot check (Cloudflare Turnstile)
+
+Create a free Turnstile widget in Cloudflare for gridpulsemedia.com. Put the site key in `TURNSTILE_SITE_KEY` in `start/index.html`, and set `TURNSTILE_SECRET` in Vercel. Until both are set, only the hidden trap field protects the form.

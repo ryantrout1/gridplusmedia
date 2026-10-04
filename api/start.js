@@ -1,5 +1,6 @@
 // Receives the /start form and emails it to the owner through Resend.
 // Needs two environment variables in Vercel: RESEND_API_KEY and NOTIFY_TO.
+// Optional: TURNSTILE_SECRET turns on the Cloudflare Turnstile bot check.
 
 const FIELDS = [
   ['business', 'Business'],
@@ -40,6 +41,26 @@ module.exports = async function handler(req, res) {
   if (!data.business || !data.name || !emailOk) {
     const p = page(400, 'Please add your business name, your name and a valid email.');
     return res.status(p.status).setHeader('Content-Type', 'text/html; charset=utf-8').send(p.html);
+  }
+
+  const secret = process.env.TURNSTILE_SECRET;
+  if (secret) {
+    const token = clean(body['cf-turnstile-response']);
+    let ok = false;
+    try {
+      const v = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ secret, response: token }).toString(),
+      });
+      ok = !!token && v.ok && (await v.json()).success === true;
+    } catch (e) {
+      console.error('Turnstile check failed', e);
+    }
+    if (!ok) {
+      const p = page(400, 'We could not confirm you are a person. Please go back and try again.');
+      return res.status(p.status).setHeader('Content-Type', 'text/html; charset=utf-8').send(p.html);
+    }
   }
 
   const key = process.env.RESEND_API_KEY;
