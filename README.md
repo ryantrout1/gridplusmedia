@@ -1,4 +1,4 @@
-# Grid Plus Media
+# Grid PulseMedia
 
 Static site, no build step. Hosted on Vercel, deployed from this repo.
 
