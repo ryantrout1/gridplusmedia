@@ -33,3 +33,11 @@ Create a free Turnstile widget in Cloudflare for gridpulsemedia.com. Put the sit
 the same value the engine project has. Until that variable is set, or if the engine does not answer, the
 form is emailed through Resend instead (`RESEND_API_KEY`, `NOTIFY_TO`), so a lead is not lost. If neither
 works the visitor sees an error rather than a thank-you.
+
+## Guides
+
+`/guides/` is built from markdown. Each file in `content/guides/` becomes a page; `scripts/build-guides.mjs`
+runs on every Vercel deploy (see `vercel.json`) and writes `/guides/` pages and `sitemap.xml`. The generated
+files are not committed. The engine publishes a guide by committing a `.md` file there (and its picture to
+`images/guides/`), which triggers a deploy. Guides carry `noindex` (the `NOINDEX` constant in the build script)
+until launch: flip it together with the homepage tag.

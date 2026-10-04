@@ -1,0 +1,7 @@
+{
+  "name": "gridpulsemedia",
+  "private": true,
+  "type": "module",
+  "scripts": { "build": "node scripts/build-guides.mjs" },
+  "dependencies": { "marked": "^15.0.0" }
+}
