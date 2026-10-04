@@ -4,7 +4,7 @@
 // through Resend instead (RESEND_API_KEY and NOTIFY_TO), so a lead is never lost.
 // Optional: TURNSTILE_SECRET turns on the Cloudflare Turnstile bot check.
 
-const crypto = require('crypto');
+import crypto from 'node:crypto';
 
 const FIELDS = [
   ['business', 'Business'],
@@ -27,7 +27,7 @@ function page(status, message) {
   return { status, html: '<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Grid Pulse Media</title><body style="font:18px/1.5 system-ui,sans-serif;max-width:560px;margin:15vh auto;padding:0 24px;color:#1E1B16;background:#F6F2EA"><h1 style="font-size:28px">' + message + '</h1><p><a href="/start/" style="color:#B04A20">Back to the form</a></p></body>' };
 }
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
     return res.status(405).send('Method not allowed');
