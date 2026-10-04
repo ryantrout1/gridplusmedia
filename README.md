@@ -1,15 +1,18 @@
 # Grid Pulse Media
 
-Static site, no build step. Hosted on Vercel, deployed from this repo.
+Static site, no build step. Hosted on Vercel, deployed from this repo. `main` is production (gridpulsemedia.com).
 
-## Branches
+## Open items (highlighted yellow on the page)
 
-- `main`: production. Currently a coming-soon placeholder.
-- `site-v1`: the first full homepage (Neighbor direction). Gets a Vercel preview URL only. Merge into `main` when ready to launch.
+- Booking link for every "Book your setup call" button.
+- Screenshots of Heaven Sent Beauty and Casa de Leyva, plus one real result each, with owner permission.
+- Contract terms and cancellation terms.
+- One or two lines on who is behind Grid Pulse Media.
+- Footer email address.
 
-## Launch checklist
+Pricing on the page: $349 per month, $699 one-time setup.
 
-- Merge `site-v1` into `main`.
+## Before search engines should see it
+
+- Fill the open items above.
 - Remove the `noindex` meta tag from `index.html`.
-- Attach the production domain in Vercel (not done yet).
-- Replace the open items listed in `site-v1` (booking link, screenshots, about line, terms).
