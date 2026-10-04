@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get started | Grid Pulse Media</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@700&amp;family=Source+Sans+3:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/">
+      <svg viewBox="0 0 64 64" fill="none" aria-hidden="true"><circle cx="32" cy="32" r="32" fill="#2F4A3A"></circle><path d="M13 34h10l5-14 8 26 5-12h10" stroke="#F6F2EA" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      <span>Grid Pulse Media</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="/">Back to home</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+<section class="start">
+  <div class="wrap start-wrap">
+    <div class="start-intro">
+      <h1>Let's get started</h1>
+      <p class="lede">Answer a few questions so we're ready before we talk. It takes about five minutes. We'll review it and email you a link to pick a time.</p>
+    </div>
+    <form class="start-form" method="post" action="/api/start">
+      <div class="field-grid">
+      <div class="field">
+        <label for="business">Business name <span class="req">Required</span></label>
+        
+        <input id="business" name="business" type="text" required autocomplete="organization">
+      </div>
+      <div class="field">
+        <label for="name">Your name <span class="req">Required</span></label>
+        
+        <input id="name" name="name" type="text" required autocomplete="name">
+      </div>
+      <div class="field">
+        <label for="email">Email <span class="req">Required</span></label>
+        <input id="email" name="email" type="email" required autocomplete="email" aria-describedby="email-h">
+        <span class="hint" id="email-h">We'll send your scheduling link here.</span>
+      </div>
+      <div class="field">
+        <label for="type">Type of business <span class="req">Optional</span></label>
+        <select id="type" name="type">
+          <option value="">Choose one</option>
+          <option>Restaurant or food</option>
+          <option>Beauty, spa or wellness</option>
+          <option>Home services (electrician, plumber, HVAC and similar)</option>
+          <option>Retail</option>
+          <option>Professional services</option>
+          <option>Something else</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="website">Your website <span class="req">Optional</span></label>
+        <input id="website" name="website" type="text" aria-describedby="website-h">
+        <span class="hint" id="website-h">Skip it if you don't have one yet.</span>
+      </div>
+      <div class="field">
+        <label for="google">Google business profile <span class="req">Optional</span></label>
+        <input id="google" name="google" type="text" aria-describedby="google-h">
+        <span class="hint" id="google-h">Paste the link, or the name it shows under on Google.</span>
+      </div>
+      <div class="field">
+        <label for="instagram">Instagram <span class="req">Optional</span></label>
+        <input id="instagram" name="instagram" type="text" aria-describedby="instagram-h">
+        <span class="hint" id="instagram-h">A link or @handle. Skip it if you don't have one.</span>
+      </div>
+      <div class="field">
+        <label for="facebook">Facebook <span class="req">Optional</span></label>
+        <input id="facebook" name="facebook" type="text" aria-describedby="facebook-h">
+        <span class="hint" id="facebook-h">A link or page name. Skip it if you don't have one.</span>
+      </div>
+      </div>
+      <div class="field">
+        <label for="fix">What's the one thing you most want fixed? <span class="req">Optional</span></label>
+        <textarea id="fix" name="fix" rows="4"></textarea>
+      </div>
+      <div class="field">
+        <label for="heard">How did you hear about us? <span class="req">Optional</span></label>
+        <input id="heard" name="heard" type="text">
+      </div>
+      <div class="trap" aria-hidden="true">
+        <label for="fax">Leave this empty</label>
+        <input id="fax" name="fax" type="text" tabindex="-1" autocomplete="off">
+      </div>
+      <button class="btn" type="submit">Send it</button>
+      <p class="form-note">We only use this to get your setup started.</p>
+    </form>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="wrap foot-bar">
+    <a class="brand" href="/">
+      <svg viewBox="0 0 64 64" fill="none" aria-hidden="true"><circle cx="32" cy="32" r="32" fill="#2F4A3A"></circle><path d="M13 34h10l5-14 8 26 5-12h10" stroke="#F6F2EA" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      <span>Grid Pulse Media</span>
+    </a>
+    <div>&copy; 2026 Grid Pulse Media</div>
+  </div>
+</footer>
+</body>
+</html>
