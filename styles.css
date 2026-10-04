@@ -465,6 +465,18 @@ body:has(.inc-dialog[open]) { overflow: hidden; }
 .compare p { font-size: 19px; }
 .compare .compare-note { font-size: 15px; color: var(--muted); }
 
+/* Compare table */
+.compare { max-width: none; }
+.table-wrap { overflow-x: auto; }
+.compare table { width: 100%; border-collapse: collapse; font-size: 17px; background: var(--sand); border: 1px solid var(--line); }
+.compare th, .compare td { text-align: left; padding: 14px 18px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.compare thead th { font-size: 14px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); background: var(--sand-deep); }
+.compare tbody th { font-weight: 700; }
+.compare td:last-child { color: var(--forest); font-weight: 700; }
+.compare tr.total th, .compare tr.total td { background: var(--sand-deep); border-bottom: 0; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+@media (max-width: 640px) { .compare table { min-width: 560px; } }
+
 /* FAQ */
 .faq { background: var(--sand); }
 .faq h2 { margin-bottom: 36px; }
