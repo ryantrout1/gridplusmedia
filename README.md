@@ -4,7 +4,7 @@ Static site, no build step. Hosted on Vercel, deployed from this repo. `main` is
 
 ## Open items (highlighted yellow on the page)
 
-- Booking link for every "Book your setup call" button.
+- Booking link for every "Book a call" button.
 - Screenshots of Heaven Sent Beauty and Casa de Leyva, plus one real result each, with owner permission.
 - Contract terms and cancellation terms.
 - One or two lines on who is behind Grid Pulse Media.
