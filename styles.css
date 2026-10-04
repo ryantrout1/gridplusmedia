@@ -307,14 +307,82 @@ p { margin: 0; }
 .card-body h3 { font-family: var(--serif); font-size: 28px; }
 .card-body p { font-size: 17px; color: var(--muted); }
 
-/* Included */
+/* Included: flip cards */
 .included-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-  gap: 36px 44px;
+  gap: 20px;
 }
-.included-grid div { display: flex; flex-direction: column; gap: 8px; }
-.included-grid p { font-size: 17px; color: var(--muted); }
+.flip {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+}
+.face { padding: 28px; display: flex; flex-direction: column; gap: 10px; }
+.face p { font-size: 17px; color: var(--muted); }
+.face.back { padding-top: 0; }
+.back-title, .face-hint, .flip-toggle { display: none; }
+
+.js .flip { background: none; border: 0; position: relative; perspective: 1400px; height: 100%; }
+.js .flip-inner {
+  display: grid;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.55s ease;
+}
+.js .face {
+  grid-area: 1 / 1;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 18px;
+  padding: 28px 28px 24px;
+}
+.js .face.front { background: #fff; border: 1px solid var(--line); }
+.js .flip:hover .face.front { border-color: var(--ink); }
+.js .face.back {
+  background: var(--forest);
+  color: var(--cream);
+  transform: rotateY(180deg);
+}
+.js .face.back p { color: var(--cream); }
+.js .back-title {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 1.25;
+}
+.js .face-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--clay);
+}
+.js .face.back .face-hint { color: var(--cream); }
+.face-hint svg { width: 16px; height: 16px; }
+.js .flip.is-flipped .flip-inner { transform: rotateY(180deg); }
+.js .flip-toggle {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 18px;
+  cursor: pointer;
+  z-index: 2;
+}
+.js .flip-toggle:focus-visible { outline: 3px solid var(--forest); outline-offset: 4px; }
+@media (prefers-reduced-motion: reduce) {
+  .js .flip-inner { transition: none; }
+}
 
 /* Pricing */
 .pricing { padding-top: 0; }
