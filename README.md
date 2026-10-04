@@ -1,4 +1,4 @@
-# Grid Plus Media
+# Grid Pulse Media
 
 Static site, no build step. Hosted on Vercel, deployed from this repo.
 
@@ -12,7 +12,7 @@ Static site, no build step. Hosted on Vercel, deployed from this repo.
 - Booking link for every "Book a call" button.
 - Screenshots of Heaven Sent Beauty and Casa de Leyva, plus one real result each, with owner permission.
 - Contract terms and cancellation terms.
-- One or two lines on who is behind Grid Plus Media.
+- One or two lines on who is behind Grid Pulse Media.
 
 Pricing on the page: $349 per month, $699 one-time setup.
 
