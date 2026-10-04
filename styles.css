@@ -310,7 +310,7 @@ p { margin: 0; }
 /* Included: cards that open a detail dialog */
 .included-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   grid-auto-rows: 1fr;
   gap: 20px;
 }
@@ -325,6 +325,8 @@ p { margin: 0; }
   gap: 10px;
   transition: border-color 0.15s ease, transform 0.15s ease;
 }
+@media (max-width: 1100px) { .included-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .included-grid { grid-template-columns: minmax(0, 1fr); } }
 .inc-card p { font-size: 17px; color: var(--muted); }
 .inc-card:hover { border-color: var(--ink); transform: translateY(-2px); }
 .inc-more {
@@ -346,9 +348,8 @@ p { margin: 0; }
 .inc-more::after { content: ""; position: absolute; inset: 0; border-radius: 18px; }
 .inc-more:focus-visible { outline: none; }
 .inc-more:focus-visible::after { outline: 3px solid var(--forest); outline-offset: 3px; }
-.inc-dialog, .inc-card .detail { display: none; }
-.js .inc-card .detail { display: none; }
-html:not(.js) .inc-card .detail { display: block; }
+.inc-dialog, .inc-card .detail, .inc-card .why { display: none; }
+html:not(.js) .inc-card .detail, html:not(.js) .inc-card .why { display: block; }
 html:not(.js) .inc-more { display: none; }
 
 .inc-dialog {
@@ -383,6 +384,15 @@ html:not(.js) .inc-more { display: none; }
 .inc-panel .eyebrow { color: var(--sand-deep); }
 .inc-panel h2 { font-size: clamp(28px, 4vw, 36px); padding-right: 48px; }
 .inc-panel p { font-size: 20px; line-height: 1.55; }
+.inc-why-label {
+  font-family: var(--serif);
+  font-size: 20px;
+  line-height: 1.25;
+  margin-top: 8px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(246, 242, 234, 0.3);
+  width: 100%;
+}
 .inc-x {
   position: absolute;
   top: 14px;
