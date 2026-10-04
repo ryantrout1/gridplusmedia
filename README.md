@@ -6,7 +6,6 @@ Static site, no build step. Hosted on Vercel, deployed from this repo. `main` is
 
 - Contract terms and cancellation terms.
 - One or two lines on who is behind Grid Pulse Media.
-- Footer email address.
 
 Pricing on the page: $349 per month, $699 one-time setup.
 
