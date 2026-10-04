@@ -1,0 +1,4 @@
+node_modules
+# Written by scripts/build-guides.mjs on every deploy
+/guides/
+/sitemap.xml

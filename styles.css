@@ -585,3 +585,24 @@ body:has(.inc-dialog[open]) { overflow: hidden; }
 .trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .start-form .btn { border: 0; font-family: inherit; cursor: pointer; }
 .form-note { font-size: 15px; color: var(--muted); }
+
+/* Guides */
+.guide { padding-top: clamp(32px, 6vw, 64px); padding-bottom: clamp(40px, 7vw, 80px); max-width: 760px; }
+.guide h1 { font-family: var(--serif); font-size: clamp(30px, 5vw, 44px); line-height: 1.15; margin-bottom: 12px; }
+.guide .lede { color: var(--muted); margin: 0 0 32px; }
+.guide-crumb { margin: 0 0 16px; font-weight: 600; }
+.guide-date { color: var(--muted); font-size: 16px; margin: 0 0 24px; }
+.guide-hero { display: block; width: 100%; height: auto; border-radius: 12px; margin: 0 0 28px; }
+.guide-body h2 { font-family: var(--serif); font-size: 26px; line-height: 1.25; margin: 36px 0 10px; }
+.guide-body h3 { font-size: 21px; margin: 28px 0 8px; }
+.guide-body p, .guide-body li { font-size: 19px; line-height: 1.65; }
+.guide-body ul, .guide-body ol { padding-left: 24px; }
+.guide-cta { margin-top: 48px; padding: 28px; background: var(--sand); border: 1px solid var(--line); border-radius: 12px; }
+.guide-cta h2 { font-family: var(--serif); font-size: 24px; margin-bottom: 8px; }
+.guide-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 28px; }
+.guide-list h2 { font-family: var(--serif); font-size: 24px; line-height: 1.25; color: var(--ink); }
+.guide-list a { text-decoration: none; }
+.guide-list a:hover h2 { color: var(--clay-dark); text-decoration: underline; text-underline-offset: 4px; }
+.guide-list p { margin: 6px 0 0; }
+.guide-empty { color: var(--muted); }
+.guide-cta .btn { margin-top: 16px; }
