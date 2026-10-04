@@ -1,6 +1,10 @@
-// Receives the /start form and emails it to the owner through Resend.
-// Needs two environment variables in Vercel: RESEND_API_KEY and NOTIFY_TO.
+// Receives the /start form and sends it to the engine as a new lead (a signed POST to
+// ENGINE_INTAKE_URL, signed with LEADS_INTAKE_SECRET, the same secret the engine holds).
+// If the engine is not set up yet or does not answer, the form is emailed to the owner
+// through Resend instead (RESEND_API_KEY and NOTIFY_TO), so a lead is never lost.
 // Optional: TURNSTILE_SECRET turns on the Cloudflare Turnstile bot check.
+
+const crypto = require('crypto');
 
 const FIELDS = [
   ['business', 'Business'],
@@ -63,10 +67,30 @@ module.exports = async function handler(req, res) {
     }
   }
 
+  // First choice: the engine. Anything but a 2xx falls through to the email below.
+  const engineUrl = process.env.ENGINE_INTAKE_URL || 'https://engine.miloe.ai/api/intake';
+  const engineSecret = process.env.LEADS_INTAKE_SECRET;
+  if (engineSecret) {
+    try {
+      const payload = JSON.stringify({ source: 'grid-pulse-media', business: data.business, name: data.name, email: data.email, type: data.type, website: data.website, google: data.google, instagram: data.instagram, facebook: data.facebook, fix: data.fix, heard: data.heard });
+      const ts = String(Date.now());
+      const sig = crypto.createHmac('sha256', engineSecret).update(ts + '.' + payload).digest('hex');
+      const r = await fetch(engineUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Intake-Timestamp': ts, 'X-Intake-Signature': sig },
+        body: payload,
+      });
+      if (r.ok) { return done(); }
+      console.error('Engine intake answered', r.status);
+    } catch (e) {
+      console.error('Engine intake failed', e);
+    }
+  }
+
   const key = process.env.RESEND_API_KEY;
   const to = process.env.NOTIFY_TO;
   if (!key || !to) {
-    console.error('Missing RESEND_API_KEY or NOTIFY_TO');
+    console.error('Lead not saved: the engine did not take it and Resend is not set up');
     const p = page(500, 'Something went wrong on our end. Please try again soon.');
     return res.status(p.status).setHeader('Content-Type', 'text/html; charset=utf-8').send(p.html);
   }

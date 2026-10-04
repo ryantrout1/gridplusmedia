@@ -25,3 +25,11 @@ You then email the person a scheduling link by hand.
 ## Bot check (Cloudflare Turnstile)
 
 Create a free Turnstile widget in Cloudflare for gridpulsemedia.com. Put the site key in `TURNSTILE_SITE_KEY` in `start/index.html`, and set `TURNSTILE_SECRET` in Vercel. Until both are set, only the hidden trap field protects the form.
+
+## Where the form goes
+
+`api/start.js` sends each submission to the engine as a lead: a signed POST to `ENGINE_INTAKE_URL`
+(default `https://engine.miloe.ai/api/intake`). It signs the body with `LEADS_INTAKE_SECRET`, which must be
+the same value the engine project has. Until that variable is set, or if the engine does not answer, the
+form is emailed through Resend instead (`RESEND_API_KEY`, `NOTIFY_TO`), so a lead is not lost. If neither
+works the visitor sees an error rather than a thank-you.
