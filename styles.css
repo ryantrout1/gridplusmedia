@@ -453,6 +453,18 @@ body:has(.inc-dialog[open]) { overflow: hidden; }
 .ai-card h2 { font-size: clamp(26px, 3.4vw, 34px); }
 .ai-card p { font-size: 18px; line-height: 1.55; }
 
+.compare {
+  grid-column: 1 / -1;
+  border-top: 1px solid var(--line);
+  padding-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 820px;
+}
+.compare p { font-size: 19px; }
+.compare .compare-note { font-size: 15px; color: var(--muted); }
+
 /* FAQ */
 .faq { background: var(--sand); }
 .faq h2 { margin-bottom: 36px; }
