@@ -8,10 +8,9 @@ None on the page right now. Terms in use: three-month minimum, then month to mon
 
 Pricing on the page: $349 per month, $699 one-time setup.
 
-## Before search engines should see it
+## Search engines
 
-- Fill the open items above.
-- Remove the `noindex` meta tag from `index.html`.
+Launched Oct 5, 2026: the `noindex` tags are removed from the home page, `/start/` and the guides. Only `/start/thanks/` keeps `noindex` on purpose. `www.gridpulsemedia.com` is the primary host (Vercel redirects the bare domain to it), so canonicals and the sitemap use www. `robots.txt` allows everything and points to the sitemap. To hide the site again, put the `noindex` tag back in `index.html` and `start/index.html` and set `NOINDEX = true` in the build script.
 
 ## Get started form
 
@@ -39,5 +38,4 @@ works the visitor sees an error rather than a thank-you.
 `/guides/` is built from markdown. Each file in `content/guides/` becomes a page; `scripts/build-guides.mjs`
 runs on every Vercel deploy (see `vercel.json`) and writes `/guides/` pages and `sitemap.xml`. The generated
 files are not committed. The engine publishes a guide by committing a `.md` file there (and its picture to
-`images/guides/`), which triggers a deploy. Guides carry `noindex` (the `NOINDEX` constant in the build script)
-until launch: flip it together with the homepage tag.
+`images/guides/`), which triggers a deploy. Guides carry `noindex` only if the `NOINDEX` constant in the build script is `true` (it is `false` now).

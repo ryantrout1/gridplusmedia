@@ -4,9 +4,10 @@
 import { readdirSync, readFileSync, writeFileSync, mkdirSync, rmSync, existsSync } from "node:fs";
 import { marked } from "marked";
 
-const SITE = "https://gridpulsemedia.com";
-// Keep in step with index.html: guides stay hidden from search engines until the site launches.
-const NOINDEX = true;
+// www is the primary host: Vercel redirects the bare domain to it, so canonicals and the sitemap name www.
+const SITE = "https://www.gridpulsemedia.com";
+// Set to true to hide guides from search engines (the site launched Oct 5, 2026).
+const NOINDEX = false;
 const DIR = "content/guides";
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -113,7 +114,7 @@ ${foot}`);
 const list = guides.length
   ? `<ul class="guide-list">\n${guides.map((g) => `<li><a href="/guides/${g.slug}/"><h2>${esc(g.heading)}</h2></a><p>${esc(g.meta.description)}</p><p class="guide-date"><time datetime="${g.meta.date}">${dateText(g.meta.date)}</time></p></li>`).join("\n")}\n</ul>`
   : `<p class="guide-empty">The first guides are on the way.</p>`;
-writeFileSync("guides/index.html", `${head("Guides | Grid Pulse Media", "Plain-language guides for local business owners on getting found online and keeping your marketing going.", "/guides/")}<section class="wrap guide">
+writeFileSync("guides/index.html", `${head("Small Business Marketing Guides | Grid Pulse Media", "Plain-language guides for local business owners on getting found online and keeping your marketing going.", "/guides/")}<section class="wrap guide">
 <h1>Guides</h1>
 <p class="lede">Plain-language help for local business owners on getting found online and keeping your marketing going.</p>
 ${list}
