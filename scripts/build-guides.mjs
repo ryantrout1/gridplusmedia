@@ -38,6 +38,7 @@ const head = (title, description, path, extra = "") => `<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="msvalidate.01" content="0D943468C18944FF4F5E947928108EA3">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 ${NOINDEX ? '<meta name="robots" content="noindex">\n' : ""}<link rel="canonical" href="${SITE}${path}">
