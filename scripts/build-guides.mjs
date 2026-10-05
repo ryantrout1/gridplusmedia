@@ -46,7 +46,9 @@ ${NOINDEX ? '<meta name="robots" content="noindex">\n' : ""}<link rel="canonical
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@700&amp;family=Source+Sans+3:wght@400;600;700&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/styles.css">
-${extra}</head>
+${extra}<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
