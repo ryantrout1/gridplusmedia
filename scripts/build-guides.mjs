@@ -12,8 +12,8 @@ const DIR = "content/guides";
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
-function parse(file) {
-  const raw = readFileSync(`${DIR}/${file}`, "utf8").replace(/\r\n/g, "\n");
+function parse(file, dir = DIR) {
+  const raw = readFileSync(`${dir}/${file}`, "utf8").replace(/\r\n/g, "\n");
   const m = /^---\n([\s\S]*?)\n---\n?([\s\S]*)$/.exec(raw);
   if (!m) throw new Error(`${file}: no front matter`);
   const meta = {};
@@ -24,7 +24,7 @@ function parse(file) {
     if (v.startsWith('"')) v = JSON.parse(v);
     meta[kv[1]] = v;
   }
-  for (const k of ["title", "description", "date"]) if (!meta[k]) throw new Error(`${file}: missing ${k}`);
+  for (const k of dir === DIR ? ["title", "description", "date"] : ["title", "description"]) if (!meta[k]) throw new Error(`${file}: missing ${k}`);
   const slug = file.replace(/\.md$/, "");
   let body = m[2].trim();
   const h1 = /^#[ \t]+(.+)$/m.exec(body);
@@ -76,6 +76,8 @@ const foot = `</main>
       <svg viewBox="160 168 680 680" aria-hidden="true"><rect x="205" y="220" width="275" height="260" rx="40" fill="#294634"/><rect x="512" y="220" width="270" height="260" rx="40" fill="#294634"/><rect x="205" y="543" width="275" height="254" rx="40" fill="#294634"/><rect x="512" y="543" width="270" height="254" rx="40" fill="#294634"/><path d="M205 512H340L372 462L430 622L496 365L560 604L634 468L662 512H793" fill="none" stroke="#F6F2EA" stroke-width="60" stroke-linecap="round" stroke-linejoin="round"/><path d="M205 512H340L372 462L430 622L496 365L560 604L634 468L662 512H793" fill="none" stroke="#BB5A23" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <span>Grid Pulse Media</span>
     </a>
+    <a href="/services/">Services</a>
+    <a href="/faq/">FAQ</a>
     <a href="/guides/">Guides</a>
     <div>&copy; 2026 Grid Pulse Media</div>
   </div>
@@ -116,13 +118,49 @@ ${foot}`);
 const list = guides.length
   ? `<ul class="guide-list">\n${guides.map((g) => `<li><a href="/guides/${g.slug}/"><h2>${esc(g.heading)}</h2></a><p>${esc(g.meta.description)}</p><p class="guide-date"><time datetime="${g.meta.date}">${dateText(g.meta.date)}</time></p></li>`).join("\n")}\n</ul>`
   : `<p class="guide-empty">The first guides are on the way.</p>`;
-writeFileSync("guides/index.html", `${head("Small Business Marketing Guides | Grid Pulse Media", "Plain-language guides for local business owners on getting found online and keeping your marketing going.", "/guides/")}<section class="wrap guide">
+writeFileSync("guides/index.html", `${head("Local Business Marketing Guides | Grid Pulse Media", "Plain-language guides for local business owners on getting found online, keeping listings matching and posting on a 90-day plan.", "/guides/")}<section class="wrap guide">
 <h1>Guides</h1>
 <p class="lede">Plain-language help for local business owners on getting found online and keeping your marketing going.</p>
 ${list}
 </section>
 ${foot}`);
 
-const urls = ["/", "/start/", "/guides/", ...guides.map((g) => `/guides/${g.slug}/`)];
+// Service and FAQ pages the engine drafts: content/pages/<slug>.md becomes /<slug>/, with /services/ and /faq/ listing them.
+const PDIR = "content/pages";
+const pages = (existsSync(PDIR) ? readdirSync(PDIR).filter((f) => f.endsWith(".md")) : []).map((f) => parse(f, PDIR));
+const withBrand = (t) => (/Grid Pulse Media/.test(t) ? t : `${t} | Grid Pulse Media`);
+for (const pg of pages) {
+  const path = `/${pg.slug}/`;
+  let faqs = [];
+  try { faqs = JSON.parse(pg.meta.faqs || "[]"); } catch { faqs = []; }
+  const ld = faqs.length ? `<script type="application/ld+json">${JSON.stringify({
+    "@context": "https://schema.org", "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.question, acceptedAnswer: { "@type": "Answer", text: f.answer } })),
+  }).replace(/</g, "\\u003c")}</script>\n` : "";
+  mkdirSync(pg.slug, { recursive: true });
+  writeFileSync(`${pg.slug}/index.html`, `${head(withBrand(pg.meta.title), pg.meta.description, path, ld)}<article class="wrap guide">
+<h1>${esc(pg.meta.h1 || pg.heading)}</h1>
+<div class="guide-body">
+${pg.html}</div>
+<aside class="guide-cta"><h2>Want this handled for you?</h2><p>We plan, write and publish your marketing every month, so none of it falls on you.</p><a class="btn" href="/start/">Get started</a></aside>
+</article>
+${foot}`);
+}
+function hub(dir, title, description, h1, lede, kind) {
+  const items = pages.filter((p) => p.meta.kind === kind).map((p) => `<li><a href="/${p.slug}/"><h2>${esc(p.meta.h1 || p.heading)}</h2></a><p>${esc(p.meta.description)}</p></li>`).join("\n");
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(`${dir}/index.html`, `${head(title, description, `/${dir}/`)}<section class="wrap guide">
+<h1>${esc(h1)}</h1>
+<p class="lede">${esc(lede)}</p>
+<ul class="guide-list">
+${items}
+</ul>
+</section>
+${foot}`);
+}
+hub("services", "Marketing Services for Local Businesses | Grid Pulse Media", "What Grid Pulse Media does for local businesses: website, Google profile, social posts, listings, reviews and blog writing, on one monthly plan.", "Services", "Everything we run for a local business, on one monthly plan.", "service");
+hub("faq", "Questions About Grid Pulse Media | FAQ", "Answers to common questions about pricing, the 90-day plan, who writes the content and how your Google listing is handled.", "Questions", "Straight answers about how Grid Pulse Media works.", "faq");
+
+const urls = ["/", "/start/", "/guides/", ...guides.map((g) => `/guides/${g.slug}/`), "/services/", "/faq/", ...pages.map((p) => `/${p.slug}/`)];
 writeFileSync("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `<url><loc>${SITE}${u}</loc></url>`).join("\n")}\n</urlset>\n`);
-console.log(`Built ${guides.length} guide(s).`);
+console.log(`Built ${guides.length} guide(s) and ${pages.length} page(s).`);

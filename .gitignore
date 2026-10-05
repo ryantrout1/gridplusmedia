@@ -2,3 +2,22 @@ node_modules
 # Written by scripts/build-guides.mjs on every deploy
 /guides/
 /sitemap.xml
+/90-day-plan-faq/
+/do-you-write-content-faq/
+/website-social-posting-service/
+/google-listing-faq/
+/google-business-profile-management/
+/listing-consistency-service/
+/posting-schedule-faq/
+/pricing-faq/
+/review-response-service/
+/instagram-facebook-posting-service/
+/local-business-website-design/
+/local-seo-for-small-business/
+/small-business-marketing-service/
+/blog-writing-service/
+/restaurant-marketing-service/
+/esthetician-marketing-service/
+/plumber-marketing-service/
+/services/
+/faq/

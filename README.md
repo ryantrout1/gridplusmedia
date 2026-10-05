@@ -33,6 +33,10 @@ the same value the engine project has. Until that variable is set, or if the eng
 form is emailed through Resend instead (`RESEND_API_KEY`, `NOTIFY_TO`), so a lead is not lost. If neither
 works the visitor sees an error rather than a thank-you.
 
+## Service and FAQ pages
+
+The engine drafts service and FAQ pages; each approved one is a markdown file in `content/pages/<slug>.md` (title, description, kind, h1, faqs as front matter). `scripts/build-guides.mjs` writes it to `/<slug>/` with FAQ structured data, builds `/services/` and `/faq/` lists, and adds all of them to `sitemap.xml`. Generated folders are in `.gitignore`: add a new slug there when adding a page.
+
 ## Guides
 
 `/guides/` is built from markdown. Each file in `content/guides/` becomes a page; `scripts/build-guides.mjs`
