@@ -597,6 +597,10 @@ body:has(.inc-dialog[open]) { overflow: hidden; }
 .guide-body h3 { font-size: 21px; margin: 28px 0 8px; }
 .guide-body p, .guide-body li { font-size: 19px; line-height: 1.65; }
 .guide-body ul, .guide-body ol { padding-left: 24px; }
+.guide-body p, .guide-body ul, .guide-body ol { margin: 0 0 1.1em; }
+.guide-body li { margin: 0 0 0.4em; }
+.guide-body > :last-child { margin-bottom: 0; }
+.guide-body + .guide-list { margin-top: 48px; padding-top: 40px; border-top: 1px solid var(--line); }
 .guide-cta { margin-top: 48px; padding: 28px; background: var(--sand); border: 1px solid var(--line); border-radius: 12px; }
 .guide-cta h2 { font-family: var(--serif); font-size: 24px; margin-bottom: 8px; }
 .guide-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 28px; }
