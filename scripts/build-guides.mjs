@@ -18,7 +18,7 @@ function parse(file, dir = DIR) {
   if (!m) throw new Error(`${file}: no front matter`);
   const meta = {};
   for (const line of m[1].split("\n")) {
-    const kv = /^([A-Za-z]+):\s*(.*)$/.exec(line);
+    const kv = /^([A-Za-z0-9]+):\s*(.*)$/.exec(line);
     if (!kv) continue;
     let v = kv[2].trim();
     if (v.startsWith('"')) v = JSON.parse(v);
