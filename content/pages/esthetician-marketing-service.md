@@ -24,7 +24,7 @@ From there we build or update what's needed: a website that reflects your actual
 
 Once the setup is done, the plan runs on its own rhythm. Posts go out on schedule across your website, Google profile, and social accounts. Reviews and comments get replies in your own voice. If something changes, like a closure or an update to your hours, you tell us once and it goes out everywhere at the same time, so your website, Google profile, Instagram and Facebook all say the same thing.
 
-We also keep your details matching across the other places people look you up, including Apple Maps, Bing Places, Foursquare, Yellow Pages, and Yelp as that listing comes online.
+We also keep your details matching across the other places people look you up, including Apple Maps, Bing Places, Foursquare and Yellow Pages.
 
 ## What to expect after a post goes out
 

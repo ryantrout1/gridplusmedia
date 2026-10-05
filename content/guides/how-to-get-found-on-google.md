@@ -17,7 +17,7 @@ The fix is simple to describe and tedious to keep up with on your own: whenever 
 
 ## Keep Your Details Matching Everywhere
 
-Google isn't the only place people check. Your website, Instagram, Facebook, Apple Maps, Bing Places, Foursquare, Yelp and other directories all carry your business details too. If even one of them is out of date, you risk a customer showing up to a locked door.
+Google isn't the only place people check. Your website, Instagram, Facebook, Apple Maps, Bing Places, Foursquare and other directories all carry your business details too. If even one of them is out of date, you risk a customer showing up to a locked door.
 
 Listing consistency across all these places is one of the clearest signals that tells Google your business is legitimate and active, and it's one of the easiest things to let slip when you're busy running the business itself.
 
@@ -33,7 +33,7 @@ A post that catches someone's eye is only half the job. From there, people shoul
 
 ## Reply to Reviews and Comments
 
-Reviews affect how your business ranks locally and how people decide whether to choose you. Replying to every review, in your own voice, shows you're paying attention. It also keeps your tone consistent across Google, Yelp and Facebook, rather than silence in some places and responses in others.
+Reviews affect how your business ranks locally and how people decide whether to choose you. Replying to every review, in your own voice, shows you're paying attention. It also keeps your tone consistent across Google and Facebook, rather than silence in some places and responses in others.
 
 ## Keep It Going Over Time
 
