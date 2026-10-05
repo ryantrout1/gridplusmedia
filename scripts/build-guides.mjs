@@ -146,12 +146,13 @@ ${pg.html}</div>
 </article>
 ${foot}`);
 }
-function hub(dir, title, description, h1, lede, kind) {
+function hub(dir, title, description, h1, lede, kind, intro = "") {
   const items = pages.filter((p) => p.meta.kind === kind).map((p) => `<li><a href="/${p.slug}/"><h2>${esc(p.meta.h1 || p.heading)}</h2></a><p>${esc(p.meta.description)}</p></li>`).join("\n");
   mkdirSync(dir, { recursive: true });
   writeFileSync(`${dir}/index.html`, `${head(title, description, `/${dir}/`)}<section class="wrap guide">
 <h1>${esc(h1)}</h1>
 <p class="lede">${esc(lede)}</p>
+${intro}
 <ul class="guide-list">
 ${items}
 </ul>
@@ -159,7 +160,7 @@ ${items}
 ${foot}`);
 }
 hub("services", "Marketing Services for Local Businesses | Grid Pulse Media", "What Grid Pulse Media does for local businesses: website, Google profile, social posts, listings, reviews and blog writing, on one monthly plan.", "Services", "Everything we run for a local business, on one monthly plan.", "service");
-hub("faq", "Questions About Grid Pulse Media | FAQ", "Answers to common questions about pricing, the 90-day plan, who writes the content and how your Google listing is handled.", "Questions", "Straight answers about how Grid Pulse Media works.", "faq");
+hub("faq", "Questions About Grid Pulse Media | FAQ", "Answers to common questions about pricing, the 90-day plan, who writes the content and how your Google listing is handled.", "Questions", "Straight answers about how Grid Pulse Media works.", "faq", `<div class="guide-body"><p>Most owners ask the same few things before they start: what it costs, what is included in the 90-day plan, who writes the content, how often we post, and how we look after your Google listing. Each page below answers one of those in plain language.</p><p>The short version: Grid Pulse Media runs the digital side of your business for one monthly price. We plan your marketing in 90-day stretches, write and publish the posts, keep your website, Google profile and listings matching, and answer reviews and comments in your voice. If your question is not here, ask it on the <a href="/start/">Get started</a> form and we will answer it before your setup call.</p><p>For reference, it is $349 per month plus a one-time setup fee of $699, with a three-month minimum and month to month after that. Your website is yours to keep. Every answer here describes how we actually work, so nothing is promised that we cannot deliver, and if something changes we update the page.</p></div>`);
 
 const urls = ["/", "/start/", "/guides/", ...guides.map((g) => `/guides/${g.slug}/`), "/services/", "/faq/", ...pages.map((p) => `/${p.slug}/`)];
 writeFileSync("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `<url><loc>${SITE}${u}</loc></url>`).join("\n")}\n</urlset>\n`);
