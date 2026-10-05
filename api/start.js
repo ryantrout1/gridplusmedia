@@ -2,7 +2,7 @@
 // ENGINE_INTAKE_URL, signed with LEADS_INTAKE_SECRET, the same secret the engine holds).
 // If the engine is not set up yet or does not answer, the form is emailed to the owner
 // through Resend instead (RESEND_API_KEY and NOTIFY_TO), so a lead is never lost.
-// Optional: TURNSTILE_SECRET turns on the Cloudflare Turnstile bot check.
+// TURNSTILE_SECRET is required: it turns on the Cloudflare Turnstile bot check, and without it every submission is refused.
 
 import crypto from 'node:crypto';
 
@@ -18,6 +18,11 @@ const FIELDS = [
   ['fix', 'Most wants fixed'],
   ['heard', 'How they heard about us'],
 ];
+
+// Junk filters (Miloe plan: block junk submissions). The audience is US only, so any
+// letter outside the Latin script is refused, and business and name may not hold a link.
+const FOREIGN_SCRIPT = /[^\p{Script=Latin}\p{Script=Common}\p{Script=Inherited}]/u;
+const LINK = /:\/\/|\bwww\.|\b[a-z0-9-]+(?:\.[a-z0-9-]+)*\.[a-z]{2,}\/\S*/i;
 
 function clean(v) {
   return String(v == null ? '' : v).replace(/\r/g, '').trim().slice(0, 2000);
@@ -47,8 +52,22 @@ export default async function handler(req, res) {
     return res.status(p.status).setHeader('Content-Type', 'text/html; charset=utf-8').send(p.html);
   }
 
+  const junk = [data.business, data.name].some((v) => FOREIGN_SCRIPT.test(v) || LINK.test(v))
+    || [data.fix, data.heard, data.type].some((v) => FOREIGN_SCRIPT.test(v));
+  if (junk) {
+    const p = page(400, 'Please use English letters and numbers, and no web links in your business or name.');
+    return res.status(p.status).setHeader('Content-Type', 'text/html; charset=utf-8').send(p.html);
+  }
+
+  // The bot check is required. With no secret set nothing is let through, so a missing
+  // setting can never leave the form open.
   const secret = process.env.TURNSTILE_SECRET;
-  if (secret) {
+  if (!secret) {
+    console.error('TURNSTILE_SECRET is not set: refusing every submission');
+    const p = page(500, 'Something went wrong on our end. Please try again soon.');
+    return res.status(p.status).setHeader('Content-Type', 'text/html; charset=utf-8').send(p.html);
+  }
+  {
     const token = clean(body['cf-turnstile-response']);
     let ok = false;
     try {
