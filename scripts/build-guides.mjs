@@ -89,7 +89,7 @@ const foot = `</main>
 const dateText = (d) => new Date(`${d}T12:00:00Z`).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" });
 
 const files = existsSync(DIR) ? readdirSync(DIR).filter((f) => f.endsWith(".md")) : [];
-const guides = files.map(parse).sort((a, b) => (a.meta.date < b.meta.date ? 1 : -1));
+const guides = files.map((f) => parse(f)).sort((a, b) => (a.meta.date < b.meta.date ? 1 : -1));
 
 rmSync("guides", { recursive: true, force: true });
 mkdirSync("guides", { recursive: true });
