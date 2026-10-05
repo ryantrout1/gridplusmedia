@@ -104,7 +104,7 @@ for (const g of guides) {
   }).replace(/</g, "\\u003c")}</script>\n`;
   const hero = g.meta.image ? `<img class="guide-hero" src="${esc(g.meta.image)}" alt="${esc(g.meta.imageAlt || "")}" width="1200" height="630">\n` : "";
   mkdirSync(`guides${path.slice(7)}`, { recursive: true });
-  writeFileSync(`guides/${g.slug}/index.html`, `${head(`${g.heading} | Grid Pulse Media`, g.meta.description, path, ld)}<article class="wrap guide">
+  writeFileSync(`guides/${g.slug}/index.html`, `${head(g.meta.seoTitle || `${g.heading} | Grid Pulse Media`, g.meta.description, path, ld)}<article class="wrap guide">
 <p class="guide-crumb"><a href="/guides/">All guides</a></p>
 <h1>${esc(g.heading)}</h1>
 <p class="guide-date"><time datetime="${g.meta.date}">${dateText(g.meta.date)}</time></p>
@@ -121,6 +121,7 @@ const list = guides.length
 writeFileSync("guides/index.html", `${head("Local Business Marketing Guides | Grid Pulse Media", "Plain-language guides for local business owners on getting found online, keeping listings matching and posting on a 90-day plan.", "/guides/")}<section class="wrap guide">
 <h1>Guides</h1>
 <p class="lede">Plain-language help for local business owners on getting found online and keeping your marketing going.</p>
+<div class="guide-body"><p>These guides cover the everyday parts of marketing a local business: setting up and keeping your Google Business Profile accurate, getting found when customers search nearby, asking for and answering reviews, deciding how often to post, and knowing what to write on your blog. Each one is written for owners who are short on time, with plain steps you can act on this week.</p><p>If you would rather not do any of it yourself, Grid Pulse Media plans, writes and posts all of this for you on a 90-day plan. See <a href="/services/">what we run for you</a> or <a href="/start/">get started</a>.</p></div>
 ${list}
 </section>
 ${foot}`);

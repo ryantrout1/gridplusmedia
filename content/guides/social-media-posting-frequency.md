@@ -1,6 +1,7 @@
 ---
 title: "How Often Should a Small Business Post on Social Media?"
 description: "Wondering how often to post on social media as a small business? Here's a plain-language answer and how to keep it consistent without doing it yourself."
+seoTitle: "How Often Should a Small Business Post? | Grid Pulse Media"
 date: "2026-10-05"
 ---
 

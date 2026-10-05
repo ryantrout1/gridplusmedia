@@ -1,6 +1,7 @@
 ---
 title: "How to Get Found on Google as a Local Business"
 description: "Learn the key steps local businesses need to get found on Google, from matching listings to steady posting, and how a 90-day plan keeps it all running."
+seoTitle: "Get Found on Google as a Local Business | Grid Pulse Media"
 date: "2026-10-05"
 ---
 
