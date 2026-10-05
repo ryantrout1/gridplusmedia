@@ -37,6 +37,10 @@ works the visitor sees an error rather than a thank-you.
 
 The engine drafts service and FAQ pages; each approved one is a markdown file in `content/pages/<slug>.md` (title, description, kind, h1, faqs as front matter). `scripts/build-guides.mjs` writes it to `/<slug>/` with FAQ structured data, builds `/services/` and `/faq/` lists, and adds all of them to `sitemap.xml`. Generated folders are in `.gitignore`: add a new slug there when adding a page.
 
+## Privacy and terms
+
+`content/legal/privacy.md` and `content/legal/terms.md` become `/privacy/` and `/terms/` on every deploy (same build script) and are in the sitemap. Footer links to both are on every page. Edit the markdown to change the wording. Add a new slug to `.gitignore` if you add another file there.
+
 ## Guides
 
 `/guides/` is built from markdown. Each file in `content/guides/` becomes a page; `scripts/build-guides.mjs`
