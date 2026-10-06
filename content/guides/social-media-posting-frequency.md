@@ -38,7 +38,7 @@ It's also common for owners to have been burned before: they paid someone to han
 
 ## How Grid Pulse Media handles posting frequency
 
-At Grid Pulse Media, posting isn't decided post by post. It starts with a setup call where we learn your business, then map out a 90-day plan for what to promote, when, and where. From there, posts go out on schedule across Instagram, Facebook and your Google profile, written from what you've told us so they're accurate and sound like you.
+At Grid Pulse Media, posting isn't decided post by post. It starts with a setup call where we learn your business. After you start, we map out a 90-day plan for what to promote, when, and where. From there, posts go out on schedule across Instagram, Facebook and your Google profile, written from what you've told us so they're accurate and sound like you.
 
 When something changes, like a closure or new hours, you tell us once and it goes out everywhere, matching, across your website, Google profile and social accounts. We also reply to reviews and comments in your own voice as part of the plan. Every 90 days we check what worked and plan the next quarter, so the schedule keeps adjusting to fit your business rather than staying fixed.
 
@@ -48,4 +48,4 @@ You can see everything included in that posting schedule on our [Posting Schedul
 
 A post is only useful if it sends someone somewhere. Ours are built to catch attention on Instagram, Facebook or Google, then lead to a blog article on your own site, which points to the service page that explains what you offer, with booking one tap away. That's part of how the 90-day plan ties social posting to the rest of your marketing instead of treating it as its own separate task.
 
-If you're trying to figure out a posting rhythm that fits your business, or you'd rather not think about it week to week, [get started](https://www.gridpulsemedia.com/start/) with a setup call and we'll map out your 90-day plan together.
+If you're trying to figure out a posting rhythm that fits your business, or you'd rather not think about it week to week, [get started](https://www.gridpulsemedia.com/start/) with a setup call. Once you start, we build your 90-day plan.

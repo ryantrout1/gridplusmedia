@@ -3,7 +3,7 @@ title: "Blog Writing Service for Small Business | Grid Pulse Media"
 description: "Ongoing blog writing built into your 90-day marketing plan, written from what you tell us, published on your own site, and linked to your services."
 kind: "service"
 h1: "Blog Writing Service"
-faqs: "[{\"answer\": \"Blog articles go out on the schedule we set together during your 90-day plan. How often depends on what makes sense for your business and the rest of your marketing calendar, which we work out during the setup call so you know what to expect.\", \"question\": \"How often will new blog articles be published?\"}, {\"answer\": \"Yes. Every article starts from what you tell us about your business, your services and how you talk about them. We don't invent details or generic filler. If we need more specifics for an article, we'll ask you rather than guess.\", \"question\": \"Will the articles actually sound like my business?\"}, {\"answer\": \"We handle publishing. Once an article is written and approved as part of your plan, we add it to your site on schedule. You don't need to log in anywhere or remember to post it yourself.\", \"question\": \"Do you handle publishing the articles, or do I have to post them myself?\"}, {\"answer\": \"Each article is linked from a relevant service page on your site, and we often point to it from your social posts too. The idea is that a post catches someone's attention, the article answers their question, and the service page gives them a clear way to book.\", \"question\": \"How do blog articles connect to the rest of my marketing?\"}, {\"answer\": \"Tell us and we'll update it. We keep your blog, website, Google profile and listings consistent, so if your hours, services or other details change, we make sure the published articles don't contradict the current facts.\", \"question\": \"What if something about my business changes after an article is published?\"}, {\"answer\": \"No. If you don't have a website yet, that's something we can set up as part of your 90-day plan, with your blog built in from the start. If you already have a site, we add the blog writing into what's there.\", \"question\": \"Do I need an existing website for this service?\"}]"
+faqs: "[{\"answer\": \"Blog articles go out on the schedule we set together during your 90-day plan. How often depends on what makes sense for your business and the rest of your marketing calendar, which we spell out in your plan so you know what to expect.\", \"question\": \"How often will new blog articles be published?\"}, {\"answer\": \"Yes. Every article starts from what you tell us about your business, your services and how you talk about them. We don't invent details or generic filler. If we need more specifics for an article, we'll ask you rather than guess.\", \"question\": \"Will the articles actually sound like my business?\"}, {\"answer\": \"We handle publishing. Once an article is written and approved as part of your plan, we add it to your site on schedule. You don't need to log in anywhere or remember to post it yourself.\", \"question\": \"Do you handle publishing the articles, or do I have to post them myself?\"}, {\"answer\": \"Each article is linked from a relevant service page on your site, and we often point to it from your social posts too. The idea is that a post catches someone's attention, the article answers their question, and the service page gives them a clear way to book.\", \"question\": \"How do blog articles connect to the rest of my marketing?\"}, {\"answer\": \"Tell us and we'll update it. We keep your blog, website, Google profile and listings consistent, so if your hours, services or other details change, we make sure the published articles don't contradict the current facts.\", \"question\": \"What if something about my business changes after an article is published?\"}, {\"answer\": \"No. If you don't have a website yet, that's something we can set up as part of your 90-day plan, with your blog built in from the start. If you already have a site, we add the blog writing into what's there.\", \"question\": \"Do I need an existing website for this service?\"}]"
 ---
 
 ## What this service is
@@ -18,7 +18,7 @@ This service fits owners who know blogging helps but don't have time to sit down
 
 ## What happens in a visit
 
-It starts with a setup call where we learn your business: what you offer, who you serve, what makes you different, and what's coming up over the next few months. From that conversation we map out a 90-day plan that includes what to write about and when.
+It starts with a setup call where we learn your business: what you offer, who you serve, what makes you different, and what's coming up over the next few months. After you start, we use that conversation to build your 90-day plan, including what to write about and when.
 
 From there, we write each article using the details you've given us. We're not guessing at your story or inventing facts about your business. If something needs checking, like a detail about a service or a seasonal offer, we ask before we publish. Images that go with each post get written alt text that describes what's shown, so the post is accessible to everyone reading it.
 
@@ -30,13 +30,13 @@ Every 90 days we check what's been published, see what you've told us has change
 
 ## How to book
 
-Getting started takes one conversation. Answer a few quick questions about your business and we'll be ready to talk through your 90-day plan, blog writing included. [Get started](https://www.gridpulsemedia.com/start/) and we'll follow up to set a time.
+Getting started takes one conversation. Answer a few quick questions about your business and we'll be ready to talk through what you need, blog writing included. [Get started](https://www.gridpulsemedia.com/start/) and we'll follow up to set a time.
 
 ## Frequently asked questions
 
 ### How often will new blog articles be published?
 
-Blog articles go out on the schedule we set together during your 90-day plan. How often depends on what makes sense for your business and the rest of your marketing calendar, which we work out during the setup call so you know what to expect.
+Blog articles go out on the schedule we set together during your 90-day plan. How often depends on what makes sense for your business and the rest of your marketing calendar, which we spell out in your plan so you know what to expect.
 
 ### Will the articles actually sound like my business?
 

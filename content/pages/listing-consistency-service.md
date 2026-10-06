@@ -30,7 +30,7 @@ If you ever notice something that doesn't match, you can flag it and we'll get i
 
 ## How to book
 
-Getting started takes one conversation. We'll ask about your business, your current website, your Google profile and your social accounts, then map out your 90-day plan, which includes keeping your listings consistent. From there, it runs without you having to manage it yourself.
+Getting started takes one conversation. We'll ask about your business, your current website, your Google profile and your social accounts, and after you start, we build your 90-day plan, which includes keeping your listings consistent. From there, it runs without you having to manage it yourself.
 
 If locked doors, mismatched hours or outdated directory listings sound familiar, [get started](https://www.gridpulsemedia.com/start/) and we'll take it from there.
 

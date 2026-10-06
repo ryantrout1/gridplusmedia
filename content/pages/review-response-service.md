@@ -28,7 +28,7 @@ You'll see replies going out across your Google profile and the other listings w
 
 ## How to book
 
-Review response is part of the full marketing plan we set up on a single setup call. If you want your reviews answered consistently, in your own voice, without you having to log into five different sites, [get started here](https://www.gridpulsemedia.com/start/) and we'll walk through it together.
+Review response is part of the full marketing plan that starts with a single setup call. If you want your reviews answered consistently, in your own voice, without you having to log into five different sites, [get started here](https://www.gridpulsemedia.com/start/) and we'll walk through it together.
 
 ## Frequently asked questions
 

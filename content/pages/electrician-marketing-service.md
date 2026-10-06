@@ -21,7 +21,7 @@ This service suits electrical contractors who want to keep showing up online wit
 
 ## What happens during setup
 
-It starts with one conversation, the setup call. We learn about your business: the services you run, the areas you cover, your hours, and anything specific you want customers to know. From that conversation we map out your next 90 days, including what to promote, when, and on which channel. We then build or connect your website, set up your Google profile correctly, and get your social accounts in shape so everything is ready to run.
+It starts with one conversation, the setup call. We learn about your business: the services you run, the areas you cover, your hours, and anything specific you want customers to know. After you start, we use that conversation to build your next 90 days, including what to promote, when, and on which channel. We then build or connect your website, set up your Google profile correctly, and get your social accounts in shape so everything is ready to run.
 
 ## What runs week to week
 

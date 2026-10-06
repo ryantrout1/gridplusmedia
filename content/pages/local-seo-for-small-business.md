@@ -3,7 +3,7 @@ title: "Local SEO for Small Business | Grid Pulse Media"
 description: "Local SEO service that keeps your Google profile, website and listings matching, so nearby customers find accurate hours, address and details."
 kind: "service"
 h1: "Local SEO for Small Business"
-faqs: "[{\"answer\": \"It includes making sure your Google profile, website and directory listings like Apple Maps, Bing Places, Foursquare and Yellow Pages all show the same accurate hours, address and details. It also includes blog articles and posts tied to your 90-day plan, written to be found in local search and to send people to the service page that explains your offer.\", \"question\": \"What exactly does local SEO include with Grid Pulse Media?\"}, {\"answer\": \"Everything starts from what you tell us during the setup call. We learn your business directly from you, including your hours, address and what makes you different, and build the 90-day plan from that conversation. Nothing is invented or assumed.\", \"question\": \"How do you know what to say about my business?\"}, {\"answer\": \"You tell us once, and we update it everywhere it needs to appear: your Google profile, your website and your social accounts. That way customers see the same accurate information no matter where they look, which helps avoid the mismatched-hours problem a lot of local businesses run into.\", \"question\": \"What if my hours change later?\"}, {\"answer\": \"Yes. Along with your Google profile, Instagram and Facebook, we keep your details matching on Apple Maps, Bing Places, Foursquare, Yellow Pages and other listings customers check before visiting.\", \"question\": \"Do you handle listings beyond Google, like Bing or Apple Maps?\"}, {\"answer\": \"We work on a clear 90-day plan that we build with you at the start and revisit every quarter, so you know what's being done and why. Instead of scattered one-off tasks, local SEO, posting, review replies and listings all run together under that same plan, with a plain report so it's clear what's happening each cycle.\", \"question\": \"How is this different from an agency I've used before?\"}, {\"answer\": \"You answer a few questions about your business, which takes about five minutes, and we follow up by email with a link to schedule your setup call. From there we learn your business, build your 90-day plan, and begin matching your profile, website and listings.\", \"question\": \"How do I get started?\"}]"
+faqs: "[{\"answer\": \"It includes making sure your Google profile, website and directory listings like Apple Maps, Bing Places, Foursquare and Yellow Pages all show the same accurate hours, address and details. It also includes blog articles and posts tied to your 90-day plan, written to be found in local search and to send people to the service page that explains your offer.\", \"question\": \"What exactly does local SEO include with Grid Pulse Media?\"}, {\"answer\": \"Everything starts from what you tell us during the setup call. We learn your business directly from you, including your hours, address and what makes you different, and, once you start, build the 90-day plan from that conversation. Nothing is invented or assumed.\", \"question\": \"How do you know what to say about my business?\"}, {\"answer\": \"You tell us once, and we update it everywhere it needs to appear: your Google profile, your website and your social accounts. That way customers see the same accurate information no matter where they look, which helps avoid the mismatched-hours problem a lot of local businesses run into.\", \"question\": \"What if my hours change later?\"}, {\"answer\": \"Yes. Along with your Google profile, Instagram and Facebook, we keep your details matching on Apple Maps, Bing Places, Foursquare, Yellow Pages and other listings customers check before visiting.\", \"question\": \"Do you handle listings beyond Google, like Bing or Apple Maps?\"}, {\"answer\": \"We work on a clear 90-day plan that we build with you at the start and revisit every quarter, so you know what's being done and why. Instead of scattered one-off tasks, local SEO, posting, review replies and listings all run together under that same plan, with a plain report so it's clear what's happening each cycle.\", \"question\": \"How is this different from an agency I've used before?\"}, {\"answer\": \"You answer a few questions about your business, which takes about five minutes, and we follow up by email with a link to schedule your setup call. From there we learn your business, and once you start we build your 90-day plan and begin matching your profile, website and listings.\", \"question\": \"How do I get started?\"}]"
 ---
 
 ## What this service is
@@ -20,7 +20,7 @@ If you're opening a new location, changing hours, or just tired of customers cal
 
 ## What happens during setup
 
-It starts with one setup call. We learn your business directly from you: what you offer, your real hours, your address, what makes you different. From that conversation we map out your 90-day plan, which decides what gets promoted, when, and where.
+It starts with one setup call. We learn your business directly from you: what you offer, your real hours, your address, what makes you different. Once you start, we use that conversation to map out your 90-day plan, which decides what gets promoted, when, and where.
 
 As part of setup, we check your website, your Google profile, and your social accounts, and line them up with what you told us. We also work through listings like Apple Maps, Bing Places, Foursquare and Yellow Pages so they match too. Anything that was out of sync gets corrected at this stage.
 
@@ -34,7 +34,7 @@ Every 90 days, we check what worked, adjust, and plan the next quarter, so your 
 
 ## How to book
 
-Getting started is one conversation. You answer a few questions about your business, and we follow up to set a time for your setup call. From there, we build your 90-day plan and get your profile, website and listings matching.
+Getting started is one conversation. You answer a few questions about your business, and we follow up to set a time for your setup call. Once you start, we build your 90-day plan and get your profile, website and listings matching.
 
 Ready to stop worrying about mismatched hours and missed listings? [Get started](https://www.gridpulsemedia.com/start/) and we'll take it from there.
 
@@ -46,7 +46,7 @@ It includes making sure your Google profile, website and directory listings like
 
 ### How do you know what to say about my business?
 
-Everything starts from what you tell us during the setup call. We learn your business directly from you, including your hours, address and what makes you different, and build the 90-day plan from that conversation. Nothing is invented or assumed.
+Everything starts from what you tell us during the setup call. We learn your business directly from you, including your hours, address and what makes you different, and, once you start, build the 90-day plan from that conversation. Nothing is invented or assumed.
 
 ### What if my hours change later?
 
@@ -62,4 +62,4 @@ We work on a clear 90-day plan that we build with you at the start and revisit e
 
 ### How do I get started?
 
-You answer a few questions about your business, which takes about five minutes, and we follow up by email with a link to schedule your setup call. From there we learn your business, build your 90-day plan, and begin matching your profile, website and listings.
+You answer a few questions about your business, which takes about five minutes, and we follow up by email with a link to schedule your setup call. From there we learn your business, and once you start we build your 90-day plan and begin matching your profile, website and listings.
