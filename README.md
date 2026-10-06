@@ -33,6 +33,16 @@ the same value the engine project has. Until that variable is set, or if the eng
 form is emailed through Resend instead (`RESEND_API_KEY`, `NOTIFY_TO`), so a lead is not lost. If neither
 works the visitor sees an error rather than a thank-you.
 
+## Form fields and bot checks
+
+Four fields are required: business, name, email and type of business. Everything else is optional and helps prepare the first call. The list of types and the 7 optional answers (`phone`, `doWhat`, `otherSocial`, `likedSites`, `admired`, `branding`, `photos`) live in `api/start.js`, and the engine keeps the same lists (`derive.ts` and `answers.ts` under `apps/engine/src/lib/leads/` in the miloe repo). Change both together, engine first, or answers are dropped.
+
+Bot checks, in order: the hidden `fax` field (a quiet thank-you), a timing check (the page fills in `ms`, how long it was open; under 3 seconds gets a retry page and nothing is sent), then Turnstile.
+
+## Tests
+
+`node --test` runs `tests/start.test.js` against the form's server code and page. It needs no packages.
+
 ## Service and FAQ pages
 
 The engine drafts service and FAQ pages; each approved one is a markdown file in `content/pages/<slug>.md` (title, description, kind, h1, faqs as front matter). `scripts/build-guides.mjs` writes it to `/<slug>/` with FAQ structured data, builds `/services/` and `/faq/` lists, and adds all of them to `sitemap.xml`. Generated folders are in `.gitignore`: add a new slug there when adding a page.

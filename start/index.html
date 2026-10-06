@@ -39,65 +39,108 @@
       <div class="field-grid">
       <div class="field">
         <label for="business">Business name <span class="req">Required</span></label>
-        
-        <input id="business" name="business" type="text" required autocomplete="organization">
+        <input id="business" name="business" type="text" required maxlength="200" autocomplete="organization">
       </div>
       <div class="field">
         <label for="name">Your name <span class="req">Required</span></label>
-        
-        <input id="name" name="name" type="text" required autocomplete="name">
+        <input id="name" name="name" type="text" required maxlength="200" autocomplete="name">
       </div>
       <div class="field">
         <label for="email">Email <span class="req">Required</span></label>
-        <input id="email" name="email" type="email" required autocomplete="email" aria-describedby="email-h">
+        <input id="email" name="email" type="email" required maxlength="254" autocomplete="email" aria-describedby="email-h">
         <span class="hint" id="email-h">We'll send your scheduling link here.</span>
       </div>
       <div class="field">
-        <label for="type">Type of business <span class="req">Optional</span></label>
-        <select id="type" name="type">
-          <option value="">Choose one</option>
+        <label for="type">Type of business <span class="req">Required</span></label>
+        <select id="type" name="type" required>
+          <option value="" disabled selected>Choose one</option>
+          <option>Esthetician or spa</option>
+          <option>Hair salon or barber</option>
+          <option>Plumber</option>
+          <option>Electrician</option>
+          <option>HVAC</option>
           <option>Restaurant or food</option>
-          <option>Beauty, spa or wellness</option>
-          <option>Home services (electrician, plumber, HVAC and similar)</option>
           <option>Retail</option>
           <option>Professional services</option>
           <option>Something else</option>
         </select>
       </div>
+      </div>
+      <div class="optional-head">
+        <h2>Optional</h2>
+        <p>Anything you share here helps us prepare for our first call. Skip whatever doesn't apply.</p>
+      </div>
+      <div class="field-grid">
+      <div class="field">
+        <label for="phone">Phone <span class="req">Optional</span></label>
+        <input id="phone" name="phone" type="tel" maxlength="40" autocomplete="tel" aria-describedby="phone-h">
+        <span class="hint" id="phone-h">The best number to reach you.</span>
+      </div>
+      <div class="field">
+        <label for="doWhat">What do you do? <span class="req">Optional</span></label>
+        <input id="doWhat" name="doWhat" type="text" maxlength="200" aria-describedby="doWhat-h">
+        <span class="hint" id="doWhat-h">A few words is plenty. Helps most if none of the types above fits.</span>
+      </div>
       <div class="field">
         <label for="website">Your website <span class="req">Optional</span></label>
-        <input id="website" name="website" type="text" aria-describedby="website-h">
+        <input id="website" name="website" type="text" maxlength="500" aria-describedby="website-h">
         <span class="hint" id="website-h">Skip it if you don't have one yet.</span>
       </div>
       <div class="field">
         <label for="google">Google business profile <span class="req">Optional</span></label>
-        <input id="google" name="google" type="text" aria-describedby="google-h">
+        <input id="google" name="google" type="text" maxlength="500" aria-describedby="google-h">
         <span class="hint" id="google-h">Paste the link, or the name it shows under on Google.</span>
       </div>
       <div class="field">
         <label for="instagram">Instagram <span class="req">Optional</span></label>
-        <input id="instagram" name="instagram" type="text" aria-describedby="instagram-h">
+        <input id="instagram" name="instagram" type="text" maxlength="500" aria-describedby="instagram-h">
         <span class="hint" id="instagram-h">A link or @handle. Skip it if you don't have one.</span>
       </div>
       <div class="field">
         <label for="facebook">Facebook <span class="req">Optional</span></label>
-        <input id="facebook" name="facebook" type="text" aria-describedby="facebook-h">
+        <input id="facebook" name="facebook" type="text" maxlength="500" aria-describedby="facebook-h">
         <span class="hint" id="facebook-h">A link or page name. Skip it if you don't have one.</span>
       </div>
       </div>
       <div class="field">
-        <label for="fix">What's the one thing you most want fixed? <span class="req">Optional</span></label>
-        <textarea id="fix" name="fix" rows="4"></textarea>
+        <label for="otherSocial">Other social accounts <span class="req">Optional</span></label>
+        <textarea id="otherSocial" name="otherSocial" rows="2" maxlength="500" aria-describedby="otherSocial-h"></textarea>
+        <span class="hint" id="otherSocial-h">TikTok, YouTube, LinkedIn, Nextdoor or anything else. Links or names.</span>
+      </div>
+      <div class="field">
+        <label for="likedSites">Websites you like <span class="req">Optional</span></label>
+        <textarea id="likedSites" name="likedSites" rows="3" maxlength="1000" aria-describedby="likedSites-h"></textarea>
+        <span class="hint" id="likedSites-h">Up to three, with a line on what you like about each. They can be in any kind of business.</span>
+      </div>
+      <div class="field">
+        <label for="admired">Local businesses you admire or compete with <span class="req">Optional</span></label>
+        <textarea id="admired" name="admired" rows="2" maxlength="500" aria-describedby="admired-h"></textarea>
+        <span class="hint" id="admired-h">Names or links.</span>
+      </div>
+      <div class="field">
+        <label for="branding">Your branding <span class="req">Optional</span></label>
+        <textarea id="branding" name="branding" rows="2" maxlength="500" aria-describedby="branding-h"></textarea>
+        <span class="hint" id="branding-h">A link to your logo, your colors and fonts, or "none yet".</span>
+      </div>
+      <div class="field">
+        <label for="photos">Link to a folder of photos <span class="req">Optional</span></label>
+        <input id="photos" name="photos" type="text" maxlength="500" aria-describedby="photos-h">
+        <span class="hint" id="photos-h">Google Drive, Dropbox, iCloud or any shared link. Skip it if you don't have one.</span>
+      </div>
+      <div class="field">
+        <label for="fix">What do you most want fixed, or what isn't working right now? <span class="req">Optional</span></label>
+        <textarea id="fix" name="fix" rows="4" maxlength="2000"></textarea>
       </div>
       <div class="field">
         <label for="heard">How did you hear about us? <span class="req">Optional</span></label>
-        <input id="heard" name="heard" type="text">
+        <input id="heard" name="heard" type="text" maxlength="500">
       </div>
       <div class="trap" aria-hidden="true">
         <label for="fax">Leave this empty</label>
         <input id="fax" name="fax" type="text" tabindex="-1" autocomplete="off">
       </div>
       <div id="bot-check"></div>
+      <input type="hidden" id="ms" name="ms" value="">
       <button class="btn" type="submit">Send it</button>
       <p class="form-note">We only use this to get your setup started. By sending it you agree to our <a href="/privacy/">privacy policy</a> and <a href="/terms/">terms</a>.</p>
     </form>
@@ -113,6 +156,13 @@
 </div>
 </section>
 </main>
+<script>
+// How long the page was open when the form is sent. A person takes longer than a script; the server checks it.
+var openedAt = Date.now();
+document.querySelector('.start-form').addEventListener('submit', function () {
+  document.getElementById('ms').value = String(Date.now() - openedAt);
+});
+</script>
 <script>
 // Paste the Cloudflare Turnstile site key between the quotes to turn the bot check on.
 var TURNSTILE_SITE_KEY = '0x4AAAAAAFNo6ZbcBxbSyfvk';

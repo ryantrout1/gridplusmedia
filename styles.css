@@ -583,6 +583,9 @@ body:has(.inc-dialog[open]) { overflow: hidden; }
   outline-offset: 2px;
   border-color: var(--forest);
 }
+.optional-head { display: flex; flex-direction: column; gap: 6px; width: 100%; padding-top: 18px; border-top: 1px solid var(--line, #d9d2c3); }
+.optional-head h2 { font-size: 24px; margin: 0; }
+.optional-head p { margin: 0; color: var(--muted); }
 .trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .start-form .btn { border: 0; font-family: inherit; cursor: pointer; }
 .form-note { font-size: 15px; color: var(--muted); }

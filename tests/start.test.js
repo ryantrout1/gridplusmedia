@@ -115,15 +115,27 @@ test('a filled trap field gets a quiet thank-you and nothing is sent anywhere', 
   assert.equal(calls.length, 0);
 });
 
-test('a send under 3 seconds, or with no usable timing, gets a friendly retry page and nothing is sent', async () => {
-  for (const ms of [undefined, '', 'abc', '-5', '0', '2999', 'NaN', '1e9x']) {
+test('a send under 3 seconds gets a friendly "go back" page and nothing is sent', async () => {
+  for (const ms of ['0', '1', '2999']) {
+    const calls = installFetch();
+    const res = await post({ ...GOOD, ms });
+    assert.equal(res.statusCode, 400, ms);
+    assert.match(res.body, /too fast/i, ms);
+    assert.match(res.body, /press Send again/i, ms);
+    assert.match(res.body, /history\.back/, ms);
+    assert.equal(calls.length, 0, ms);
+  }
+});
+
+test('a send with no usable timing gets a "reload the form" page and nothing is sent', async () => {
+  for (const ms of [undefined, '', 'abc', '-5', 'NaN', '1e9x', '1234567890123']) {
     const calls = installFetch();
     const body = { ...GOOD };
     if (ms === undefined) delete body.ms; else body.ms = ms;
     const res = await post(body);
     assert.equal(res.statusCode, 400, String(ms));
-    assert.match(res.body, /too fast/i, String(ms));
-    assert.match(res.body, /press Send again/i, String(ms));
+    assert.match(res.body, /reload the form/i, String(ms));
+    assert.doesNotMatch(res.body, /history\.back/, String(ms));
     assert.equal(calls.length, 0, String(ms));
   }
 });
@@ -278,6 +290,6 @@ test('the timing value is filled in by script when the form is sent', () => {
 
 test('no page text or server message uses an em dash or an en dash', () => {
   const server = readFileSync(new URL('../api/start.js', import.meta.url), 'utf8');
-  assert.doesNotMatch(html, /[–—]/);
-  assert.doesNotMatch(server, /[–—]/);
+  assert.doesNotMatch(html, /[\u2013\u2014]/);
+  assert.doesNotMatch(server, /[\u2013\u2014]/);
 });
