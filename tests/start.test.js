@@ -288,6 +288,17 @@ test('the timing value is filled in by script when the form is sent', () => {
   assert.match(html, /addEventListener\('submit'/);
 });
 
+test('the page says the 90-day plan is built after you start, not on the call', () => {
+  const after = /<h2>What happens after you send this<\/h2>([\s\S]*?)<h2>/.exec(html);
+  assert.ok(after, 'the section is there');
+  const [call, ...rest] = after[1].split('</p>');
+  assert.match(call, /setup call/);
+  assert.doesNotMatch(call, /90-day/);
+  assert.match(rest.join(' '), /you get a link to get started/);
+  assert.match(rest.join(' '), /build your first 90-day marketing plan/);
+  assert.match(rest.join(' '), /ask for changes/);
+});
+
 test('no page text or server message uses an em dash or an en dash', () => {
   const server = readFileSync(new URL('../api/start.js', import.meta.url), 'utf8');
   assert.doesNotMatch(html, /[\u2013\u2014]/);
