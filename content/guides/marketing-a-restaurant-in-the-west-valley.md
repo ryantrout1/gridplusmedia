@@ -16,7 +16,7 @@ Today, compare your hours on Google to the sign on your door. Open your Google B
 
 ## Set special hours before any holiday
 
-Do this before the holiday, not after someone has shown up. Add special hours in your profile for each day you open late, close early or close for the day. It takes a few minutes. Then post the same hours on Facebook and Instagram, so a regular who never opens Google still sees them.
+Do this before the holiday, not after someone has shown up. Add special hours in your profile for each day you open late, close early or close for the day. It takes a few minutes. Then post the same hours on Facebook and Instagram, so a regular who never opens Google still sees them. For the steps, see [Check Your Hours Before the Holidays](/guides/check-your-hours-before-the-holidays/).
 
 ## Make it easy to leave a review
 
