@@ -57,3 +57,7 @@ The engine drafts service and FAQ pages; each approved one is a markdown file in
 runs on every Vercel deploy (see `vercel.json`) and writes `/guides/` pages and `sitemap.xml`. The generated
 files are not committed. The engine publishes a guide by committing a `.md` file there (and its picture to
 `images/guides/`), which triggers a deploy. Guides carry `noindex` only if the `NOINDEX` constant in the build script is `true` (it is `false` now).
+
+## The services page
+
+`/services/` lists each distinct service once. A page for one kind of business (`<trade>-marketing-service`, such as `electrician-marketing-service`) and the pages named in `RELATED` in `scripts/build-guides.mjs` stay published but appear as short link rows under the list, because they say what a main service already says. A new trade page the engine drafts is grouped by its slug. `tests/services.test.js` fails if two main entries read as the same service or a page is left unlinked.

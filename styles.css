@@ -612,5 +612,10 @@ body:has(.inc-dialog[open]) { overflow: hidden; }
 .guide-list a { text-decoration: none; }
 .guide-list a:hover h2 { color: var(--clay-dark); text-decoration: underline; text-underline-offset: 4px; }
 .guide-list p { margin: 6px 0 0; }
+.more-head { font-family: var(--serif); font-size: 20px; line-height: 1.25; color: var(--ink); margin: 40px 0 12px; padding-top: 28px; border-top: 1px solid var(--line); }
+.more-head + .link-row { margin-top: 0; }
+.more-head ~ .more-head { margin-top: 28px; padding-top: 0; border-top: 0; }
+.link-row { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px 24px; }
+.link-row a { color: var(--clay-dark); text-underline-offset: 4px; }
 .guide-empty { color: var(--muted); }
 .guide-cta .btn { margin-top: 16px; }

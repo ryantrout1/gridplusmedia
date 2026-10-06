@@ -163,8 +163,18 @@ ${lg.html}</div>
 </article>
 ${foot}`);
 }
+// A page for one kind of business (electrician-marketing-service) says what the main plan says, and a few pages cover the
+// same ground as another service. They stay published and linked, but /services/ shows them as short rows of links under the
+// list instead of repeating them as entries. The engine drafts new pages, so the trade rule is a pattern, not a list.
+const BY_TYPE = /^[a-z]+-marketing-service$/;
+const RELATED = new Set(["listing-consistency-service", "website-social-posting-service"]);
+const entry = (p) => `<li><a href="/${p.slug}/"><h2>${esc(p.meta.h1 || p.heading)}</h2></a><p>${esc(p.meta.description)}</p></li>`;
+const linkRow = (head, list) => (list.length ? `<h2 class="more-head">${head}</h2>\n<ul class="link-row">\n${list.map((p) => `<li><a href="/${p.slug}/">${esc(p.meta.h1 || p.heading)}</a></li>`).join("\n")}\n</ul>\n` : "");
 function hub(dir, title, description, h1, lede, kind, intro = "") {
-  const items = pages.filter((p) => p.meta.kind === kind).map((p) => `<li><a href="/${p.slug}/"><h2>${esc(p.meta.h1 || p.heading)}</h2></a><p>${esc(p.meta.description)}</p></li>`).join("\n");
+  const all = pages.filter((p) => p.meta.kind === kind);
+  const group = (p) => (kind !== "service" ? "main" : BY_TYPE.test(p.slug) ? "type" : RELATED.has(p.slug) ? "related" : "main");
+  const items = all.filter((p) => group(p) === "main").map(entry).join("\n");
+  const more = linkRow("For your type of business", all.filter((p) => group(p) === "type")) + linkRow("Related", all.filter((p) => group(p) === "related"));
   mkdirSync(dir, { recursive: true });
   writeFileSync(`${dir}/index.html`, `${head(title, description, `/${dir}/`)}<section class="wrap guide">
 <h1>${esc(h1)}</h1>
@@ -173,7 +183,7 @@ ${intro}
 <ul class="guide-list">
 ${items}
 </ul>
-</section>
+${more}</section>
 ${foot}`);
 }
 hub("services", "Marketing Services for Local Businesses | Grid Pulse Media", "What Grid Pulse Media does for local businesses: website, Google profile, social posts, listings, reviews and blog writing, on one monthly plan.", "Services", "Everything we run for a local business, on one monthly plan.", "service");
