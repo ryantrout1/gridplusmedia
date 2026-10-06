@@ -26,3 +26,19 @@ test('no page or guide says the 90-day plan is built on the setup call', () => {
   }
   assert.deepEqual(hits, []);
 });
+
+// The 90-day plan is one plan across every channel, with each piece working with the others. The FAQ leads with that.
+test('the 90-day plan FAQ leads with what the plan is and how the channels work together', () => {
+  const raw = readFileSync('content/pages/90-day-plan-faq.md', 'utf8');
+  const [, front, body] = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/.exec(raw);
+  const faqs = JSON.parse(JSON.parse(/^faqs: (.*)$/m.exec(front)[1]));
+  assert.equal(faqs[0].question, 'What is the 90-day marketing plan?');
+  assert.equal(faqs[1].question, 'How do my website, Instagram and Facebook work together?');
+  for (const q of faqs.slice(0, 2)) assert.ok(body.includes(`### ${q.question}`) && body.includes(q.answer), `${q.question} is in the body`);
+  assert.match(faqs[0].answer, /not a list of posts/);
+  assert.match(faqs[0].answer, /on brand, on theme and on message/);
+  assert.match(faqs[1].answer, /same topic/);
+  assert.match(faqs[1].answer, /do not look the same/);
+  assert.match(faqs[1].answer, /back to your (?:website|site)/);
+  assert.doesNotMatch(raw, /[–—]/);
+});
