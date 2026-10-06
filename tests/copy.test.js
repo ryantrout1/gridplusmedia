@@ -42,3 +42,13 @@ test('the 90-day plan FAQ leads with what the plan is and how the channels work 
   assert.match(faqs[1].answer, /back to your (?:website|site)/);
   assert.doesNotMatch(raw, /[–—]/);
 });
+
+test('the home page does not say the 90-day plan is built on the setup call', () => {
+  const home = readFileSync('index.html', 'utf8');
+  const step = /<h3>(Setup call[^<]*)<\/h3>\s*<p>([^<]*)<\/p>/.exec(home);
+  assert.ok(step, 'step 1 is there');
+  assert.doesNotMatch(step[1] + ' ' + step[2], /then map out the next 90 days/);
+  assert.match(step[2], /Once you start, we build your 90-day plan/);
+  assert.match(step[2], /every channel working together/);
+  for (const re of ON_THE_CALL) assert.doesNotMatch(home, re);
+});
