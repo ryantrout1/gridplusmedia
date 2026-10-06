@@ -288,15 +288,20 @@ test('the timing value is filled in by script when the form is sent', () => {
   assert.match(html, /addEventListener\('submit'/);
 });
 
-test('the page says the 90-day plan is built after you start, not on the call', () => {
+test('the page says the plan comes after you pay, launch is usually under a week and reviews are on the owner', () => {
   const after = /<h2>What happens after you send this<\/h2>([\s\S]*?)<h2>/.exec(html);
   assert.ok(after, 'the section is there');
   const [call, ...rest] = after[1].split('</p>');
+  const later = rest.join(' ');
   assert.match(call, /setup call/);
   assert.doesNotMatch(call, /90-day/);
-  assert.match(rest.join(' '), /you get a link to get started/);
-  assert.match(rest.join(' '), /build your first 90-day marketing plan/);
-  assert.match(rest.join(' '), /ask for changes/);
+  assert.match(later, /pick a launch date/);
+  assert.match(later, /after you pay/i);
+  assert.match(later, /couple of days/);
+  assert.match(later, /first 90-day marketing plan arrives within a couple of days: every post, and exactly what goes out on each channel/);
+  assert.match(later, /the plan, the website and everything else/);
+  assert.match(later, /usually in less than a week/);
+  assert.match(later, /how quickly you review/);
 });
 
 test('no page text or server message uses an em dash or an en dash', () => {
