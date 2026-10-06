@@ -35,7 +35,9 @@ test('the 90-day plan FAQ leads with what the plan is and how the channels work 
   assert.equal(faqs[0].question, 'What is the 90-day marketing plan?');
   assert.equal(faqs[1].question, 'How do my website, Instagram and Facebook work together?');
   for (const q of faqs.slice(0, 2)) assert.ok(body.includes(`### ${q.question}`) && body.includes(q.answer), `${q.question} is in the body`);
-  assert.match(faqs[0].answer, /not a list of posts/);
+  assert.match(faqs[0].answer, /one plan for your whole online presence, not a list of posts/);
+  assert.match(body, /one plan for your whole online presence, with your website, Google profile, Instagram and Facebook each supporting the others/);
+  assert.doesNotMatch(body.split('## Frequently')[0], /everywhere/);
   assert.match(faqs[0].answer, /on brand, on theme and on message/);
   assert.match(faqs[1].answer, /same topic/);
   assert.match(faqs[1].answer, /do not look the same/);
@@ -43,12 +45,25 @@ test('the 90-day plan FAQ leads with what the plan is and how the channels work 
   assert.doesNotMatch(raw, /[–—]/);
 });
 
-test('the home page does not say the 90-day plan is built on the setup call', () => {
+test('the home page does not say the 90-day plan is built on the setup call, and says what the plan is', () => {
   const home = readFileSync('index.html', 'utf8');
   const step = /<h3>(Setup call[^<]*)<\/h3>\s*<p>([^<]*)<\/p>/.exec(home);
   assert.ok(step, 'step 1 is there');
-  assert.doesNotMatch(step[1] + ' ' + step[2], /then map out the next 90 days/);
-  assert.match(step[2], /Once you start, we build your 90-day plan/);
-  assert.match(step[2], /every channel working together/);
+  assert.equal(step[1], 'Setup call, then your 90-day marketing plan');
+  assert.doesNotMatch(step[2], /then map out the next 90 days/);
+  assert.match(step[2], /Once you start, we build one plan for your whole online presence/);
+  assert.match(step[2], /website, Google profile, Instagram and Facebook, all working together/);
+  assert.doesNotMatch(step[2], /everywhere/i);
   for (const re of ON_THE_CALL) assert.doesNotMatch(home, re);
+});
+
+test('the plan card says it is one plan across the website, Google profile and social accounts', () => {
+  const home = readFileSync('index.html', 'utf8');
+  const card = /<h3>(A 90-day marketing plan, every quarter)<\/h3>\s*<p>([^<]*)<\/p>\s*<p class="detail">([^<]*)<\/p>\s*<p class="why">([^<]*)<\/p>/.exec(home);
+  assert.ok(card, 'the plan card is there');
+  assert.match(card[2], /one plan for your whole online presence/i);
+  assert.match(card[3], /same topic looks different on Instagram, Facebook and your website/);
+  assert.match(card[3], /on brand and on message/);
+  assert.match(card[4], /someone who knows your business and runs all of it as one plan/);
+  assert.doesNotMatch(card.slice(1).join(' '), /everywhere/i);
 });
