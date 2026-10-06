@@ -57,11 +57,27 @@ test('the home page does not say the 90-day plan is built on the setup call, and
   for (const re of ON_THE_CALL) assert.doesNotMatch(home, re);
 });
 
+test('the plan leads the included list and the pricing section says it is built around goals', () => {
+  const home = readFileSync('index.html', 'utf8');
+  const cards = [...home.matchAll(/<article class="inc-card">\s*<h3>([^<]*)<\/h3>/g)].map((m) => m[1]);
+  assert.equal(cards[0], 'A marketing plan built around your goals');
+  assert.match(home, /A marketing plan built around your goals for your online presence, checked every week and refreshed every quarter\./);
+  assert.match(home, /<th scope="row">Social posts, written to your plan<\/th>/);
+  assert.match(home, /<th scope="row">Blog articles, tied to your plan<\/th>/);
+  assert.match(home, /<th scope="row">All of it, planned around your goals, from one marketing company<\/th>/);
+  assert.match(home, /<td>\$2,500 to \$7,500 a month<\/td><td>\$349 a month<\/td>/);
+  assert.doesNotMatch(home, /[–—]/);
+});
+
 test('the plan card says it is one plan across the website, Google profile and social accounts', () => {
   const home = readFileSync('index.html', 'utf8');
-  const card = /<h3>(A 90-day marketing plan, every quarter)<\/h3>\s*<p>([^<]*)<\/p>\s*<p class="detail">([^<]*)<\/p>\s*<p class="why">([^<]*)<\/p>/.exec(home);
+  const card = /<h3>(A marketing plan built around your goals)<\/h3>\s*<p>([^<]*)<\/p>\s*<p class="detail">([^<]*)<\/p>\s*<p class="why">([^<]*)<\/p>/.exec(home);
   assert.ok(card, 'the plan card is there');
   assert.match(card[2], /one plan for your whole online presence/i);
+  assert.match(card[2], /built around what you want to accomplish/);
+  assert.match(card[2], /Checked every week, refreshed every quarter/);
+  assert.match(card[3], /Each week we look at your numbers against your goals/);
+  assert.match(card[4], /a plan without a goal is just a posting calendar/);
   assert.match(card[3], /same topic looks different on Instagram, Facebook and your website/);
   assert.match(card[3], /on brand and on message/);
   assert.match(card[4], /someone who knows your business and runs all of it as one plan/);
