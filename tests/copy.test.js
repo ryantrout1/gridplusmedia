@@ -83,3 +83,14 @@ test('the plan card says it is one plan across the website, Google profile and s
   assert.match(card[4], /someone who knows your business and runs all of it as one plan/);
   assert.doesNotMatch(card.slice(1).join(' '), /everywhere/i);
 });
+
+// The home page carries one short why line under the hero. No dashes in it.
+test('home page has the why line and no dashes in it', () => {
+  const html = readFileSync('index.html', 'utf8');
+  const m = /<p class="why-line">([^<]+)<\/p>/.exec(html);
+  assert.ok(m, 'why line missing');
+  assert.match(m[1], /Good businesses shouldn't disappear because marketing is hard\./);
+  assert.ok(!/[‒–—―]/.test(m[1]));
+  assert.ok(html.indexOf('class="why"') > html.indexOf('class="hero"'));
+  assert.ok(html.indexOf('class="why"') < html.indexOf('class="channels"'));
+});
