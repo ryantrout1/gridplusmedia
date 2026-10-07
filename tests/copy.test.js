@@ -65,7 +65,7 @@ test('the plan leads the included list and the pricing section says it is built 
   assert.match(home, /<th scope="row">Social posts, written to your plan<\/th>/);
   assert.match(home, /<th scope="row">Blog articles, tied to your plan<\/th>/);
   assert.match(home, /<th scope="row">All of it, planned around your goals, from one marketing company<\/th>/);
-  assert.match(home, /<td>\$2,500 to \$7,500 a month<\/td><td>\$349 a month<\/td>/);
+  assert.match(home, /<td data-label=\"Typical cost elsewhere\">\$2,500 to \$7,500 a month<\/td><td data-label=\"With us\">\$349 a month<\/td>/);
   assert.doesNotMatch(home, /[–—]/);
 });
 
