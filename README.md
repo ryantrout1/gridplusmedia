@@ -58,6 +58,14 @@ runs on every Vercel deploy (see `vercel.json`) and writes `/guides/` pages and 
 files are not committed. The engine publishes a guide by committing a `.md` file there (and its picture to
 `images/guides/`), which triggers a deploy. Guides carry `noindex` only if the `NOINDEX` constant in the build script is `true` (it is `false` now).
 
+`/guides/` is grouped by topic, and each guide page shows its time and links to more in its topic. Two optional front matter lines drive that, and a third feeds search later:
+
+- `topic: reviews` is one of the ids in `scripts/guide-config.mjs` (`TOPICS`, which also sets the order and wording of the sections).
+- `minutes: 20` is a whole number, about how long the guide takes to read and do. Only put a time the guide itself states.
+- `keywords: "gmb, google my business"` is words an owner might type that the guide does not use.
+
+The engine writes guides without these lines (it writes title, description, path, date). Such a guide still builds and shows up under "More guides" at the bottom of `/guides/`, and the build log names it. Set `topic` and `minutes` on it to move it into place. Do not use a front matter key called `path` for anything new: the engine already writes it as the guide's URL. To add a topic, add one entry to `TOPICS`. `tests/guides-index.test.js` checks every guide is listed once and that the fallback works.
+
 ## The services page
 
 `/services/` lists each distinct service once. A page for one kind of business (`<trade>-marketing-service`, such as `electrician-marketing-service`) and the pages named in `RELATED` in `scripts/build-guides.mjs` stay published but appear as short link rows under the list, because they say what a main service already says. A new trade page the engine drafts is grouped by its slug. `tests/services.test.js` fails if two main entries read as the same service or a page is left unlinked.
