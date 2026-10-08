@@ -3,6 +3,9 @@ title: "Which Photos to Put on Your Google Listing"
 seoTitle: "Photos to Put on Your Google Listing | Grid Pulse Media"
 description: "Real photos beat clever captions. Which photos to add to your Google listing first, the exact steps, the file sizes Google accepts and what to skip."
 date: "2026-10-06"
+topic: google-profile
+minutes: 45
+keywords: "pictures, images, logo, cover photo, google listing, gmb"
 ---
 
 # Which Photos to Put on Your Google Listing

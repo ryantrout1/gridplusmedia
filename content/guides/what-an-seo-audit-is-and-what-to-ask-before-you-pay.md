@@ -3,11 +3,14 @@ title: "What an SEO Audit Is, and What to Ask Before You Pay for One"
 seoTitle: "What an SEO Audit Is and What to Ask Before You Pay | Grid Pulse Media"
 description: "An SEO audit is a checklist review of your site. Here is what one covers, what it cannot promise, and the questions to ask before paying anyone."
 date: "2026-10-08"
+topic: hiring
+minutes: 20
+keywords: "seo, audit, agency, hire, scam, report, website audit, seo company"
 ---
 
 # What an SEO Audit Is, and What to Ask Before You Pay for One
 
-If you have been pitched "SEO" lately, you may have been offered an audit. It sounds technical, and the pitch usually does not say what you get. This guide takes the mystery out of it, so you can tell what is worth paying for.
+If you have been pitched "SEO" lately, you may have been offered an audit. It sounds technical, and the pitch usually does not say what you get. This guide takes the mystery out of it, so you can tell what is worth paying for. Plan on about 20 minutes, including a short check of your own.
 
 ## What an audit is
 

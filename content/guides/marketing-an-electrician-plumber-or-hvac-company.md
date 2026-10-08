@@ -3,6 +3,9 @@ title: "Marketing an Electrician, Plumber or HVAC Company"
 seoTitle: "Electrician, Plumber and HVAC Marketing | Grid Pulse Media"
 description: "A step by step plan for home service pros: set up your Google listing with a service area, list each service, use before and after photos and keep your hours honest."
 date: "2026-10-06"
+topic: industry
+minutes: 180
+keywords: "electrician, plumber, hvac, contractor, home service, trades, emergency calls"
 ---
 
 # Marketing an Electrician, Plumber or HVAC Company

@@ -2,11 +2,14 @@
 title: "Local Search in Plain Words"
 description: "How Google picks local results, in plain words: relevance, distance and prominence. What each one means and the exact steps you can take this week."
 date: "2026-10-06"
+topic: found
+minutes: 15
+keywords: "seo, ranking, near me, map pack, local search, relevance, distance, prominence"
 ---
 
 # Local Search in Plain Words
 
-When someone searches for a plumber, a haircut or a place to eat near them, Google shows a short list of local businesses. People call this local search. It sounds technical, but the idea is simple, and most of what you can do about it is plain, steady work. This guide explains the idea and then gives you a checklist for each part.
+When someone searches for a plumber, a haircut or a place to eat near them, Google shows a short list of local businesses. People call this local search. It sounds technical, but the idea is simple, and most of what you can do about it is plain, steady work. This guide explains the idea and then gives you a checklist for each part. Plan on about 15 minutes, including a ten minute check of your own.
 
 ## The three things Google looks at
 

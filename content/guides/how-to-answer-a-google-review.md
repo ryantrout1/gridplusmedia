@@ -2,6 +2,9 @@
 title: "How to Answer a Google Review, Good or Bad"
 description: "A simple way to answer Google reviews in three lines, how to reply calmly to a bad review, and a prompt for drafting replies with AI without making things up."
 date: "2026-10-06"
+topic: reviews
+minutes: 10
+keywords: "reviews, reply, respond, bad review, negative review, fake review"
 ---
 
 # How to Answer a Google Review, Good or Bad

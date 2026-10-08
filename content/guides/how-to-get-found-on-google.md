@@ -3,13 +3,16 @@ title: "How to Get Found on Google as a Local Business"
 description: "A step by step order of work for getting found on Google as a local business: your profile, matching details, photos, reviews, a website that backs it up, and steady posting."
 seoTitle: "Get Found on Google as a Local Business | Grid Pulse Media"
 date: "2026-10-05"
+topic: found
+minutes: 10
+keywords: "seo, rank on google, show up on google, local seo, maps, near me"
 ---
 
 # How to Get Found on Google as a Local Business
 
 Getting found on Google is not one trick. It is a handful of ordinary things, done in the right order and kept up. Nobody can promise you a spot at the top, and Google says there are no secrets that put a site first automatically. What you can do is make it easy for Google and for customers to see what you do, where you are and that you are open.
 
-This guide is the order of work. Each step links to a detailed guide.
+This guide is the order of work. Reading it takes about 10 minutes, and each step links to a detailed guide with its own time.
 
 ## Step 1. See what customers see today
 

@@ -3,6 +3,9 @@ title: "How to Choose Your Google Categories, Services and Service Area"
 seoTitle: "Google Categories, Services and Service Area | Grid Pulse Media"
 description: "Pick the right primary category, add your services, and set a service area or hide your address, with the exact clicks and Google's own rules."
 date: "2026-10-08"
+topic: google-profile
+minutes: 20
+keywords: "category, primary category, service area, hide address, services list, google my business, gmb"
 ---
 
 # How to Choose Your Google Categories, Services and Service Area

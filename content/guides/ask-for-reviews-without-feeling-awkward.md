@@ -3,6 +3,9 @@ title: "How to Ask for a Google Review Without Feeling Awkward"
 seoTitle: "How to Ask for a Google Review | Grid Pulse Media"
 description: "Exact words for asking customers for a Google review, the right moment to ask, how to get your review link, and the one rule that matters most."
 date: "2026-10-06"
+topic: reviews
+minutes: 15
+keywords: "reviews, asking, review request, text message, testimonials"
 ---
 
 # How to Ask for a Google Review Without Feeling Awkward

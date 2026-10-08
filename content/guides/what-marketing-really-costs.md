@@ -3,11 +3,14 @@ title: "What Marketing Really Costs for a Local Business"
 seoTitle: "What Marketing Really Costs | Grid Pulse Media"
 description: "Four places the money and time go when you market a local business, why a cheap post tool is not the whole job, and what Grid Pulse Media charges."
 date: "2026-10-06"
+topic: hiring
+minutes: 20
+keywords: "price, pricing, budget, how much, cost of marketing, agency, hire"
 ---
 
 # What Marketing Really Costs for a Local Business
 
-Marketing costs something, even when you do it yourself. The trick is knowing which costs you are already paying in hours instead of dollars. Here are the four places the money and time go, so you can decide what fits your week and your budget.
+Marketing costs something, even when you do it yourself. The trick is knowing which costs you are already paying in hours instead of dollars. Here are the four places the money and time go, so you can decide what fits your week and your budget. Reading it takes about ten minutes, and adding up your own numbers takes about ten more.
 
 ## 1. Your own time
 

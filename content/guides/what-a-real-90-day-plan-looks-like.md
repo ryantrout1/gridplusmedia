@@ -3,6 +3,9 @@ title: "What a Real 90 Day Plan Looks Like, With a Sample"
 seoTitle: "What a Real 90 Day Plan Looks Like | Grid Pulse Media"
 description: "The four steps of a 90 day marketing plan (plan, do, check, adjust), why a quarter beats a month, a labeled sample, and how to write your own in about 30 minutes."
 date: "2026-10-06"
+topic: measure
+minutes: 30
+keywords: "marketing plan, quarterly plan, sample plan, content plan, strategy"
 ---
 
 # What a Real 90 Day Plan Looks Like, With a Sample

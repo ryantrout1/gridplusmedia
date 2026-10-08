@@ -2,6 +2,9 @@
 title: "What to Write on a Small Business Blog"
 description: "Topic ideas for a small business blog and a step by step way to write one article in about an hour, with a prompt for a first draft."
 date: "2026-10-05"
+topic: posting
+minutes: 60
+keywords: "blog, articles, topic ideas, content marketing, writing"
 ---
 
 # What to Write on a Small Business Blog

@@ -3,6 +3,9 @@ title: "How to Use AI to Write Your Marketing Without It Making Things Up"
 seoTitle: "Use AI for Your Marketing Without It Making Things Up | Grid Pulse Media"
 description: "Build a one page facts sheet, give it to any AI chat tool with one rule, and check the draft. A simple way to get posts, replies and pages that are true."
 date: "2026-10-08"
+topic: posting
+minutes: 30
+keywords: "chatgpt, claude, ai writing, prompts, ai content, facts sheet, artificial intelligence"
 ---
 
 # How to Use AI to Write Your Marketing Without It Making Things Up

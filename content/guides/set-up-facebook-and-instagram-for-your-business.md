@@ -3,6 +3,9 @@ title: "How to Set Up Facebook and Instagram for Your Business"
 seoTitle: "Set Up Facebook and Instagram for Your Business | Grid Pulse Media"
 description: "Create a Facebook Page, switch Instagram to a professional account, connect the two, and fill in every detail so it matches your Google profile and website."
 date: "2026-10-08"
+topic: posting
+minutes: 45
+keywords: "facebook page, instagram business account, meta, create page, professional account, social media setup"
 ---
 
 # How to Set Up Facebook and Instagram for Your Business

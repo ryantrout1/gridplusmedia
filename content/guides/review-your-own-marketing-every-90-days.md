@@ -3,6 +3,9 @@ title: "How to Review Your Own Marketing Every 90 Days"
 seoTitle: "Review Your Own Marketing Every 90 Days | Grid Pulse Media"
 description: "Pick what to count, write it down weekly, ask people how they found you, then look back each quarter and plan the next one in 20 minutes."
 date: "2026-10-06"
+topic: measure
+minutes: 20
+keywords: "quarterly review, results, goals, plan next quarter, tracking"
 ---
 
 # How to Review Your Own Marketing Every 90 Days

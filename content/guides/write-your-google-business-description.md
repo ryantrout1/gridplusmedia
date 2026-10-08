@@ -3,6 +3,9 @@ title: "How to Write Your Google Business Description"
 seoTitle: "Write Your Google Business Description | Grid Pulse Media"
 description: "What goes in the 750 character description on your Google profile, what to leave out, a fill-in outline, and a prompt to get a clean first draft from AI."
 date: "2026-10-08"
+topic: google-profile
+minutes: 15
+keywords: "description, about us, business bio, 750 characters, google my business, gmb"
 ---
 
 # How to Write Your Google Business Description

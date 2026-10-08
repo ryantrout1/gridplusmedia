@@ -3,6 +3,9 @@ title: "What to Post on Your Google Business Profile"
 seoTitle: "What to Post on Your Google Profile | Grid Pulse Media"
 description: "Four things worth posting on your Google Business Profile, the exact steps to publish one, how often to post and an honest answer on whether posting helps."
 date: "2026-10-06"
+topic: posting
+minutes: 10
+keywords: "google posts, gmb posts, updates, offers, events"
 ---
 
 # What to Post on Your Google Business Profile

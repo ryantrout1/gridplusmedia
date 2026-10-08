@@ -3,11 +3,14 @@ title: "How Often Should a Small Business Post on Social Media?"
 description: "How often a small business should post on social media: pick a pace you can hold, a simple schedule by time available, and how to batch your posts in one sitting."
 seoTitle: "How Often Should a Small Business Post? | Grid Pulse Media"
 date: "2026-10-05"
+topic: posting
+minutes: 60
+keywords: "facebook, instagram, how often, schedule, batch, consistency"
 ---
 
 # How Often Should a Small Business Post on Social Media?
 
-There is no magic number that fits every business. The number that works is the one you can keep up in your busiest week. A steady pace you hold beats a burst of posts followed by months of silence, because people who check your page before they visit notice the gap. This guide helps you pick a pace and then makes it easy to hold.
+There is no magic number that fits every business. The number that works is the one you can keep up in your busiest week. A steady pace you hold beats a burst of posts followed by months of silence, because people who check your page before they visit notice the gap. This guide helps you pick a pace and then makes it easy to hold. Plan on about an hour to choose your pace and write your first month of posts.
 
 ## Step 1. Count the time you really have
 

@@ -3,6 +3,9 @@ title: "A 90 Day Posting Plan You Can Copy"
 seoTitle: "A 90 Day Posting Plan You Can Copy | Grid Pulse Media"
 description: "A simple 90 day posting plan for small businesses: pick three themes, rotate them week by week, start with one post a week, then look back and adjust."
 date: "2026-10-06"
+topic: posting
+minutes: 90
+keywords: "content calendar, quarterly plan, posting plan, themes, social media plan"
 ---
 
 # A 90 Day Posting Plan You Can Copy

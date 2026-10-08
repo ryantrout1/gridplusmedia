@@ -3,6 +3,9 @@ title: "Check How Your Business Shows Up on Google, and Fix What Is Wrong"
 seoTitle: "Check Your Google Listing and Fix Duplicates | Grid Pulse Media"
 description: "A 20 minute check of what customers actually see when they search for you, plus how to handle duplicate profiles, wrong details and someone else's listing."
 date: "2026-10-08"
+topic: google-profile
+minutes: 20
+keywords: "duplicate listing, wrong hours, wrong phone, maps, search yourself, someone else claimed, suggest an edit, google listing"
 ---
 
 # Check How Your Business Shows Up on Google, and Fix What Is Wrong

@@ -3,6 +3,9 @@ title: "Website or Google Listing: Which Matters More?"
 seoTitle: "Website vs Google Listing | Grid Pulse Media"
 description: "Which matters more for a local business, your website or your Google listing? Both, in that order. A one afternoon check of each, and how to make them agree."
 date: "2026-10-06"
+topic: found
+minutes: 120
+keywords: "gmb, google my business, website or listing, do i need a website"
 ---
 
 # Website or Google Listing: Which Matters More?

@@ -2,6 +2,9 @@
 title: "How to Get More Google Reviews for Your Business"
 description: "A simple system for getting more Google reviews: get your review link and QR code, put them where customers are, ask every time and answer every review."
 date: "2026-10-05"
+topic: reviews
+minutes: 30
+keywords: "reviews, qr code, review link, star rating, more reviews, testimonials"
 ---
 
 # How to Get More Google Reviews

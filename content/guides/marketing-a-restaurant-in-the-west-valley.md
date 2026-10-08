@@ -2,6 +2,9 @@
 title: "Marketing a Restaurant in the West Valley"
 description: "A step by step plan for West Valley restaurants: get your Google hours right, make reviews easy to leave, show the real place and plan posts for the slow weeks."
 date: "2026-10-06"
+topic: industry
+minutes: 180
+keywords: "restaurant, cafe, food, menu, west valley, buckeye, hours"
 ---
 
 # Marketing a Restaurant in the West Valley

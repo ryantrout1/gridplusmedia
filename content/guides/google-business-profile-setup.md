@@ -2,6 +2,9 @@
 title: "How to Set Up a Google Business Profile"
 description: "A step by step checklist for setting up a Google Business Profile: claim it, verify it, fill in every section and keep it accurate. Links to a detailed guide for each step."
 date: "2026-10-05"
+topic: google-profile
+minutes: 120
+keywords: "google my business, gmb, setup, checklist, google listing, maps, getting started"
 ---
 
 # How to Set Up a Google Business Profile

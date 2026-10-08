@@ -3,6 +3,9 @@ title: "How to Claim and Verify Your Google Business Profile"
 seoTitle: "Claim and Verify Your Google Business Profile | Grid Pulse Media"
 description: "Step by step: find out if your business already has a Google profile, claim it or create one, pick a verification method and fix the usual snags."
 date: "2026-10-08"
+topic: google-profile
+minutes: 20
+keywords: "google my business, gmb, claim listing, verify, verification postcard, business profile, create listing"
 ---
 
 # How to Claim and Verify Your Google Business Profile

@@ -2,6 +2,9 @@
 title: "Nothing to Say? Post One of These Seven"
 description: "Seven post ideas for any week when you have nothing to say, a fill-in line for each, and how to pick a posting pace you can actually keep."
 date: "2026-10-06"
+topic: posting
+minutes: 10
+keywords: "content ideas, writer's block, what to post, social media ideas, post ideas"
 ---
 
 # Nothing to Say? Post One of These Seven

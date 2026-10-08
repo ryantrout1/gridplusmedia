@@ -2,6 +2,9 @@
 title: "Check Your Hours Before the Holidays"
 description: "Write your holiday hours once, then update five places: Google, Facebook, Instagram, your website and your directories. Includes the exact steps for Google special hours."
 date: "2026-10-06"
+topic: google-profile
+minutes: 30
+keywords: "holiday hours, special hours, closed, thanksgiving, christmas, temporarily closed"
 ---
 
 # Check Your Hours Before the Holidays

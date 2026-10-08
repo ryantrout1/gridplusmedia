@@ -3,6 +3,9 @@ title: "Marketing a Salon, Spa or Esthetician Business"
 seoTitle: "Marketing a Salon, Spa or Esthetician | Grid Pulse Media"
 description: "Five habits for salons, spas and estheticians, with steps: pick the right Google categories, list services, share work with permission, rebook clients and fill slow days."
 date: "2026-10-06"
+topic: industry
+minutes: 120
+keywords: "salon, spa, esthetician, hair, nails, beauty, booking"
 ---
 
 # Marketing a Salon, Spa or Esthetician Business

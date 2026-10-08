@@ -3,11 +3,14 @@ title: "How to Tell If a Change to Your Marketing Worked"
 seoTitle: "How to Tell If a Marketing Change Worked | Grid Pulse Media"
 description: "Change one thing, write down the date, give it time, then compare before and after. A plain way for a local business to tell what helped."
 date: "2026-10-06"
+topic: measure
+minutes: 15
+keywords: "results, analytics, testing, before and after, measure, tracking"
 ---
 
 # How to Tell If a Change to Your Marketing Worked
 
-You post a new photo, rewrite your Google profile and add a page to your website, all in the same week. Then the phone rings more. Which one did it? You cannot tell, and neither can anyone else. This guide shows a simple habit that fixes that: change one thing at a time, write down when, wait, and compare.
+You post a new photo, rewrite your Google profile and add a page to your website, all in the same week. Then the phone rings more. Which one did it? You cannot tell, and neither can anyone else. This guide shows a simple habit that fixes that: change one thing at a time, write down when, wait, and compare. Setting it up takes about 15 minutes.
 
 ## Why one change at a time
 

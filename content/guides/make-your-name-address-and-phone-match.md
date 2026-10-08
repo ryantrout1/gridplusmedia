@@ -3,6 +3,9 @@ title: "Make Your Name, Address and Phone Number Match Everywhere"
 seoTitle: "Match Your Name, Address and Phone | Grid Pulse Media"
 description: "Small differences in your business name, address or phone number confuse customers and search. Make a master copy, then check each place in about an hour."
 date: "2026-10-06"
+topic: found
+minutes: 60
+keywords: "nap, citations, directories, listings, consistency, apple maps, bing, yellow pages"
 ---
 
 # Make Your Name, Address and Phone Number Match Everywhere

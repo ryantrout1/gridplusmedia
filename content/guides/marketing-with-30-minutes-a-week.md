@@ -3,6 +3,9 @@ title: "Check Your Own Marketing in 30 Minutes a Week"
 seoTitle: "Check Your Marketing in 30 Minutes a Week | Grid Pulse Media"
 description: "Five questions and where to look for each answer, so you can see what is working in about 30 minutes. A simple weekly check with a page to copy."
 date: "2026-10-06"
+topic: measure
+minutes: 30
+keywords: "weekly check, analytics, results, metrics, insights, tracking, weekly review"
 ---
 
 # Check Your Own Marketing in 30 Minutes a Week

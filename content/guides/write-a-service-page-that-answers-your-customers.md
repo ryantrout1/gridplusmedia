@@ -3,6 +3,9 @@ title: "How to Write a Service Page That Answers Your Customers"
 seoTitle: "How to Write a Service Page for Your Website | Grid Pulse Media"
 description: "One page for each main service, with a plain layout, real questions and a clear next step. Includes an outline, a check list and a prompt to get a first draft."
 date: "2026-10-08"
+topic: found
+minutes: 60
+keywords: "website, service page, landing page, website copy, seo"
 ---
 
 # How to Write a Service Page That Answers Your Customers
