@@ -4,14 +4,23 @@
 // and says how long it takes with:                        minutes: 20   (a whole number, about how long to read and do it)
 // A guide with no topic, or a topic that is not listed here, appears under "More guides" until someone sets it.
 // To add a topic, add one entry below. Sections show in this order, and a topic with no guides is not shown.
+// "short" is the shorter name on the topic chips above the list (optional, up to 20 characters; the label is used without it).
 export const TOPICS = [
-  { id: "google-profile", label: "Your Google profile", blurb: "Claim it, fill it in and keep it right." },
-  { id: "found", label: "Getting found nearby", blurb: "What helps people near you find you on Google." },
-  { id: "reviews", label: "Reviews", blurb: "Ask for them, answer them and make it a habit." },
-  { id: "posting", label: "Posting and content", blurb: "What to post, how often, and how to keep it going." },
-  { id: "measure", label: "Plan and check your results", blurb: "A simple plan, and a quick way to see what is working." },
-  { id: "industry", label: "For your type of business", blurb: "Plans for restaurants, salons and home service pros." },
-  { id: "hiring", label: "Before you spend money", blurb: "What things cost, and what to ask before you pay anyone." },
+  { id: "google-profile", label: "Your Google profile", short: "Google profile", blurb: "Claim it, fill it in and keep it right." },
+  { id: "found", label: "Getting found nearby", short: "Getting found", blurb: "What helps people near you find you on Google." },
+  { id: "reviews", label: "Reviews", short: "Reviews", blurb: "Ask for them, answer them and make it a habit." },
+  { id: "posting", label: "Posting and content", short: "Posting", blurb: "What to post, how often, and how to keep it going." },
+  { id: "measure", label: "Plan and check your results", short: "Your results", blurb: "A simple plan, and a quick way to see what is working." },
+  { id: "industry", label: "For your type of business", short: "By business type", blurb: "Plans for restaurants, salons and home service pros." },
+  { id: "hiring", label: "Before you spend money", short: "Before you pay", blurb: "What things cost, and what to ask before you pay anyone." },
+];
+
+// The time chips above the list. A chip means "up to": the 60 chip shows guides of 60 minutes or less.
+// A guide with no minutes is hidden while a time chip is on. Keep them in order, smallest first.
+export const TIME_CHIPS = [
+  { minutes: 15, label: "15 minutes" },
+  { minutes: 60, label: "An hour" },
+  { minutes: 180, label: "An afternoon" },
 ];
 
 // "About 20 minutes", "About an hour", "About 2 and a half hours".

@@ -30,7 +30,7 @@ function build(fixture, paths) {
     mkdirSync(join(dir, 'scripts'));
     copyFileSync(join(ROOT, 'scripts', 'build-guides.mjs'), join(dir, 'scripts', 'build-guides.mjs'));
     const real = JSON.stringify(pathToFileURL(join(ROOT, 'scripts', 'guide-config.mjs')).href);
-    writeFileSync(join(dir, 'scripts', 'guide-config.mjs'), `export { TOPICS, timeLabel, pathLabel } from ${real};\nexport const PATHS = ${JSON.stringify(paths)};\n`);
+    writeFileSync(join(dir, 'scripts', 'guide-config.mjs'), `export { TOPICS, TIME_CHIPS, timeLabel, pathLabel } from ${real};\nexport const PATHS = ${JSON.stringify(paths)};\n`);
     symlinkSync(join(ROOT, 'node_modules'), join(dir, 'node_modules'), 'junction');
   } else {
     symlinkSync(join(ROOT, 'scripts'), join(dir, 'scripts'), 'junction');

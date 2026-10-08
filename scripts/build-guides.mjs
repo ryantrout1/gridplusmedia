@@ -3,9 +3,10 @@
 // optional image and imageAlt), then one "# heading", the body, and "## question" answers.
 // Optional lines the engine does not write yet: topic, minutes and keywords (see scripts/guide-config.mjs and the README).
 // Learning paths (ordered guides, listed in PATHS in guide-config.mjs) get a page each at /guides/paths/<id>/.
+// /guides/ has a search box and chips (guides.js and guides-filter.js at the site root). They ship hidden and the script shows them.
 import { readdirSync, readFileSync, writeFileSync, mkdirSync, rmSync, existsSync } from "node:fs";
 import { marked } from "marked";
-import { TOPICS, PATHS, timeLabel, pathLabel } from "./guide-config.mjs";
+import { TOPICS, TIME_CHIPS, PATHS, timeLabel, pathLabel } from "./guide-config.mjs";
 
 // www is the primary host: Vercel redirects the bare domain to it, so canonicals and the sitemap name www.
 const SITE = "https://www.gridpulsemedia.com";
@@ -204,20 +205,30 @@ const pathCard = (p) => `<li class="path-card"><a href="/guides/paths/${p.id}/">
 const startHere = paths.length ? `<section class="start-here" id="start" aria-labelledby="start-heading">\n<h2 id="start-heading">Start here</h2>\n<p class="topic-blurb">Not sure where to begin? Pick one and follow it, one step at a time.</p>\n<ul class="path-cards">\n${paths.map(pathCard).join("\n")}\n</ul>\n</section>\n` : "";
 
 // One section per topic, in the order set in guide-config.mjs. Guides with no known topic go last under "More guides".
-const card = (g) => `<li class="guide-card"><a href="/guides/${g.slug}/"><h3>${esc(g.heading)}</h3></a><p>${esc(g.meta.description)}</p>${g.minutes ? `<p class="guide-meta">${timeLabel(g.minutes)}</p>` : ""}</li>`;
+const cardData = (g) => ` data-topic="${g.topic ? g.topic.id : "more"}"${g.minutes ? ` data-minutes="${g.minutes}"` : ""}${g.meta.keywords ? ` data-keywords="${esc(g.meta.keywords)}"` : ""}`;
+const card = (g) => `<li class="guide-card"${cardData(g)}><a href="/guides/${g.slug}/"><h3>${esc(g.heading)}</h3></a><p>${esc(g.meta.description)}</p>${g.minutes ? `<p class="guide-meta">${timeLabel(g.minutes)}</p>` : ""}</li>`;
 const topicSection = (id, label, blurb, items) => `<section class="topic" id="${id}">\n<h2>${esc(label)}</h2>\n<p class="topic-blurb">${esc(blurb)}</p>\n<ul class="guide-cards">\n${items.map(card).join("\n")}\n</ul>\n</section>`;
 const groups = [
   ...TOPICS.map((t) => ({ id: t.id, label: t.label, blurb: t.blurb, items: guides.filter((g) => g.topic === t) })),
   { id: "more", label: "More guides", blurb: "Newer guides that have not been sorted into a topic yet.", items: guides.filter((g) => !g.topic) },
 ].filter((s) => s.items.length);
+// Search box, the count line (right under the box so a phone shows it) and chips. They ship hidden: guides.js shows them, so without JavaScript nothing on the page is a dead control.
+const chip = (attrs, pressed, text) => `<button type="button" class="chip" ${attrs} aria-pressed="${pressed}">${esc(text)}</button>`;
+const topicsInUse = TOPICS.filter((t) => guides.some((g) => g.topic === t));
+const finder = guides.length ? `<div class="guide-finder" hidden>
+<div class="finder-search"><label for="guide-search">Search the guides</label><input type="search" id="guide-search" class="finder-input" placeholder="Try &quot;reviews&quot; or &quot;photos&quot;" autocomplete="off" enterkeyhint="search"></div>
+<div class="finder-result"><p class="finder-status" role="status"></p><button type="button" class="finder-clear" hidden>Clear filters</button></div>
+<div class="finder-row"><p class="finder-label" id="finder-time">How much time do you have?</p><div class="finder-chips" role="group" aria-labelledby="finder-time">${[chip('data-time="any"', true, "Any time"), ...TIME_CHIPS.map((c) => chip(`data-time="${c.minutes}"`, false, c.label))].join("")}</div></div>${topicsInUse.length ? `
+<div class="finder-row"><p class="finder-label" id="finder-topic">Topic</p><div class="finder-chips" role="group" aria-labelledby="finder-topic">${[chip('data-topic="all"', true, "All"), ...topicsInUse.map((t) => chip(`data-topic="${t.id}" data-label="${esc(t.label)}"`, false, t.short || t.label))].join("")}</div></div>` : ""}
+</div>\n` : "";
 const list = guides.length
   ? `<div class="topics">\n${groups.map((s) => topicSection(s.id, s.label, s.blurb, s.items)).join("\n")}\n</div>`
   : `<p class="guide-empty">The first guides are on the way.</p>`;
-writeFileSync("guides/index.html", `${head("Local Business Marketing Guides | Grid Pulse Media", "Plain-language guides for local business owners on getting found online, keeping listings matching and posting on a 90-day plan.", "/guides/")}<section class="wrap guide guide-index">
+writeFileSync("guides/index.html", `${head("Local Business Marketing Guides | Grid Pulse Media", "Plain-language guides for local business owners on getting found online, keeping listings matching and posting on a 90-day plan.", "/guides/", '<script type="module" src="/guides.js"></script>\n')}<section class="wrap guide guide-index">
 <h1>Guides</h1>
 <p class="lede">Plain-language help for local business owners on getting found online and keeping your marketing going.</p>
-<div class="guide-body"><p>These guides cover the everyday parts of marketing a local business: setting up and keeping your Google Business Profile accurate, getting found when customers search nearby, asking for and answering reviews, deciding how often to post, and knowing what to write on your blog. Each one is written for owners who are short on time, with plain steps you can act on this week.</p><p>If you would rather not do any of it yourself, Grid Pulse Media plans, writes and posts all of this for you on a 90-day plan. See <a href="/services/">what we run for you</a> or <a href="/start/">get started</a>.</p></div>
-${startHere}${list}
+${finder}${startHere}${list}
+<div class="guide-body guide-about"><p>These guides cover the everyday parts of marketing a local business: setting up and keeping your Google Business Profile accurate, getting found when customers search nearby, asking for and answering reviews, deciding how often to post, and knowing what to write on your blog. Each one is written for owners who are short on time, with plain steps you can act on this week.</p><p>If you would rather not do any of it yourself, Grid Pulse Media plans, writes and posts all of this for you on a 90-day plan. See <a href="/services/">what we run for you</a> or <a href="/start/">get started</a>.</p></div>
 </section>
 ${foot}`);
 
