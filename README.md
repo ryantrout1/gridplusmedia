@@ -58,7 +58,7 @@ runs on every Vercel deploy (see `vercel.json`) and writes `/guides/` pages and 
 files are not committed. The engine publishes a guide by committing a `.md` file there (and its picture to
 `images/guides/`), which triggers a deploy. Guides carry `noindex` only if the `NOINDEX` constant in the build script is `true` (it is `false` now).
 
-`/guides/` is grouped by topic, and each guide page shows its time and links to more in its topic. Two optional front matter lines drive that, and a third feeds search later:
+`/guides/` is grouped by topic, and each guide page shows its time and links to more in its topic. Two optional front matter lines drive that, and a third feeds search:
 
 - `topic: reviews` is one of the ids in `scripts/guide-config.mjs` (`TOPICS`, which also sets the order and wording of the sections).
 - `minutes: 20` is a whole number, about how long the guide takes to read and do. Only put a time the guide itself states.
@@ -67,6 +67,8 @@ files are not committed. The engine publishes a guide by committing a `.md` file
 The engine writes guides without these lines (it writes title, description, path, date). Such a guide still builds and shows up under "More guides" at the bottom of `/guides/`, and the build log names it. Set `topic` and `minutes` on it to move it into place. Do not use a front matter key called `path` for anything new: the engine already writes it as the guide's URL. To add a topic, add one entry to `TOPICS`. `tests/guides-index.test.js` checks every guide is listed once and that the fallback works.
 
 Learning paths are ordered sets of guides, each with a page at `/guides/paths/<id>/` and a card in the "Start here" row on `/guides/`. They are listed in `PATHS` in `scripts/guide-config.mjs`: an id, a title, a one line blurb and the guide slugs in order. A guide in a path shows "Step 2 of 6 in ..." under its title and Previous / Next at the end. The time on a path is the sum of its guides' `minutes`, so every guide in a path needs `minutes`. If one has none, the path still builds but shows only the number of steps, and the build log names the guide. A guide can be in one path only. A new guide does not have to be in a path; to add it to one, add its slug to that path's `steps`. A slug that has no guide, or a guide already in an earlier path, is left out and named in the build log, and a path with fewer than two steps left is not built. No guide can be named `paths` (the build stops and says so), because `/guides/paths/` is where the path pages live.
+
+Search and filters on `/guides/`: a search box, time chips ("up to" 15 minutes, an hour, an afternoon) and topic chips sit under the intro. The page script `guides.js` runs them and the matching rules are in `guides-filter.js`, both at the site root, loaded on `/guides/` only. The controls ship with the `hidden` attribute and the script shows them, so with JavaScript off nobody sees buttons that do nothing and every guide stays listed. Every word typed has to match the start of a word in a guide's title, description, topic name or `keywords`, so `keywords` is where to put the words owners use that the guide does not (`gmb`). A time chip hides guides that have no `minutes`. The time chips are `TIME_CHIPS` and the short topic chip names are the `short` field of each topic, both in `scripts/guide-config.mjs`. A new topic or guide needs no change to the script. The filter is not kept in the address bar and nothing the visitor types is recorded. `tests/guides-filter.test.js` checks the rules.
 
 ## The services page
 
