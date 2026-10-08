@@ -11,7 +11,7 @@ date: "2026-10-06"
 
 ## Why 90 days
 
-A week is too short to see a pattern. A year is too long to wait. A quarter is long enough to see what is working and short enough to change course. It is also the length of the plan we recommend, because changes in search can take weeks or months to show. For more on why, see [What a Real 90 Day Plan Looks Like, With a Sample](/guides/what-a-real-90-day-plan-looks-like/).
+A week is too short to see a pattern. A year is too long to wait. A quarter is long enough to see what is working and short enough to change course. It is also the length of the plan we recommend, because changes in search can take weeks or months to show. Google's own advice is to wait a few weeks before deciding whether a change helped. For more on why, see [What a Real 90 Day Plan Looks Like, With a Sample](/guides/what-a-real-90-day-plan-looks-like/).
 
 ## Step 1. Pick what matters to you
 
@@ -27,7 +27,7 @@ Keep the list short. Fancy dashboards can wait.
 
 ## Step 2. Write them down once a week
 
-Use paper or a notes app, and pick the same day each week. It takes two minutes. If a week was unusual, like a holiday, a closed day or a slow stretch, add a short note beside it so you do not read too much into the number later.
+Use paper or a notes app, and pick the same day each week. It takes two minutes. If a week was unusual, like a holiday, a closed day or a slow stretch, add a short note beside it so you do not read too much into the number later. Your Google profile can supply calls, website clicks and directions. Go to business.google.com and select **Performance**.
 
 A short list you keep up beats a big report you never open.
 
@@ -46,7 +46,23 @@ Set a date, and put it on the calendar. When it comes, look at four things:
 3. **Your posts.** Which ones got the most response?
 4. **Your business.** Did anything change, like a new service, a holiday or a staff change? Marketing is only one reason numbers move.
 
-Then decide three things: what to keep, what to drop, and one new thing to try.
+Then decide three things: what to keep, what to drop, and one new thing to try. Write them at the top of a fresh page. Here is a page to copy:
+
+> Quarter: [dates]
+>
+> Numbers at the start: [calls, messages, bookings]
+>
+> Numbers at the end: [calls, messages, bookings]
+>
+> How people found us: [the top answers]
+>
+> Best posts: [what they were about]
+>
+> Keep: [one or two things]
+>
+> Drop: [one thing]
+>
+> Try: [one new thing]
 
 ## Plan next quarter in 20 minutes
 
@@ -72,8 +88,15 @@ These take an afternoon, and they make the whole year calmer.
 
 ## For the weeks in between
 
-You do not have to wait 90 days to check on things. For a quick weekly look, see [Check Your Own Marketing in 30 Minutes a Week](/guides/marketing-with-30-minutes-a-week/).
+You do not have to wait 90 days to check on things. For a quick weekly look, see [Check Your Own Marketing in 30 Minutes a Week](/guides/marketing-with-30-minutes-a-week/). To judge one specific change, see [How to Tell If a Change to Your Marketing Worked](/guides/how-to-tell-if-a-marketing-change-worked/).
 
-## How Grid Pulse Media helps with this
+## Check your work
 
-Reviewing your own marketing works, and plenty of owners do it well. If you would rather not, this is the cycle we run for our clients: plan, do, check and adjust, every 90 days. We write and publish your posts on schedule, and at the end of each quarter we look back at what worked and plan the next one. See our [90-Day Plan FAQ](/90-day-plan-faq/), or [get started](https://www.gridpulsemedia.com/start/) with a setup call.
+- You have three or four numbers you track.
+- You asked new customers how they found you.
+- A review date is on your calendar.
+- You wrote down what to keep, drop and try.
+
+## If you would rather hand this off
+
+Reviewing your own marketing works, and plenty of owners do it well. If you would rather not, this is the cycle we run for our clients: plan, do, check and adjust, every 90 days. We write and publish your posts on schedule, and at the end of each quarter we look back at what worked and plan the next one. See our [90-Day Plan FAQ](/90-day-plan-faq/), or [get started](https://www.gridpulsemedia.com/start/).

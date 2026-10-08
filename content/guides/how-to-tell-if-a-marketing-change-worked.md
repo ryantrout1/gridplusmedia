@@ -28,6 +28,14 @@ If you cannot say what you changed in one sentence, it is too big. Split it.
 
 Before you make the change, write down the numbers you already track. Calls, messages, bookings, quote requests and visits to your website are good ones. If you are not tracking anything yet, [Check Your Own Marketing in 30 Minutes a Week](/guides/marketing-with-30-minutes-a-week/) shows how to start. Two or three weeks of numbers is enough to give you a starting point.
 
+### Where to find your numbers
+
+- **Your Google profile.** Go to business.google.com while signed in and select **Performance**. Pick a time period and select **Apply**. You will see calls, website clicks and requests for directions. Calls only show if you have a phone number on your profile. Google says the searches number updates at the start of each month and that data can take up to 5 days to appear.
+- **Your own count.** Calls, messages and bookings you write down yourself. Ask each new customer how they found you and write the answer next to the number.
+- **Your posts.** Likes, comments and shares on Facebook and Instagram.
+
+A simple page works. Write the date down the left side and a few numbers across the top.
+
 ## Step 3. Write down the date
 
 Put the date you made the change next to your numbers, with one line about what it was. This takes ten seconds and saves you from guessing later.
@@ -60,6 +68,6 @@ Then pick the next one change and start again.
 
 You do not need software for this. A page of notes with dates and a few numbers is enough. The habit matters more than the tool. For the bigger look back, see [How to Review Your Own Marketing Every 90 Days](/guides/review-your-own-marketing-every-90-days/).
 
-## How Grid Pulse Media helps with this
+## If you would rather hand this off
 
 Doing this yourself works, and many owners do it well. If you would rather not, it is how we work. Each week we check how your pages are doing in search and make one change at a time, so we can tell what helped, and every 90 days we plan the next quarter with you. Nothing goes live without a person reviewing it first. See our [90-Day Plan FAQ](/90-day-plan-faq/), or [get started](https://www.gridpulsemedia.com/start/) with a setup call.

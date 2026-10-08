@@ -1,12 +1,12 @@
 ---
 title: "Local Search in Plain Words"
-description: "How Google picks local results, in plain words: relevance, distance and prominence. What each one means and what you can do about it this week."
+description: "How Google picks local results, in plain words: relevance, distance and prominence. What each one means and the exact steps you can take this week."
 date: "2026-10-06"
 ---
 
 # Local Search in Plain Words
 
-When someone searches for a plumber, a haircut or a place to eat near them, Google shows a short list of local businesses. People call this local search. It sounds technical, but the idea is simple, and most of what you can do about it is plain, steady work.
+When someone searches for a plumber, a haircut or a place to eat near them, Google shows a short list of local businesses. People call this local search. It sounds technical, but the idea is simple, and most of what you can do about it is plain, steady work. This guide explains the idea and then gives you a checklist for each part.
 
 ## The three things Google looks at
 
@@ -16,23 +16,36 @@ Google has said it uses three things to pick local results: relevance, distance 
 
 How well your listing matches what someone searched for. If your profile is thin or the category is wrong, Google has less to match.
 
-**Do this:** fill out every part of your Google Business Profile and pick the right categories. Say what you do, in the words a customer would use.
+**Do this:**
+
+1. Pick the most specific primary category that fits. See [How to Choose Your Google Categories, Services and Service Area](/guides/choose-your-google-categories-services-and-service-area/).
+2. List your services.
+3. Write a description in the words a customer would use. See [How to Write Your Google Business Description](/guides/write-your-google-business-description/).
 
 ### Distance
 
 How close you are to the person searching. You cannot change it.
 
-**Do this:** make sure your address is correct, so you show up where you really are. If you do not serve customers at your address, you can set a service area instead and hide the address.
+**Do this:**
+
+1. Make sure your address is correct, so you show up where you really are.
+2. If you do not serve customers at your address, set a service area and hide the address.
 
 ### Prominence
 
-How well known you are. Google says this comes from things like reviews and links from other websites.
+How well known you are. Google says this comes from things like reviews and mentions of your business around the web.
 
-**Do this:** earn honest reviews, answer them, and keep your business name the same everywhere.
+**Do this:**
 
-## No tricks
+1. Ask every customer for a review. See [How to Ask for a Google Review Without Feeling Awkward](/guides/ask-for-reviews-without-feeling-awkward/).
+2. Reply to the reviews you get. See [How to Answer a Google Review, Good or Bad](/guides/how-to-answer-a-google-review/).
+3. Keep your business name, address and phone number the same everywhere. See [Make Your Name, Address and Phone Number Match Everywhere](/guides/make-your-name-address-and-phone-match/).
 
-Nobody can guarantee you a spot at the top. What you control is a set of steady, accurate habits:
+## What you cannot control
+
+You cannot control how many people search, who else is nearby, or the exact order Google chooses. Nobody can guarantee you a spot at the top. Be wary of anyone who says they can. See [What an SEO Audit Is, and What to Ask Before You Pay for One](/guides/what-an-seo-audit-is-and-what-to-ask-before-you-pay/).
+
+What you control is a set of steady, accurate habits:
 
 - A complete, correct Google profile.
 - The same name, address and phone number everywhere your business is listed.
@@ -51,8 +64,8 @@ Being found by everyone is not the goal. Being found by the people within drivin
 3. Look at your newest reviews and see which are still unanswered.
 4. Check that your website says the same things as your profile.
 
-For a longer walk through, see [How to Get Found on Google as a Local Business](/guides/how-to-get-found-on-google/).
+For a longer walk through, see [How to Get Found on Google as a Local Business](/guides/how-to-get-found-on-google/) and [Check How Your Business Shows Up on Google, and Fix What Is Wrong](/guides/check-how-your-business-shows-up-on-google-and-fix-it/).
 
-## How Grid Pulse Media helps with this
+## If you would rather hand this off
 
-A lot of local search problems are not about tricks. They are mismatches: a website that says one thing and a profile that says another. As part of a 90-day plan, we keep your Google profile, website and listings such as Apple Maps, Bing Places and Yellow Pages matching. We also write posts and articles that point back to what you offer, and reply to reviews in your voice. We make no promises about rankings. Read more about our [local SEO service](/local-seo-for-small-business/), or [get started](https://www.gridpulsemedia.com/start/) with a setup call.
+A lot of local search problems are not about tricks. They are mismatches, like a website that says one thing and a profile that says another. We keep your profile, website and listings matching, and we make no promises about rankings. See our [local SEO service](/local-seo-for-small-business/), or [get started](https://www.gridpulsemedia.com/start/).

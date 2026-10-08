@@ -1,19 +1,19 @@
 ---
 title: "What a Real 90 Day Plan Looks Like, With a Sample"
 seoTitle: "What a Real 90 Day Plan Looks Like | Grid Pulse Media"
-description: "The four steps of a 90 day marketing plan (plan, do, check, adjust), why a quarter beats a month, and a labeled sample plan for an imaginary shop."
+description: "The four steps of a 90 day marketing plan (plan, do, check, adjust), why a quarter beats a month, a labeled sample, and how to write your own in about 30 minutes."
 date: "2026-10-06"
 ---
 
 # What a Real 90 Day Plan Looks Like, With a Sample
 
-A 90 day plan is not a mystery. It is four steps you repeat: plan, do, check and adjust. This guide shows what each step looks like, why we plan a quarter at a time, and a labeled sample you can copy. The sample is for an imaginary business. It shows a method, not a result.
+A 90 day plan is not a mystery. It is four steps you repeat: plan, do, check and adjust. This guide shows what each step looks like, why we plan a quarter at a time, a labeled sample, and how to write your own in about 30 minutes. The sample is for an imaginary business. It shows a method, not a result.
 
 ## Why a quarter, not a month
 
-Changes in search can take weeks or months to show, so one month rarely gives you enough to judge. A month is also long enough to stay stuck on something that is not working. A quarter gives you room to try something, look at what happened and adjust. We also like that it lines up with the seasons many local businesses live by.
+Changes in search can take weeks or months to show, so one month rarely gives you enough to judge. Google's own guidance says some changes take effect in a few hours and others can take several months, and it suggests waiting a few weeks before deciding whether a change helped. A month is also long enough to stay stuck on something that is not working. A quarter gives you room to try something, look at what happened and adjust. We also like that it lines up with the seasons many local businesses live by.
 
-So how long before marketing works? Nobody can give you an exact number, but about 90 days is a fair window to judge a plan. Search can take a while to notice a business that has changed, and people often need to see you more than once before they call. Give a plan a full quarter before you judge it.
+So how long before marketing works? Nobody can give you an exact number, but about 90 days is a fair window to judge a plan. People often need to see you more than once before they call. Give a plan a full quarter before you judge it.
 
 ## The four steps
 
@@ -33,7 +33,7 @@ Four weeks into a plan, it is tempting to stare at every number you can find. Do
 2. Which post got the most response? Note what it was about.
 3. Did anyone call, click or send a message? That is what the posts are for.
 
-Write the answers on a sheet of paper. If the posts went out and someone reached out, the plan is working well enough to keep going. If not, you know where to look next. No dashboards needed.
+Write the answers on a sheet of paper. If the posts went out and someone reached out, the plan is working well enough to keep going. If not, you know where to look next. No dashboards needed. See [Check Your Own Marketing in 30 Minutes a Week](/guides/marketing-with-30-minutes-a-week/).
 
 ### Step 4. Adjust
 
@@ -70,6 +70,23 @@ Change one or two things at a time, and keep everything else the same. Say you c
 
 Small, steady posts are the point. The plan is built so that the quarter is already written down before the busy weeks arrive.
 
-## How Grid Pulse Media helps with this
+## Write your own in about 30 minutes
 
-This is the method we run for our clients: plan, do, check and adjust, every 90 days. It starts with a setup call where we learn your business. The plan covers what gets posted, when and where, and we write and publish on that schedule. Every 90 days we look back together and plan the next quarter. You can see what is included on our [90-Day Plan FAQ](/90-day-plan-faq/), or [get started](https://www.gridpulsemedia.com/start/) with a setup call.
+1. **Write your goal (5 minutes).** One sentence about what you want from the quarter, such as "more calls for AC repair" or "fill Tuesday appointments." A plan without a goal is just a calendar of posts.
+2. **Fill in your facts sheet (10 minutes).** See [How to Use AI to Write Your Marketing Without It Making Things Up](/guides/use-ai-to-write-your-marketing-without-it-making-things-up/).
+3. **Ask AI for a draft (5 minutes).** Paste your facts sheet and use this:
+
+> Using only my facts sheet, draft a 90 day marketing plan for my business. My goal this quarter is: [your goal]. Include: three themes; a posting pace of [number] posts a week on [Facebook, Instagram and Google]; one blog article a month; a list of holidays or slow weeks I should plan around, based only on dates in my sheet; and the three numbers I should write down each week. Do not invent prices, specials, events or statistics. If you need a fact that is not in the sheet, write [ASK ME].
+
+4. **Edit it (10 minutes).** Cut anything that is not true or that you cannot keep up in your busiest week. Fill in every [ASK ME]. Put the review date on your calendar for week 12.
+
+## Check your work
+
+- You have one sentence for your goal.
+- You have three themes and a pace you can hold.
+- You know the three things you will check each week.
+- A review date is on your calendar.
+
+## If you would rather hand this off
+
+This is the method we run for our clients: plan, do, check and adjust, every 90 days. It starts with a setup call where we learn your business. The plan covers what gets posted, when and where, and we write and publish on that schedule. Every 90 days we look back together and plan the next quarter. You can see what is included on our [90-Day Plan FAQ](/90-day-plan-faq/), or [get started](https://www.gridpulsemedia.com/start/).

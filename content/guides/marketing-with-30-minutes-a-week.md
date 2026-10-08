@@ -1,7 +1,7 @@
 ---
 title: "Check Your Own Marketing in 30 Minutes a Week"
 seoTitle: "Check Your Marketing in 30 Minutes a Week | Grid Pulse Media"
-description: "Five questions and where to look for each answer, so you can see what is working in about 30 minutes. A simple weekly check with no dashboards."
+description: "Five questions and where to look for each answer, so you can see what is working in about 30 minutes. A simple weekly check with a page to copy."
 date: "2026-10-06"
 ---
 
@@ -25,7 +25,7 @@ Look at likes, comments and shares. Find the post that got the most and write do
 
 ### 3. Did anyone call or click? (about 7 minutes)
 
-Posts are there to get people to reach out. Check your Google profile for calls and website clicks. Google shows them in the Performance section of your profile, though names and layouts can change. If your profile does not show it, count the calls and messages you got yourself, and ask your staff what they heard.
+Posts are there to get people to reach out. On a computer, go to business.google.com, select **Performance**, pick the last week, and select **Apply**. Google shows calls, website clicks and directions. Calls only show if you have a phone number on your profile, and Google says the searches number updates at the start of each month. Write the numbers down. Then count the calls and messages you got yourself, and ask your staff what they heard.
 
 ### 4. Are your hours and photos current? (about 8 minutes)
 
@@ -40,13 +40,27 @@ Pick one thing, and write it down. Only one. When you change one thing, you can 
 - End a post with a question.
 - Reply to your newest reviews. See [How to Answer a Google Review, Good or Bad](/guides/how-to-answer-a-google-review/).
 
+## A page to copy
+
+Each week, write these five lines:
+
+> Week of: [date]
+>
+> Posts that went out: [number] of [number planned]
+>
+> Best post: [what it was about]
+>
+> Calls, clicks and messages: [numbers]
+>
+> One change for next week: [what you will do]
+
 ## If you only have 20 minutes
 
 Do questions 1, 3 and 5. Did the posts go out, did anyone call or click, and what will you change. That adds up to about 17 minutes. A short check you actually do beats a long one you skip.
 
 ## Keep a running page
 
-Each week, write four lines on your notes page: how many posts went out, which post did best, how many calls or clicks you saw, and the one thing you will change. After a month, you will have four weeks of answers side by side, and the pattern gets easy to see.
+After a month, you will have four weeks of answers side by side, and the pattern gets easy to see. To judge a specific change, see [How to Tell If a Change to Your Marketing Worked](/guides/how-to-tell-if-a-marketing-change-worked/).
 
 Once a quarter, step back and look at the bigger picture. For that, see [How to Review Your Own Marketing Every 90 Days](/guides/review-your-own-marketing-every-90-days/).
 
@@ -54,6 +68,6 @@ Once a quarter, step back and look at the bigger picture. For that, see [How to 
 
 This check is simple on purpose. It will not measure everything, and a week or two is a short time to judge a plan. Give a plan a full quarter before you decide it is not working. For why, see [What a Real 90 Day Plan Looks Like, With a Sample](/guides/what-a-real-90-day-plan-looks-like/).
 
-## How Grid Pulse Media helps with this
+## If you would rather hand this off
 
-Writing and publishing the posts, and replying to reviews and comments, is the part we take off your plate. As part of a 90-day plan, we write and publish your posts on schedule, keep your Google profile and listings current, and reply in your own voice. Every 90 days we look back at what worked and plan the next quarter. See our [90-Day Plan FAQ](/90-day-plan-faq/), or [get started](https://www.gridpulsemedia.com/start/) with a setup call.
+Writing and publishing the posts, and replying to reviews and comments, is the part we take off your plate. We write and publish your posts on schedule, keep your Google profile and listings current, and reply in your own voice. Every 90 days we look back at what worked and plan the next quarter. See our [90-Day Plan FAQ](/90-day-plan-faq/), or [get started](https://www.gridpulsemedia.com/start/).

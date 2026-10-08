@@ -1,51 +1,59 @@
 ---
 title: "How Often Should a Small Business Post on Social Media?"
-description: "Wondering how often to post on social media as a small business? Here's a plain-language answer and how to keep it consistent without doing it yourself."
+description: "How often a small business should post on social media: pick a pace you can hold, a simple schedule by time available, and how to batch your posts in one sitting."
 seoTitle: "How Often Should a Small Business Post? | Grid Pulse Media"
 date: "2026-10-05"
 ---
 
 # How Often Should a Small Business Post on Social Media?
 
-## The short answer
+There is no magic number that fits every business. The number that works is the one you can keep up in your busiest week. A steady pace you hold beats a burst of posts followed by months of silence, because people who check your page before they visit notice the gap. This guide helps you pick a pace and then makes it easy to hold.
 
-There isn't one magic number that fits every small business. What matters more than hitting an exact count is posting on a schedule you can actually keep, with content that matches what's true about your business right now: your hours, your services, your current offers.
+## Step 1. Count the time you really have
 
-Many local businesses find that a steady rhythm, a few times a week rather than daily, works better than a burst of posts followed by months of silence. Customers notice gaps more than they notice a slightly lower frequency. A Google profile or Instagram account that hasn't posted in months can look abandoned, even if the business is open and busy.
+Look at your last busy month and be honest. How many minutes a week can you give to this? Pick the number that survives a bad week, not a good one.
 
-## Why consistency matters more than volume
+## Step 2. Choose a pace to match
 
-If your last post was months ago, that's a signal to anyone checking your profile before they visit. On the other hand, posting constantly but letting your hours or address drift out of sync between your website, your Google profile and your social accounts creates a different problem: customers show up expecting something different from what they find, like arriving at a locked door.
+- **About 30 minutes a week:** one post a week on Facebook and Instagram, and one update on your Google profile.
+- **About an hour a week:** two posts a week, plus replies to comments and reviews.
+- **More than an hour:** three posts a week. Do not go higher until you have kept three going for a full quarter.
 
-The real goal isn't a posting quota. It's making sure that whenever someone checks in on your business online, whether that's today or three months from now, what they see is accurate and current.
+If even one a week sounds like too much, start with one every two weeks and keep it going.
 
-## What a realistic posting schedule looks like
+## Step 3. Pick three themes
 
-A workable approach usually includes:
+Write every post under one of three themes, and you stop staring at a blank screen. A tip, a look behind the scenes and a customer question work for most businesses. See [A 90 Day Posting Plan You Can Copy](/guides/90-day-posting-plan-you-can-copy/) and [Nothing to Say? Post One of These Seven](/guides/what-to-post-when-you-have-nothing-to-say/).
 
-- Regular posts on Instagram and Facebook, planned ahead rather than decided the morning of
-- Updates to your Google profile that match what's on your website and social accounts
-- A plan for handling changes, like a closure or new hours, so they go out everywhere at once instead of updating one place and forgetting another
-- A recheck every so often to see what's working and adjust, rather than setting a schedule once and never revisiting it
+## Step 4. Write a month in one sitting
 
-This kind of rhythm tends to work better over a 90-day stretch than a day-by-day decision, since it gives you (or whoever handles your marketing) room to plan content around what's actually happening in the business.
+Do not decide what to post the morning of. Block out an hour once a month and draft every post. Then schedule them in your tool of choice. Posts written ahead are calmer and more accurate than posts written between jobs.
 
-## Why owners fall behind on posting
+Use a facts sheet and the method in [How to Use AI to Write Your Marketing Without It Making Things Up](/guides/use-ai-to-write-your-marketing-without-it-making-things-up/) if you want a first draft you only have to edit.
 
-Most small business owners aren't short on things to say about their business. They're short on time to turn that into a post, remember to publish it, and do it again next week. That's usually the real reason posting goes quiet: not a lack of ideas, but a lack of hours in the day.
+## Step 5. Keep your details matching
 
-It's also common for owners to have been burned before: they paid someone to handle social media and never had a clear sense of what was actually posted or why. That makes it harder to trust a new posting schedule, even a reasonable one.
+Posting often does not help if your hours, phone number or address are different on your website, your Google profile and your social accounts. When something changes, like a closure or new hours, change it everywhere the same day. See [Make Your Name, Address and Phone Number Match Everywhere](/guides/make-your-name-address-and-phone-match/).
 
-## How Grid Pulse Media handles posting frequency
+## Step 6. Send people somewhere
 
-At Grid Pulse Media, posting isn't decided post by post. It starts with a setup call where we learn your business. After you start, we map out a 90-day plan for what to promote, when, and where. From there, posts go out on schedule across Instagram, Facebook and your Google profile, written from what you've told us so they're accurate and sound like you.
+A post should lead somewhere: a blog article on your site, a service page, a booking link or a phone number. End each post with one next step. Do not leave readers at a dead end.
 
-When something changes, like a closure or new hours, you tell us once and it goes out everywhere, matching, across your website, Google profile and social accounts. We also reply to reviews and comments in your own voice as part of the plan. Every 90 days we check what worked and plan the next quarter, so the schedule keeps adjusting to fit your business rather than staying fixed.
+## Step 7. Check, then adjust
 
-You can see everything included in that posting schedule on our [Posting Schedule FAQ](/faq/), and the full list of what's covered on our [90-Day Plan FAQ](/90-day-plan-faq/).
+After four weeks, look at three things: did the posts go out on time, which one got the most response, and did anyone call, click or message. Change one thing, not five. See [Check Your Own Marketing in 30 Minutes a Week](/guides/marketing-with-30-minutes-a-week/).
 
-## Where posts should actually lead
+## What if I fall behind?
 
-A post is only useful if it sends someone somewhere. Ours are built to catch attention on Instagram, Facebook or Google, then lead to a blog article on your own site, which points to the service page that explains what you offer, with booking one tap away. That's part of how the 90-day plan ties social posting to the rest of your marketing instead of treating it as its own separate task.
+Pick up where you are. A post a week late still helps, and you do not need to make up for missed ones. If you fall behind more than twice, your pace is too fast, so lower it.
 
-If you're trying to figure out a posting rhythm that fits your business, or you'd rather not think about it week to week, [get started](https://www.gridpulsemedia.com/start/) with a setup call. Once you start, we build your 90-day plan.
+## Check your work
+
+- You picked a pace that survives your worst week.
+- You have three themes written down.
+- Next month's posts are written before the month starts.
+- Each post has one next step.
+
+## If you would rather hand this off
+
+Most owners do not run out of things to say. They run out of time. We plan, write and publish posts on a schedule as part of the monthly plan. See our [Posting Schedule FAQ](/posting-schedule-faq/), or [get started](https://www.gridpulsemedia.com/start/).
