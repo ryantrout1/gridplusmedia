@@ -2,12 +2,15 @@
 // Topic, minutes and keywords are optional front matter. A guide without them (the engine writes guides without them)
 // still has to build, show up on /guides/ and get related links, so the fallback is tested with a fixture.
 //
+// Learning paths (ordered guides with a page of their own) are tested here too: the real config against the real guides,
+// and a fixture with its own PATHS for the cases the real ones do not have (a missing slug, a guide in two paths).
+//
 // Each build runs in its own temp folder, so this file never fights tests/services.test.js over the guides/ folder
 // while node runs the test files side by side.
 import test, { before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdtempSync, mkdirSync, symlinkSync, writeFileSync, readFileSync, readdirSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, symlinkSync, writeFileSync, readFileSync, readdirSync, rmSync, copyFileSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -15,13 +18,22 @@ import { pathToFileURL } from 'node:url';
 const ROOT = resolve('.');
 const DASH = new RegExp('[\\u2010-\\u2015\\u2212]');
 
-// Build the site in a temp folder. With no fixture, the repo's own content is used.
+// Build the site in a temp folder. With no fixture, the repo's own content is used. With paths, the build script runs from
+// its own copy next to a config that has those PATHS (and the real topics), so a fixture can have paths made of fixture guides.
 const made = [];
 after(() => { for (const d of made) rmSync(d, { recursive: true, force: true }); });
-function build(fixture) {
+function build(fixture, paths) {
   const dir = mkdtempSync(join(tmpdir(), 'gpm-guides-'));
   made.push(dir);
-  symlinkSync(join(ROOT, 'scripts'), join(dir, 'scripts'), 'junction');
+  if (paths) {
+    mkdirSync(join(dir, 'scripts'));
+    copyFileSync(join(ROOT, 'scripts', 'build-guides.mjs'), join(dir, 'scripts', 'build-guides.mjs'));
+    const real = JSON.stringify(pathToFileURL(join(ROOT, 'scripts', 'guide-config.mjs')).href);
+    writeFileSync(join(dir, 'scripts', 'guide-config.mjs'), `export { TOPICS, timeLabel, pathLabel } from ${real};\nexport const PATHS = ${JSON.stringify(paths)};\n`);
+    symlinkSync(join(ROOT, 'node_modules'), join(dir, 'node_modules'), 'junction');
+  } else {
+    symlinkSync(join(ROOT, 'scripts'), join(dir, 'scripts'), 'junction');
+  }
   if (!fixture) {
     symlinkSync(join(ROOT, 'content'), join(dir, 'content'), 'junction');
   } else {
@@ -29,7 +41,7 @@ function build(fixture) {
     for (const [name, text] of Object.entries(fixture)) writeFileSync(join(dir, 'content', 'guides', `${name}.md`), text);
   }
   const run = spawnSync('node', ['scripts/build-guides.mjs'], { cwd: dir, encoding: 'utf8' });
-  return { dir, status: run.status, log: `${run.stdout}\n${run.stderr}`, read: (p) => readFileSync(join(dir, p), 'utf8') };
+  return { dir, status: run.status, log: `${run.stdout}\n${run.stderr}`, read: (p) => readFileSync(join(dir, p), 'utf8'), has: (p) => existsSync(join(dir, p)) };
 }
 
 // The engine writes: title, description, path, date (unquoted), then the heading and body. Nothing else.
@@ -46,11 +58,20 @@ const FIXTURE = {
   'typo-topic': classified('Typo Topic', '2026-10-03', 'revews', 10),
 };
 
-let cfg, repo, fx;
+// Paths for the fixture guides. habit is whole; ghost names a guide that does not exist; dup shares a guide with habit.
+const PATHS_FIXTURE = [
+  { id: 'habit', title: 'Build a habit', blurb: 'Three guides, in order.', steps: ['reviews-a', 'reviews-b', 'reviews-d'] },
+  { id: 'ghost', title: 'Ghost path', blurb: 'One step is missing.', steps: ['reviews-c', 'no-such-guide', 'engine-shaped'] },
+  { id: 'dup', title: 'Dup path', blurb: 'Shares a guide with habit.', steps: ['reviews-a', 'typo-topic'] },
+];
+
+let cfg, repo, fx, px, reserved;
 before(async () => {
   cfg = await import(pathToFileURL(join(ROOT, 'scripts', 'guide-config.mjs')).href);
   repo = build();
   fx = build(FIXTURE);
+  px = build(FIXTURE, PATHS_FIXTURE);
+  reserved = build({ paths: engineGuide('Paths', '2026-10-08') });
 });
 
 const front = (file) => {
@@ -180,8 +201,161 @@ test('the config is sound: topic ids are unique, labels and blurbs have no dashe
   assert.equal(new Set(ids).size, ids.length);
   for (const x of cfg.TOPICS) {
     assert.match(x.id, /^[a-z]+(-[a-z]+)*$/);
-    assert.ok(!['main', 'more', 'topics'].includes(x.id), `${x.id} is used by the page itself`);
+    assert.ok(!['main', 'more', 'topics', 'start'].includes(x.id), `${x.id} is used by the page itself`);
     assert.ok(x.label && x.blurb, `${x.id} needs a label and a blurb`);
     assert.doesNotMatch(`${x.label} ${x.blurb}`, DASH);
   }
+});
+
+// ---- Learning paths ----
+
+// The path page: heading, the "3 steps, about 95 minutes" line, the steps in order with their time, the Start button.
+const pathPage = (html) => ({
+  title: /<h1>([^<]*)<\/h1>/.exec(html)?.[1],
+  label: /<p class="guide-meta">([^<]*)<\/p>\s*<ol class="path-steps">/.exec(html)?.[1],
+  steps: [...html.matchAll(/<li class="path-step">([\s\S]*?)<\/li>/g)].map((m) => ({ slug: /href="\/guides\/([a-z0-9-]+)\/"/.exec(m[1])?.[1], time: /<p class="guide-meta">([^<]*)<\/p>/.exec(m[1])?.[1] ?? null })),
+  start: /<p class="path-start"><a class="btn" href="([^"]+)">([^<]*)<\/a>/.exec(html)?.slice(1),
+});
+// The Start here row on /guides/.
+const startRow = (html) => {
+  const m = /<section class="start-here"[^>]*>([\s\S]*?)<\/section>/.exec(html);
+  if (!m) return null;
+  return [...m[1].matchAll(/<li class="path-card"><a href="\/guides\/paths\/([a-z0-9-]+)\/"><h3>([^<]*)<\/h3><\/a><p>([^<]*)<\/p><p class="guide-meta">([^<]*)<\/p><\/li>/g)]
+    .map((c) => ({ id: c[1], title: c[2], blurb: c[3], label: c[4] }));
+};
+// What a guide in a path shows: the "Step 2 of 6 in ..." line under the title and the Previous / Next pair at the end.
+const stepLine = (html) => { const m = /<p class="guide-path"><a href="([^"]+)">([^<]*)<\/a><\/p>/.exec(html); return m ? { href: m[1], text: m[2] } : null; };
+const pathNav = (html) => {
+  const m = /<nav class="guide-path-nav"[^>]*>([\s\S]*?)<\/nav>/.exec(html);
+  if (!m) return null;
+  return { prev: /<li class="prev"><a href="([^"]+)"/.exec(m[1])?.[1] ?? null, next: /<li class="next(?: done)?"><a href="([^"]+)"/.exec(m[1])?.[1] ?? null, done: /<li class="next done">/.test(m[1]) };
+};
+const minutesOf = (slug) => Number(repoGuides.find((g) => g.slug === slug).minutes);
+
+test('pathLabel says how many steps and about how long, in plain words', () => {
+  const l = cfg.pathLabel;
+  assert.equal(l(6, 180), '6 steps, about 3 hours');
+  assert.equal(l(3, 55), '3 steps, about 55 minutes');
+  assert.equal(l(2, 60), '2 steps, about an hour');
+  assert.equal(l(4, 150), '4 steps, about 2 and a half hours');
+  assert.equal(l(3, null), '3 steps');
+});
+
+test('the paths in the config are sound: known guides with minutes, none in two paths, plain wording', () => {
+  assert.ok(Array.isArray(cfg.PATHS));
+  for (const id of ['get-found', 'review-habit', 'posting-habit', 'before-you-hire']) assert.ok(cfg.PATHS.some((p) => p.id === id), `path ${id} is missing`);
+  const ids = cfg.PATHS.map((p) => p.id);
+  assert.equal(new Set(ids).size, ids.length, 'a path id is used twice');
+  const slugs = new Set(repoGuides.map((g) => g.slug));
+  const inPath = new Map();
+  for (const p of cfg.PATHS) {
+    assert.match(p.id, /^[a-z]+(-[a-z]+)*$/);
+    assert.ok(p.title && p.blurb, `${p.id} needs a title and a blurb`);
+    assert.doesNotMatch(`${p.title} ${p.blurb}`, DASH, `${p.id}: dash in wording`);
+    assert.ok(p.steps.length >= 2, `${p.id} needs at least two steps`);
+    for (const s of p.steps) {
+      assert.ok(slugs.has(s), `${p.id}: no guide called ${s}`);
+      assert.ok(!inPath.has(s), `${s} is in both ${inPath.get(s)} and ${p.id}`);
+      inPath.set(s, p.id);
+      assert.ok(repoGuides.find((g) => g.slug === s).minutes, `${s} is in a path, so it needs minutes`);
+    }
+  }
+});
+
+test('every real path has a page: steps in order, a time for each, and a total that is the sum', () => {
+  for (const p of cfg.PATHS) {
+    const page = pathPage(repo.read(`guides/paths/${p.id}/index.html`));
+    assert.equal(page.title, p.title);
+    assert.deepEqual(page.steps.map((s) => s.slug), p.steps);
+    assert.deepEqual(page.steps.map((s) => s.time), p.steps.map((s) => cfg.timeLabel(minutesOf(s))));
+    assert.equal(page.label, cfg.pathLabel(p.steps.length, p.steps.reduce((n, s) => n + minutesOf(s), 0)));
+    assert.deepEqual(page.start, [`/guides/${p.steps[0]}/`, 'Start with step 1']);
+    assert.match(repo.read(`guides/paths/${p.id}/index.html`), /class="guide-cta"/);
+  }
+});
+
+test('/guides/ opens with a Start here row: one card per path, above the topic sections', () => {
+  const html = repo.read('guides/index.html');
+  const cards = startRow(html);
+  assert.deepEqual(cards.map((c) => c.id), cfg.PATHS.map((p) => p.id));
+  for (const [i, p] of cfg.PATHS.entries()) {
+    const sum = p.steps.reduce((n, s) => n + minutesOf(s), 0);
+    assert.deepEqual(cards[i], { id: p.id, title: p.title, blurb: p.blurb, label: cfg.pathLabel(p.steps.length, sum) });
+  }
+  assert.ok(html.indexOf('class="start-here"') < html.indexOf('class="topics"'));
+});
+
+test('a guide in a path says which step it is, links Previous and Next, and the last step links back to the path page', () => {
+  for (const p of cfg.PATHS) {
+    p.steps.forEach((slug, i) => {
+      const html = repo.read(`guides/${slug}/index.html`);
+      assert.deepEqual(stepLine(html), { href: `/guides/paths/${p.id}/`, text: `Step ${i + 1} of ${p.steps.length} in ${p.title}` }, slug);
+      const nav = pathNav(html);
+      assert.equal(nav.prev, i === 0 ? null : `/guides/${p.steps[i - 1]}/`, `${slug} previous`);
+      assert.equal(nav.next, i === p.steps.length - 1 ? `/guides/paths/${p.id}/` : `/guides/${p.steps[i + 1]}/`, `${slug} next`);
+      assert.equal(nav.done, i === p.steps.length - 1, `${slug} only the last step is the end of the path`);
+      assert.ok(html.indexOf('class="guide-path-nav"') < html.indexOf('class="guide-related"'), `${slug}: path links come before more in topic`);
+      assert.ok(html.indexOf('class="guide-related"') < html.indexOf('class="guide-cta"'));
+    });
+  }
+  const inPath = new Set(cfg.PATHS.flatMap((p) => p.steps));
+  for (const g of repoGuides.filter((x) => !inPath.has(x.slug))) {
+    const html = repo.read(`guides/${g.slug}/index.html`);
+    assert.equal(stepLine(html), null, `${g.slug} is in no path`);
+    assert.equal(pathNav(html), null, `${g.slug} is in no path`);
+  }
+});
+
+test('the sitemap lists every path page', () => {
+  const sitemap = repo.read('sitemap.xml');
+  for (const p of cfg.PATHS) assert.ok(sitemap.includes(`https://www.gridpulsemedia.com/guides/paths/${p.id}/`), p.id);
+});
+
+test('paths made of fixture guides: a whole path, a path with a missing guide, and a guide in two paths', () => {
+  assert.equal(px.status, 0, px.log);
+  // habit: whole, in order, with the total of 20 + 60 + 15
+  const habit = pathPage(px.read('guides/paths/habit/index.html'));
+  assert.deepEqual(habit.steps, [{ slug: 'reviews-a', time: 'About 20 minutes' }, { slug: 'reviews-b', time: 'About an hour' }, { slug: 'reviews-d', time: 'About 15 minutes' }]);
+  assert.equal(habit.label, '3 steps, about 95 minutes');
+  assert.deepEqual(habit.start, ['/guides/reviews-a/', 'Start with step 1']);
+  assert.deepEqual(stepLine(px.read('guides/reviews-a/index.html')), { href: '/guides/paths/habit/', text: 'Step 1 of 3 in Build a habit' });
+  assert.deepEqual(pathNav(px.read('guides/reviews-a/index.html')), { prev: null, next: '/guides/reviews-b/', done: false });
+  assert.deepEqual(pathNav(px.read('guides/reviews-b/index.html')), { prev: '/guides/reviews-a/', next: '/guides/reviews-d/', done: false });
+  assert.deepEqual(pathNav(px.read('guides/reviews-d/index.html')), { prev: '/guides/reviews-b/', next: '/guides/paths/habit/', done: true });
+  assert.doesNotMatch(px.log, /path habit/);
+  // ghost: the missing guide is named in the log and left out, the other two stay, and with no minutes there is no total
+  assert.match(px.log, /ghost[^\n]*no-such-guide/);
+  const ghost = pathPage(px.read('guides/paths/ghost/index.html'));
+  assert.deepEqual(ghost.steps, [{ slug: 'reviews-c', time: null }, { slug: 'engine-shaped', time: null }]);
+  assert.equal(ghost.label, '2 steps');
+  assert.deepEqual(stepLine(px.read('guides/engine-shaped/index.html')), { href: '/guides/paths/ghost/', text: 'Step 2 of 2 in Ghost path' });
+  // dup: reviews-a already belongs to habit, so it is left out; one step is not a path, so dup is not built
+  assert.match(px.log, /dup[^\n]*reviews-a/);
+  assert.ok(!px.has('guides/paths/dup/index.html'), 'a path with one step left is not built');
+  assert.deepEqual(stepLine(px.read('guides/reviews-a/index.html')).href, '/guides/paths/habit/', 'first path wins');
+  assert.equal(stepLine(px.read('guides/typo-topic/index.html')), null);
+  assert.equal(pathNav(px.read('guides/typo-topic/index.html')), null);
+  // the index row and the sitemap list the paths that were built, and only those
+  assert.deepEqual(startRow(px.read('guides/index.html')).map((c) => c.id), ['habit', 'ghost']);
+  const sitemap = px.read('sitemap.xml');
+  assert.ok(sitemap.includes('/guides/paths/habit/') && sitemap.includes('/guides/paths/ghost/'));
+  assert.ok(!sitemap.includes('/guides/paths/dup/'));
+  // every guide is still listed once under its topic, and still gets more in its topic
+  assert.deepEqual([...new Set(sections(px.read('guides/index.html')).flatMap((s) => s.slugs))].sort(), Object.keys(FIXTURE).sort());
+  assert.deepEqual(related(px.read('guides/reviews-a/index.html')).slugs, ['reviews-b', 'reviews-c', 'reviews-d']);
+});
+
+test('when none of the paths can be built there is no Start here row and no paths folder, and the build still passes', () => {
+  // fx uses the real PATHS, whose guides are not in the fixture.
+  assert.equal(fx.status, 0, fx.log);
+  assert.equal(startRow(fx.read('guides/index.html')), null);
+  assert.ok(!/class="start-here"/.test(fx.read('guides/index.html')));
+  assert.ok(!fx.has('guides/paths'), 'no paths folder');
+  assert.ok(!fx.read('sitemap.xml').includes('/guides/paths/'));
+});
+
+test('a guide called "paths" would collide with /guides/paths/, so the build stops and says so', () => {
+  assert.notEqual(reserved.status, 0);
+  assert.match(reserved.log, /paths/);
+  assert.match(reserved.log, /reserved|collide|cannot/i);
 });
