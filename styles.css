@@ -649,19 +649,54 @@ body:has(.inc-dialog[open]) { overflow: hidden; }
 .guide-index { max-width: 960px; }
 .guide-index .lede, .guide-index .guide-body { max-width: 720px; }
 .topics { margin-top: 48px; padding-top: 40px; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 52px; }
-.topic h2 { font-family: var(--serif); font-size: 28px; line-height: 1.2; margin: 0 0 6px; }
+.topic h2, .start-here h2 { font-family: var(--serif); font-size: 28px; line-height: 1.2; margin: 0 0 6px; }
 .topic-blurb { color: var(--muted); font-size: 18px; margin: 0 0 20px; }
-.guide-cards { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr)); gap: 16px; }
-.guide-card { position: relative; display: flex; flex-direction: column; gap: 6px; padding: 18px 20px; background: var(--sand); border: 1px solid var(--line); border-radius: 12px; }
-.guide-card:hover { border-color: var(--clay); }
-.guide-card a { color: var(--ink); text-decoration: none; }
-.guide-card a::after { content: ""; position: absolute; inset: 0; border-radius: 12px; }
-.guide-card a:hover h3 { color: var(--clay-dark); text-decoration: underline; text-underline-offset: 4px; }
-.guide-card a:focus-visible { outline: none; }
-.guide-card a:focus-visible::after { outline: 3px solid var(--forest); outline-offset: 2px; }
-.guide-card h3 { font-family: var(--serif); font-size: 20px; line-height: 1.25; margin: 0; }
-.guide-card p { margin: 0; font-size: 17px; line-height: 1.5; }
-.guide-card .guide-meta { margin-top: auto; padding-top: 6px; font-size: 15px; }
+.guide-cards, .path-cards { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr)); gap: 16px; }
+.guide-card, .path-card { position: relative; display: flex; flex-direction: column; gap: 6px; padding: 18px 20px; background: var(--sand); border: 1px solid var(--line); border-radius: 12px; }
+.guide-card:hover, .path-card:hover { border-color: var(--clay); }
+.guide-card a, .path-card a { color: var(--ink); text-decoration: none; }
+.guide-card a::after, .path-card a::after { content: ""; position: absolute; inset: 0; border-radius: 12px; }
+.guide-card a:hover h3, .path-card a:hover h3 { color: var(--clay-dark); text-decoration: underline; text-underline-offset: 4px; }
+.guide-card a:focus-visible, .path-card a:focus-visible { outline: none; }
+.guide-card a:focus-visible::after, .path-card a:focus-visible::after { outline: 3px solid var(--forest); outline-offset: 2px; }
+.guide-card h3, .path-card h3 { font-family: var(--serif); font-size: 20px; line-height: 1.25; margin: 0; }
+.guide-card p, .path-card p { margin: 0; font-size: 17px; line-height: 1.5; }
+.guide-card .guide-meta, .path-card .guide-meta { margin-top: auto; padding-top: 6px; font-size: 15px; }
+
+/* Learning paths: the Start here row on /guides/, the path page, and the step line and Previous / Next on guides in a path */
+.start-here { margin-top: 48px; padding-top: 40px; border-top: 1px solid var(--line); }
+.path-card { border-top: 4px solid var(--clay); }
+.guide-path { margin: 0 0 24px; font-size: 16px; font-weight: 600; }
+.guide-meta + .guide-path, .guide-date + .guide-path { margin-top: -22px; }
+.guide-path a { display: flex; align-items: center; min-height: 44px; color: var(--clay-dark); text-underline-offset: 4px; }
+.guide-path-nav { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--line); }
+.guide-path-nav h2 { font-family: var(--serif); font-size: 22px; line-height: 1.25; margin: 0 0 14px; }
+.guide-path-nav ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 12px; }
+.guide-path-nav a { display: flex; flex-direction: column; justify-content: center; gap: 2px; height: 100%; min-height: 44px; padding: 14px 18px; background: var(--sand); border: 1px solid var(--line); border-radius: 12px; color: var(--ink); text-decoration: none; font-size: 19px; font-weight: 600; line-height: 1.35; }
+.guide-path-nav a:hover { border-color: var(--clay); color: var(--clay-dark); }
+.guide-path-nav .next a { border-color: var(--clay); }
+.guide-path-nav a span { font-size: 15px; font-weight: 700; color: var(--muted); }
+@media (min-width: 600px) {
+  .guide-path-nav ul { grid-template-columns: 1fr 1fr; }
+  .guide-path-nav .next { grid-column: 2; }
+}
+.path-steps { list-style: none; padding: 0; margin: 28px 0 0; counter-reset: step; display: flex; flex-direction: column; gap: 16px; }
+.path-step { counter-increment: step; position: relative; display: flex; flex-direction: column; gap: 6px; padding: 18px 20px 18px 72px; background: var(--sand); border: 1px solid var(--line); border-radius: 12px; }
+.path-step::before { content: counter(step); position: absolute; left: 20px; top: 18px; width: 36px; height: 36px; border-radius: 50%; background: var(--forest); color: var(--cream); font-weight: 700; font-size: 18px; display: flex; align-items: center; justify-content: center; }
+.path-step:hover { border-color: var(--clay); }
+.path-step a { color: var(--ink); text-decoration: none; }
+.path-step a::after { content: ""; position: absolute; inset: 0; border-radius: 12px; }
+.path-step a:hover h2 { color: var(--clay-dark); text-decoration: underline; text-underline-offset: 4px; }
+.path-step a:focus-visible { outline: none; }
+.path-step a:focus-visible::after { outline: 3px solid var(--forest); outline-offset: 2px; }
+.path-step h2 { font-family: var(--serif); font-size: 21px; line-height: 1.25; margin: 0; }
+.path-step p { margin: 0; font-size: 17px; line-height: 1.5; }
+.path-step .guide-meta { margin: 0; padding-top: 4px; font-size: 15px; }
+.path-start { margin: 32px 0 0; }
+@media (max-width: 480px) {
+  .path-step { padding-left: 58px; }
+  .path-step::before { left: 14px; width: 32px; height: 32px; font-size: 17px; }
+}
 
 /* Phones: easier taps, and the cost table stacked so the "With us" column is never cut off */
 @media (max-width: 640px) {

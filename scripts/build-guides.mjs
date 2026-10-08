@@ -2,9 +2,10 @@
 // The engine writes each guide as markdown with front matter (title, description, path, date,
 // optional image and imageAlt), then one "# heading", the body, and "## question" answers.
 // Optional lines the engine does not write yet: topic, minutes and keywords (see scripts/guide-config.mjs and the README).
+// Learning paths (ordered guides, listed in PATHS in guide-config.mjs) get a page each at /guides/paths/<id>/.
 import { readdirSync, readFileSync, writeFileSync, mkdirSync, rmSync, existsSync } from "node:fs";
 import { marked } from "marked";
-import { TOPICS, timeLabel } from "./guide-config.mjs";
+import { TOPICS, PATHS, timeLabel, pathLabel } from "./guide-config.mjs";
 
 // www is the primary host: Vercel redirects the bare domain to it, so canonicals and the sitemap name www.
 const SITE = "https://www.gridpulsemedia.com";
@@ -99,6 +100,9 @@ const files = existsSync(DIR) ? readdirSync(DIR).filter((f) => f.endsWith(".md")
 // Newest first, then by title, so the order never depends on the file system.
 const guides = files.map((f) => parse(f)).sort((a, b) => (a.meta.date < b.meta.date ? 1 : a.meta.date > b.meta.date ? -1 : a.heading.localeCompare(b.heading)));
 
+// /guides/paths/ is where the learning path pages live, so no guide can use that slug.
+if (guides.some((g) => g.slug === "paths")) throw new Error('content/guides/paths.md cannot be used: /guides/paths/ is reserved for learning paths. Rename the guide.');
+
 // topic, minutes and keywords are optional front matter. The engine writes guides without them, so a guide with no
 // topic (or one the config does not know) is listed under "More guides" and named in the build log.
 const TOPIC = new Map(TOPICS.map((t) => [t.id, t]));
@@ -122,6 +126,36 @@ const relatedNav = (g) => {
   return r.list.length ? `<nav class="guide-related" aria-labelledby="related-heading"><h2 id="related-heading">${esc(r.heading)}</h2><ul>${r.list.map((o) => `<li><a href="/guides/${o.slug}/">${esc(o.heading)}</a></li>`).join("")}</ul></nav>\n` : "";
 };
 
+// Learning paths. A slug with no guide, or a guide that already belongs to an earlier path, is left out and named in the log.
+// A path with fewer than two steps left is not built. The total time shows only when every step has minutes.
+const BY_SLUG = new Map(guides.map((g) => [g.slug, g]));
+const paths = [];
+for (const p of PATHS) {
+  if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(p.id) || paths.some((o) => o.id === p.id)) { console.warn(`path "${p.id}": not a usable id (letters, digits and hyphens, once), not built`); continue; }
+  const steps = [];
+  for (const slug of p.steps) {
+    const g = BY_SLUG.get(slug);
+    if (!g) console.warn(`path ${p.id}: no guide called ${slug}, left out`);
+    else if (g.path) console.warn(`path ${p.id}: ${slug} is already in path ${g.path.path.id}, left out`);
+    else if (steps.includes(g)) console.warn(`path ${p.id}: ${slug} is listed twice, left out`);
+    else steps.push(g);
+  }
+  if (steps.length < 2) { console.warn(`path ${p.id}: ${steps.length} step${steps.length === 1 ? "" : "s"} left, not built (a path needs at least two)`); continue; }
+  const built = { id: p.id, title: p.title, blurb: p.blurb, steps, label: pathLabel(steps.length, steps.every((g) => g.minutes) ? steps.reduce((n, g) => n + g.minutes, 0) : null) };
+  steps.forEach((g, index) => { g.path = { path: built, index }; });
+  paths.push(built);
+}
+// On a guide in a path: the "Step 2 of 6 in ..." line under the title, and Previous / Next at the end (the last step links back to the path page).
+const stepLine = (g) => (g.path ? `<p class="guide-path"><a href="/guides/paths/${g.path.path.id}/">Step ${g.path.index + 1} of ${g.path.path.steps.length} in ${esc(g.path.path.title)}</a></p>\n` : "");
+function pathNav(g) {
+  if (!g.path) return "";
+  const { path: p, index: i } = g.path;
+  const link = (cls, href, word, text) => `<li class="${cls}"><a href="${href}"><span>${word}</span> ${esc(text)}</a></li>`;
+  const prev = p.steps[i - 1];
+  const next = p.steps[i + 1];
+  return `<nav class="guide-path-nav" aria-labelledby="path-nav-heading"><h2 id="path-nav-heading">Step ${i + 1} of ${p.steps.length}: ${esc(p.title)}</h2><ul>${prev ? link("prev", `/guides/${prev.slug}/`, "Previous", prev.heading) : ""}${next ? link("next", `/guides/${next.slug}/`, "Next", next.heading) : link("next done", `/guides/paths/${p.id}/`, "Finished", "Back to the whole path")}</ul></nav>\n`;
+}
+
 rmSync("guides", { recursive: true, force: true });
 mkdirSync("guides", { recursive: true });
 
@@ -139,12 +173,34 @@ for (const g of guides) {
 <p class="guide-crumb"><a href="/guides/">All guides</a></p>
 <h1>${esc(g.heading)}</h1>
 <p class="guide-date"><time datetime="${g.meta.date}">${dateText(g.meta.date)}</time></p>
-${g.minutes ? `<p class="guide-meta">${timeLabel(g.minutes)}</p>\n` : ""}${hero}<div class="guide-body">
+${g.minutes ? `<p class="guide-meta">${timeLabel(g.minutes)}</p>\n` : ""}${stepLine(g)}${hero}<div class="guide-body">
 ${g.html}</div>
-${relatedNav(g)}<aside class="guide-cta"><h2>Want this handled for you?</h2><p>We plan, write and publish your marketing every month, so none of it falls on you.</p><a class="btn" href="/start/">Get started</a></aside>
+${pathNav(g)}${relatedNav(g)}<aside class="guide-cta"><h2>Want this handled for you?</h2><p>We plan, write and publish your marketing every month, so none of it falls on you.</p><a class="btn" href="/start/">Get started</a></aside>
 </article>
 ${foot}`);
 }
+
+// One page per learning path: what it is, the steps in order with the time each takes, and a button to start.
+const pathStep = (g) => `<li class="path-step"><a href="/guides/${g.slug}/"><h2>${esc(g.heading)}</h2></a><p>${esc(g.meta.description)}</p>${g.minutes ? `<p class="guide-meta">${timeLabel(g.minutes)}</p>` : ""}</li>`;
+for (const p of paths) {
+  mkdirSync(`guides/paths/${p.id}`, { recursive: true });
+  writeFileSync(`guides/paths/${p.id}/index.html`, `${head(`${p.title} | Grid Pulse Media`, `${p.blurb} A step by step path: ${p.label}.`, `/guides/paths/${p.id}/`)}<section class="wrap guide guide-path-page">
+<p class="guide-crumb"><a href="/guides/">All guides</a></p>
+<h1>${esc(p.title)}</h1>
+<p class="lede">${esc(p.blurb)}</p>
+<p class="guide-meta">${esc(p.label)}</p>
+<ol class="path-steps">
+${p.steps.map(pathStep).join("\n")}
+</ol>
+<p class="path-start"><a class="btn" href="/guides/${p.steps[0].slug}/">Start with step 1</a></p>
+<aside class="guide-cta"><h2>Want this handled for you?</h2><p>We plan, write and publish your marketing every month, so none of it falls on you.</p><a class="btn" href="/start/">Get started</a></aside>
+</section>
+${foot}`);
+}
+
+// The Start here row on /guides/: one card per path.
+const pathCard = (p) => `<li class="path-card"><a href="/guides/paths/${p.id}/"><h3>${esc(p.title)}</h3></a><p>${esc(p.blurb)}</p><p class="guide-meta">${esc(p.label)}</p></li>`;
+const startHere = paths.length ? `<section class="start-here" id="start" aria-labelledby="start-heading">\n<h2 id="start-heading">Start here</h2>\n<p class="topic-blurb">Not sure where to begin? Pick one and follow it, one step at a time.</p>\n<ul class="path-cards">\n${paths.map(pathCard).join("\n")}\n</ul>\n</section>\n` : "";
 
 // One section per topic, in the order set in guide-config.mjs. Guides with no known topic go last under "More guides".
 const card = (g) => `<li class="guide-card"><a href="/guides/${g.slug}/"><h3>${esc(g.heading)}</h3></a><p>${esc(g.meta.description)}</p>${g.minutes ? `<p class="guide-meta">${timeLabel(g.minutes)}</p>` : ""}</li>`;
@@ -160,7 +216,7 @@ writeFileSync("guides/index.html", `${head("Local Business Marketing Guides | Gr
 <h1>Guides</h1>
 <p class="lede">Plain-language help for local business owners on getting found online and keeping your marketing going.</p>
 <div class="guide-body"><p>These guides cover the everyday parts of marketing a local business: setting up and keeping your Google Business Profile accurate, getting found when customers search nearby, asking for and answering reviews, deciding how often to post, and knowing what to write on your blog. Each one is written for owners who are short on time, with plain steps you can act on this week.</p><p>If you would rather not do any of it yourself, Grid Pulse Media plans, writes and posts all of this for you on a 90-day plan. See <a href="/services/">what we run for you</a> or <a href="/start/">get started</a>.</p></div>
-${list}
+${startHere}${list}
 </section>
 ${foot}`);
 
@@ -224,6 +280,6 @@ ${foot}`);
 hub("services", "Marketing Services for Local Businesses | Grid Pulse Media", "What Grid Pulse Media does for local businesses: website, Google profile, social posts, listings, reviews and blog writing, on one monthly plan.", "Services", "Everything we run for a local business, on one monthly plan.", "service");
 hub("faq", "Questions About Grid Pulse Media | FAQ", "Answers to common questions about pricing, the 90-day plan, who writes the content and how your Google listing is handled.", "Questions", "Straight answers about how Grid Pulse Media works.", "faq", `<div class="guide-body"><p>Most owners ask the same few things before they start: what it costs, what is included in the 90-day plan, who writes the content, how often we post, and how we look after your Google listing. Each page below answers one of those in plain language.</p><p>The short version: Grid Pulse Media runs the digital side of your business for one monthly price. We plan your marketing in 90-day stretches, write and publish the posts, keep your website, Google profile and listings matching, and answer reviews and comments in your voice. If your question is not here, ask it on the <a href="/start/">Get started</a> form and we will answer it before your setup call.</p><p>For reference, it is $349 per month plus a one-time setup fee of $699, with a three-month minimum and month to month after that. Your website is yours to keep. Every answer here describes how we actually work, so nothing is promised that we cannot deliver, and if something changes we update the page.</p></div>`);
 
-const urls = ["/", "/start/", "/guides/", ...guides.map((g) => `/guides/${g.slug}/`), "/services/", "/faq/", ...pages.map((p) => `/${p.slug}/`), ...legal.map((l) => `/${l.slug}/`)];
+const urls = ["/", "/start/", "/guides/", ...guides.map((g) => `/guides/${g.slug}/`), ...paths.map((p) => `/guides/paths/${p.id}/`), "/services/", "/faq/", ...pages.map((p) => `/${p.slug}/`), ...legal.map((l) => `/${l.slug}/`)];
 writeFileSync("sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `<url><loc>${SITE}${u}</loc></url>`).join("\n")}\n</urlset>\n`);
 console.log(`Built ${guides.length} guide(s), ${pages.length} page(s) and ${legal.length} legal page(s).`);
