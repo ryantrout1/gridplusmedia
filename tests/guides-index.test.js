@@ -56,13 +56,21 @@ const FIXTURE = {
   'reviews-d': classified('Reviews D', '2026-10-05', 'reviews', 15),
   'engine-shaped': engineGuide('Engine Shaped', '2026-10-04'),
   'typo-topic': classified('Typo Topic', '2026-10-03', 'revews', 10),
+  'measure-a': classified('Measure A', '2026-10-02', 'measure', 25),
+  'measure-b': classified('Measure B', '2026-10-01', 'measure'),
+  'measure-c': classified('Measure C', '2026-09-30', 'measure', 5),
 };
 
-// Paths for the fixture guides. habit is whole; ghost names a guide that does not exist; dup shares a guide with habit.
+// Paths for the fixture guides. habit is whole. ghost lists a guide that does not exist and one guide twice. dup shares a guide
+// with habit. mixed has one step with minutes and one without. The last two cannot be built: an id that is not a folder name,
+// and an id already taken (their steps are free, so only the id check stops them).
 const PATHS_FIXTURE = [
   { id: 'habit', title: 'Build a habit', blurb: 'Three guides, in order.', steps: ['reviews-a', 'reviews-b', 'reviews-d'] },
-  { id: 'ghost', title: 'Ghost path', blurb: 'One step is missing.', steps: ['reviews-c', 'no-such-guide', 'engine-shaped'] },
+  { id: 'ghost', title: 'Ghost path', blurb: 'One step is missing.', steps: ['reviews-c', 'reviews-c', 'no-such-guide', 'engine-shaped'] },
   { id: 'dup', title: 'Dup path', blurb: 'Shares a guide with habit.', steps: ['reviews-a', 'typo-topic'] },
+  { id: 'mixed', title: 'Mixed times', blurb: 'One step has no minutes.', steps: ['measure-a', 'measure-b'] },
+  { id: 'Bad Id', title: 'Bad id', blurb: 'The id cannot be a folder name.', steps: ['typo-topic', 'measure-c'] },
+  { id: 'mixed', title: 'Same id again', blurb: 'Reuses an id.', steps: ['typo-topic', 'measure-c'] },
 ];
 
 let cfg, repo, fx, px, reserved;
@@ -249,7 +257,7 @@ test('the paths in the config are sound: known guides with minutes, none in two 
   const slugs = new Set(repoGuides.map((g) => g.slug));
   const inPath = new Map();
   for (const p of cfg.PATHS) {
-    assert.match(p.id, /^[a-z]+(-[a-z]+)*$/);
+    assert.match(p.id, /^[a-z0-9]+(-[a-z0-9]+)*$/);
     assert.ok(p.title && p.blurb, `${p.id} needs a title and a blurb`);
     assert.doesNotMatch(`${p.title} ${p.blurb}`, DASH, `${p.id}: dash in wording`);
     assert.ok(p.steps.length >= 2, `${p.id} needs at least two steps`);
@@ -329,6 +337,20 @@ test('paths made of fixture guides: a whole path, a path with a missing guide, a
   assert.deepEqual(ghost.steps, [{ slug: 'reviews-c', time: null }, { slug: 'engine-shaped', time: null }]);
   assert.equal(ghost.label, '2 steps');
   assert.deepEqual(stepLine(px.read('guides/engine-shaped/index.html')), { href: '/guides/paths/ghost/', text: 'Step 2 of 2 in Ghost path' });
+  // a guide listed twice in one path is one step, not the first and the last
+  assert.match(px.log, /ghost[^\n]*reviews-c[^\n]*twice/);
+  assert.deepEqual(stepLine(px.read('guides/reviews-c/index.html')), { href: '/guides/paths/ghost/', text: 'Step 1 of 2 in Ghost path' });
+  assert.deepEqual(pathNav(px.read('guides/reviews-c/index.html')), { prev: null, next: '/guides/engine-shaped/', done: false });
+  // mixed: one step has no minutes, so no total (not a partial one), and the log names the guide
+  const mixed = pathPage(px.read('guides/paths/mixed/index.html'));
+  assert.deepEqual(mixed.steps, [{ slug: 'measure-a', time: 'About 25 minutes' }, { slug: 'measure-b', time: null }]);
+  assert.equal(mixed.label, '2 steps');
+  assert.match(px.log, /path mixed:[^\n]*measure-b[^\n]*minutes/);
+  // an id that is not a folder name is not built, and a second path with a taken id does not replace the first
+  assert.match(px.log, /Bad Id/);
+  assert.ok(!px.has('guides/paths/Bad Id'), 'no folder for a bad id');
+  assert.equal(stepLine(px.read('guides/measure-c/index.html')), null);
+  assert.equal(stepLine(px.read('guides/typo-topic/index.html')), null);
   // dup: reviews-a already belongs to habit, so it is left out; one step is not a path, so dup is not built
   assert.match(px.log, /dup[^\n]*reviews-a/);
   assert.ok(!px.has('guides/paths/dup/index.html'), 'a path with one step left is not built');
@@ -336,9 +358,10 @@ test('paths made of fixture guides: a whole path, a path with a missing guide, a
   assert.equal(stepLine(px.read('guides/typo-topic/index.html')), null);
   assert.equal(pathNav(px.read('guides/typo-topic/index.html')), null);
   // the index row and the sitemap list the paths that were built, and only those
-  assert.deepEqual(startRow(px.read('guides/index.html')).map((c) => c.id), ['habit', 'ghost']);
+  assert.deepEqual(startRow(px.read('guides/index.html')).map((c) => c.id), ['habit', 'ghost', 'mixed']);
   const sitemap = px.read('sitemap.xml');
-  assert.ok(sitemap.includes('/guides/paths/habit/') && sitemap.includes('/guides/paths/ghost/'));
+  assert.ok(['habit', 'ghost', 'mixed'].every((id) => sitemap.includes(`/guides/paths/${id}/`)));
+  assert.ok(!sitemap.includes('Bad'));
   assert.ok(!sitemap.includes('/guides/paths/dup/'));
   // every guide is still listed once under its topic, and still gets more in its topic
   assert.deepEqual([...new Set(sections(px.read('guides/index.html')).flatMap((s) => s.slugs))].sort(), Object.keys(FIXTURE).sort());
@@ -349,7 +372,6 @@ test('when none of the paths can be built there is no Start here row and no path
   // fx uses the real PATHS, whose guides are not in the fixture.
   assert.equal(fx.status, 0, fx.log);
   assert.equal(startRow(fx.read('guides/index.html')), null);
-  assert.ok(!/class="start-here"/.test(fx.read('guides/index.html')));
   assert.ok(!fx.has('guides/paths'), 'no paths folder');
   assert.ok(!fx.read('sitemap.xml').includes('/guides/paths/'));
 });

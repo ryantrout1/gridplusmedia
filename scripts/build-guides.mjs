@@ -136,20 +136,21 @@ for (const p of PATHS) {
   for (const slug of p.steps) {
     const g = BY_SLUG.get(slug);
     if (!g) console.warn(`path ${p.id}: no guide called ${slug}, left out`);
-    else if (g.path) console.warn(`path ${p.id}: ${slug} is already in path ${g.path.path.id}, left out`);
+    else if (g.step) console.warn(`path ${p.id}: ${slug} is already in path ${g.step.path.id}, left out`);
     else if (steps.includes(g)) console.warn(`path ${p.id}: ${slug} is listed twice, left out`);
     else steps.push(g);
   }
   if (steps.length < 2) { console.warn(`path ${p.id}: ${steps.length} step${steps.length === 1 ? "" : "s"} left, not built (a path needs at least two)`); continue; }
+  for (const g of steps) if (!g.minutes) console.warn(`path ${p.id}: ${g.slug} has no minutes, so the path shows no total time`);
   const built = { id: p.id, title: p.title, blurb: p.blurb, steps, label: pathLabel(steps.length, steps.every((g) => g.minutes) ? steps.reduce((n, g) => n + g.minutes, 0) : null) };
-  steps.forEach((g, index) => { g.path = { path: built, index }; });
+  steps.forEach((g, index) => { g.step = { path: built, index }; });
   paths.push(built);
 }
 // On a guide in a path: the "Step 2 of 6 in ..." line under the title, and Previous / Next at the end (the last step links back to the path page).
-const stepLine = (g) => (g.path ? `<p class="guide-path"><a href="/guides/paths/${g.path.path.id}/">Step ${g.path.index + 1} of ${g.path.path.steps.length} in ${esc(g.path.path.title)}</a></p>\n` : "");
+const stepLine = (g) => (g.step ? `<p class="guide-path"><a href="/guides/paths/${g.step.path.id}/">Step ${g.step.index + 1} of ${g.step.path.steps.length} in ${esc(g.step.path.title)}</a></p>\n` : "");
 function pathNav(g) {
-  if (!g.path) return "";
-  const { path: p, index: i } = g.path;
+  if (!g.step) return "";
+  const { path: p, index: i } = g.step;
   const link = (cls, href, word, text) => `<li class="${cls}"><a href="${href}"><span>${word}</span> ${esc(text)}</a></li>`;
   const prev = p.steps[i - 1];
   const next = p.steps[i + 1];
@@ -184,7 +185,7 @@ ${foot}`);
 const pathStep = (g) => `<li class="path-step"><a href="/guides/${g.slug}/"><h2>${esc(g.heading)}</h2></a><p>${esc(g.meta.description)}</p>${g.minutes ? `<p class="guide-meta">${timeLabel(g.minutes)}</p>` : ""}</li>`;
 for (const p of paths) {
   mkdirSync(`guides/paths/${p.id}`, { recursive: true });
-  writeFileSync(`guides/paths/${p.id}/index.html`, `${head(`${p.title} | Grid Pulse Media`, `${p.blurb} A step by step path: ${p.label}.`, `/guides/paths/${p.id}/`)}<section class="wrap guide guide-path-page">
+  writeFileSync(`guides/paths/${p.id}/index.html`, `${head(`${p.title} | Grid Pulse Media`, `${p.blurb} A step by step path: ${p.label}.`, `/guides/paths/${p.id}/`)}<section class="wrap guide">
 <p class="guide-crumb"><a href="/guides/">All guides</a></p>
 <h1>${esc(p.title)}</h1>
 <p class="lede">${esc(p.blurb)}</p>
