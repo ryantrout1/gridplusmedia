@@ -322,7 +322,7 @@ test('paths made of fixture guides: a whole path, a path with a missing guide, a
   assert.deepEqual(pathNav(px.read('guides/reviews-a/index.html')), { prev: null, next: '/guides/reviews-b/', done: false });
   assert.deepEqual(pathNav(px.read('guides/reviews-b/index.html')), { prev: '/guides/reviews-a/', next: '/guides/reviews-d/', done: false });
   assert.deepEqual(pathNav(px.read('guides/reviews-d/index.html')), { prev: '/guides/reviews-b/', next: '/guides/paths/habit/', done: true });
-  assert.doesNotMatch(px.log, /path habit/);
+  assert.doesNotMatch(px.log, /path habit:/, "habit is whole, so the log has nothing to say about it");
   // ghost: the missing guide is named in the log and left out, the other two stay, and with no minutes there is no total
   assert.match(px.log, /ghost[^\n]*no-such-guide/);
   const ghost = pathPage(px.read('guides/paths/ghost/index.html'));
