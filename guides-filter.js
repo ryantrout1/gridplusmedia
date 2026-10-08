@@ -7,24 +7,30 @@
 //   time   "any", or a number of minutes. A chip means "up to": a 60 chip shows guides of 60 minutes or less.
 //          A guide with no minutes is hidden while a time chip is on, because we cannot say how long it takes.
 
-// Lowercase, no accents, no apostrophes, everything else that is not a letter or digit becomes one space.
+// Lowercase, no accents, no apostrophes, everything else that is not a letter or digit (in any language) becomes one space.
 export function normalize(text) {
   return String(text ?? "")
     .toLowerCase()
     .normalize("NFKD")
-    .replace(/[̀-ͯ]/g, "")
-    .replace(/['’]/g, "")
-    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/['\u2019]/g, "")
+    .replace(/[^\p{L}\p{N}]+/gu, " ")
     .trim();
 }
 
 const words = (text) => normalize(text).split(" ").filter(Boolean);
 
-// A typed word matches a word that starts with it. A plural also matches the word it came from ("postcards" finds "postcard").
-const found = (tokens, word) => {
-  const single = word.length > 3 && word.endsWith("s") ? word.slice(0, -1) : null;
-  return tokens.some((t) => t.startsWith(word) || (single !== null && t.startsWith(single)));
+// A typed word matches a word that starts with it. A typed plural also matches the whole word it came from
+// ("postcards" finds "postcard", "categories" finds "category", "businesses" finds "business"), but only as a whole word,
+// so "pros" does not find "profile".
+const singulars = (word) => {
+  const out = [];
+  if (word.length > 3 && word.endsWith("ies")) out.push(`${word.slice(0, -3)}y`);
+  if (word.length > 4 && word.endsWith("es")) out.push(word.slice(0, -2));
+  if (word.length > 2 && word.endsWith("s") && !word.endsWith("ss")) out.push(word.slice(0, -1));
+  return out;
 };
+const found = (tokens, word) => tokens.some((t) => t.startsWith(word)) || singulars(word).some((w) => tokens.includes(w));
 
 export function matches(card, state = {}) {
   const { q = "", topic = "all", time = "any" } = state;

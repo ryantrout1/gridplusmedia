@@ -53,7 +53,7 @@ test('the step line and the Previous and Next links on a guide in a path are at 
 });
 
 test('cards, sections and controls the page script hides stay hidden (their display rules must not beat the hidden attribute)', () => {
-  for (const sel of ['.guide-finder', '.guide-card', '.topic', '.start-here', '.finder-clear']) {
+  for (const sel of ['.guide-finder', '.guide-card', '.topic', '.topics', '.start-here', '.finder-clear']) {
     const re = new RegExp(sel.replace('.', '\\.') + '\\[hidden\\][^{]*\\{[^}]*display: none');
     assert.match(css, re, sel);
   }

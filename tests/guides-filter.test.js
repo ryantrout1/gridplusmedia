@@ -52,6 +52,25 @@ test('search treats a plural as the word it comes from', () => {
   assert.deepEqual(ids({ q: 'reviews' }), ['answer']);
 });
 
+test('a typed plural also finds the whole singular word (es, ies and s), but a short word is not cut down into a prefix of other words', () => {
+  const two = [
+    card({ id: 'biz', title: 'Marketing for a salon business', description: 'Pick the right category.', topicLabel: '' }),
+    card({ id: 'prof', title: 'Your profile and the process', description: 'Photos and hours.', topicLabel: '' }),
+  ];
+  const got = (q) => filterCards(two, { ...ALL, q }).map((c) => c.id);
+  assert.deepEqual(got('businesses'), ['biz']);
+  assert.deepEqual(got('categories'), ['biz']);
+  assert.deepEqual(got('photos'), ['prof']);
+  assert.deepEqual(got('pros'), [], 'pros is not a way to type profile or process');
+  assert.deepEqual(got('this'), [], 'this is not cut down to thi');
+});
+
+test('letters from other languages count as letters, so a search in them finds nothing instead of being ignored', () => {
+  assert.equal(normalize('Отзывы'), 'отзывы');
+  assert.deepEqual(ids({ q: 'отзывы' }), []);
+  assert.equal(isFiltered({ q: 'отзывы' }), true);
+});
+
 test('search ignores case and punctuation', () => {
   assert.deepEqual(ids({ q: 'GMB!' }), ids({ q: 'gmb' }));
   assert.deepEqual(ids({ q: '90-day' }), ['plan']);

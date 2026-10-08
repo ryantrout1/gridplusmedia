@@ -12,12 +12,13 @@ if (finder) {
   const topicChips = [...finder.querySelectorAll(".chip[data-topic]")];
   const topicLabels = new Map(topicChips.map((c) => [c.dataset.topic, c.dataset.label || ""]));
   const start = document.querySelector(".start-here");
+  const topics = document.querySelector(".topics");
   const sections = [...document.querySelectorAll(".topics .topic")];
 
   const cards = [...document.querySelectorAll(".guide-card")].map((el) => ({
     el,
     title: el.querySelector("h3")?.textContent ?? "",
-    description: el.querySelector("p")?.textContent ?? "",
+    description: el.querySelector("p:not(.guide-meta)")?.textContent ?? "",
     topic: el.dataset.topic ?? "more",
     topicLabel: topicLabels.get(el.dataset.topic) ?? "",
     keywords: el.dataset.keywords ?? "",
@@ -37,7 +38,10 @@ if (finder) {
     const filtered = isFiltered(state);
     if (start) start.hidden = filtered;
     clear.hidden = !filtered;
+    if (topics) topics.hidden = shown === 0;
     status.textContent = shown === 0 ? `${countLabel(0)}. Try fewer words, or clear the filters.` : countLabel(shown);
+    // On a phone the chips can push the message off the top of the screen, so bring it back into view.
+    if (shown === 0 && finder.offsetParent !== null) status.scrollIntoView({ block: "nearest" });
   };
 
   // Chips work like radio buttons: one is on in each row, and picking another moves it.

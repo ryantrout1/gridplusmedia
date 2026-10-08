@@ -418,7 +418,23 @@ test('the time chips are Any time (on) then the chips from the config, and the t
   const html = repo.read('guides/index.html');
   assert.deepEqual(timeChips(html), [{ time: 'any', pressed: true, text: 'Any time' }, ...cfg.TIME_CHIPS.map((c) => ({ time: String(c.minutes), pressed: false, text: c.label }))]);
   const used = cfg.TOPICS.filter((x) => repoGuides.some((g) => g.topic === x.id));
-  assert.deepEqual(topicChips(html), [{ topic: 'all', label: null, pressed: true, text: 'All' }, ...used.map((x) => ({ topic: x.id, label: x.label, pressed: false, text: x.short || x.label }))]);
+  const unsorted = repoGuides.some((g) => !cfg.TOPICS.some((x) => x.id === g.topic));
+  assert.deepEqual(topicChips(html), [{ topic: 'all', label: null, pressed: true, text: 'All' }, ...used.map((x) => ({ topic: x.id, label: x.label, pressed: false, text: x.short || x.label })), ...(unsorted ? [{ topic: 'more', label: 'More guides', pressed: false, text: 'More guides' }] : [])]);
+});
+
+test('guides with no topic yet get a More guides chip, last, and a site with none does not', () => {
+  const chips = topicChips(fx.read('guides/index.html'));
+  assert.deepEqual(chips.at(-1), { topic: 'more', label: 'More guides', pressed: false, text: 'More guides' });
+  assert.equal(chips.filter((c) => c.topic === 'more').length, 1);
+  const sorted = build({ 'only-reviews': classified('Only Reviews', '2026-10-08', 'reviews', 20) });
+  assert.deepEqual(topicChips(sorted.read('guides/index.html')).map((c) => c.topic), ['all', 'reviews']);
+});
+
+test('what a guide puts in its keywords is escaped in the page, so a quote or a tag cannot break the markup', () => {
+  const odd = build({ 'odd-keywords': engineGuide('Odd Keywords', '2026-10-09', ['topic: reviews', 'minutes: 5', `keywords: ${JSON.stringify('rock & roll, "quoted", <b>bold</b>')}`]) });
+  const html = odd.read('guides/index.html');
+  assert.match(html, /data-keywords="rock &amp; roll, &quot;quoted&quot;, &lt;b&gt;bold&lt;\/b&gt;"/);
+  assert.doesNotMatch(html, /<b>bold/);
 });
 
 test('every guide card says its topic, minutes and keywords, so the page script can filter without re-reading the guides', () => {

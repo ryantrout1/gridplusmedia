@@ -665,7 +665,7 @@ body:has(.inc-dialog[open]) { overflow: hidden; }
 
 /* Find a guide: the search box and chips on /guides/. The script shows them; the markup ships hidden so nothing dead shows without JS. */
 .guide-finder { margin-top: 32px; padding: 20px; background: var(--sand); border: 1px solid var(--line); border-radius: 12px; display: flex; flex-direction: column; gap: 18px; }
-.guide-finder[hidden], .guide-card[hidden], .topic[hidden], .start-here[hidden], .finder-clear[hidden] { display: none; }
+.guide-finder[hidden], .guide-card[hidden], .topic[hidden], .topics[hidden], .start-here[hidden], .finder-clear[hidden] { display: none; }
 .finder-search label, .finder-label { display: block; margin: 0 0 8px; font-size: 16px; font-weight: 700; color: var(--muted); }
 .finder-input { display: block; width: 100%; min-height: 44px; padding: 10px 14px; font: inherit; font-size: 18px; color: var(--ink); background: #fff; border: 1px solid var(--line); border-radius: 10px; }
 .finder-input:focus-visible, .chip:focus-visible, .finder-clear:focus-visible { outline: 3px solid var(--forest); outline-offset: 2px; }
@@ -675,7 +675,7 @@ body:has(.inc-dialog[open]) { overflow: hidden; }
 .chip[aria-pressed="true"] { background: var(--forest); border-color: var(--forest); color: var(--cream); }
 .finder-result { display: flex; flex-wrap: wrap; align-items: center; gap: 0 16px; margin-top: -6px; }
 .finder-status { margin: 0; font-size: 17px; font-weight: 600; color: var(--muted); }
-.finder-clear { min-height: 44px; padding: 8px 4px; font: inherit; font-size: 17px; font-weight: 600; color: var(--clay-dark); background: none; border: 0; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+.finder-clear { min-height: 44px; padding: 8px 0; font: inherit; font-size: 17px; font-weight: 600; color: var(--clay-dark); background: none; border: 0; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
 .guide-about { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--line); }
 
 /* Learning paths: the Start here row on /guides/, the path page, and the step line and Previous / Next on guides in a path */

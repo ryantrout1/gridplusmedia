@@ -218,8 +218,8 @@ const topicsInUse = TOPICS.filter((t) => guides.some((g) => g.topic === t));
 const finder = guides.length ? `<div class="guide-finder" hidden>
 <div class="finder-search"><label for="guide-search">Search the guides</label><input type="search" id="guide-search" class="finder-input" placeholder="Try &quot;reviews&quot; or &quot;photos&quot;" autocomplete="off" enterkeyhint="search"></div>
 <div class="finder-result"><p class="finder-status" role="status"></p><button type="button" class="finder-clear" hidden>Clear filters</button></div>
-<div class="finder-row"><p class="finder-label" id="finder-time">How much time do you have?</p><div class="finder-chips" role="group" aria-labelledby="finder-time">${[chip('data-time="any"', true, "Any time"), ...TIME_CHIPS.map((c) => chip(`data-time="${c.minutes}"`, false, c.label))].join("")}</div></div>${topicsInUse.length ? `
-<div class="finder-row"><p class="finder-label" id="finder-topic">Topic</p><div class="finder-chips" role="group" aria-labelledby="finder-topic">${[chip('data-topic="all"', true, "All"), ...topicsInUse.map((t) => chip(`data-topic="${t.id}" data-label="${esc(t.label)}"`, false, t.short || t.label))].join("")}</div></div>` : ""}
+<div class="finder-row"><p class="finder-label" id="finder-time">How much time do you have?</p><div class="finder-chips" role="group" aria-labelledby="finder-time">${[chip('data-time="any"', true, "Any time"), ...TIME_CHIPS.map((c) => chip(`data-time="${c.minutes}"`, false, c.label))].join("")}</div></div>${(topicsInUse.length || guides.some((g) => !g.topic)) ? `
+<div class="finder-row"><p class="finder-label" id="finder-topic">Topic</p><div class="finder-chips" role="group" aria-labelledby="finder-topic">${[chip('data-topic="all"', true, "All"), ...topicsInUse.map((t) => chip(`data-topic="${t.id}" data-label="${esc(t.label)}"`, false, t.short || t.label)), ...(guides.some((g) => !g.topic) ? [chip('data-topic="more" data-label="More guides"', false, "More guides")] : [])].join("")}</div></div>` : ""}
 </div>\n` : "";
 const list = guides.length
   ? `<div class="topics">\n${groups.map((s) => topicSection(s.id, s.label, s.blurb, s.items)).join("\n")}\n</div>`
