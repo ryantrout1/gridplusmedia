@@ -638,6 +638,30 @@ body:has(.inc-dialog[open]) { overflow: hidden; }
 .link-row a { color: var(--clay-dark); text-underline-offset: 4px; }
 .guide-empty { color: var(--muted); }
 .guide-cta .btn { margin-top: 16px; }
+.guide-meta { color: var(--muted); font-size: 16px; font-weight: 600; margin: 0 0 24px; }
+.guide-date + .guide-meta { margin-top: -18px; }
+.guide-related { margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--line); }
+.guide-related h2 { font-family: var(--serif); font-size: 22px; line-height: 1.25; margin: 0 0 8px; }
+.guide-related ul { list-style: none; margin: 0; padding: 0; }
+.guide-related a { display: inline-flex; align-items: center; min-height: 44px; font-size: 19px; font-weight: 600; color: var(--clay-dark); text-underline-offset: 4px; }
+
+/* /guides/ index: topic sections of cards. Wider than a guide, with the intro kept to a readable line length. */
+.guide-index { max-width: 960px; }
+.guide-index .lede, .guide-index .guide-body { max-width: 720px; }
+.topics { margin-top: 48px; padding-top: 40px; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 52px; }
+.topic h2 { font-family: var(--serif); font-size: 28px; line-height: 1.2; margin: 0 0 6px; }
+.topic-blurb { color: var(--muted); font-size: 18px; margin: 0 0 20px; }
+.guide-cards { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr)); gap: 16px; }
+.guide-card { position: relative; display: flex; flex-direction: column; gap: 6px; padding: 18px 20px; background: var(--sand); border: 1px solid var(--line); border-radius: 12px; }
+.guide-card:hover { border-color: var(--clay); }
+.guide-card a { color: var(--ink); text-decoration: none; }
+.guide-card a::after { content: ""; position: absolute; inset: 0; border-radius: 12px; }
+.guide-card a:hover h3 { color: var(--clay-dark); text-decoration: underline; text-underline-offset: 4px; }
+.guide-card a:focus-visible { outline: none; }
+.guide-card a:focus-visible::after { outline: 3px solid var(--forest); outline-offset: 2px; }
+.guide-card h3 { font-family: var(--serif); font-size: 20px; line-height: 1.25; margin: 0; }
+.guide-card p { margin: 0; font-size: 17px; line-height: 1.5; }
+.guide-card .guide-meta { margin-top: auto; padding-top: 6px; font-size: 15px; }
 
 /* Phones: easier taps, and the cost table stacked so the "With us" column is never cut off */
 @media (max-width: 640px) {

@@ -4,23 +4,26 @@
 //
 // Each build runs in its own temp folder, so this file never fights tests/services.test.js over the guides/ folder
 // while node runs the test files side by side.
-import test, { before } from 'node:test';
+import test, { before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdtempSync, mkdirSync, symlinkSync, writeFileSync, readFileSync, readdirSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, symlinkSync, writeFileSync, readFileSync, readdirSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 const ROOT = resolve('.');
-const DASH = /[‐-―−]/;
+const DASH = new RegExp('[\\u2010-\\u2015\\u2212]');
 
 // Build the site in a temp folder. With no fixture, the repo's own content is used.
+const made = [];
+after(() => { for (const d of made) rmSync(d, { recursive: true, force: true }); });
 function build(fixture) {
   const dir = mkdtempSync(join(tmpdir(), 'gpm-guides-'));
-  symlinkSync(join(ROOT, 'scripts'), join(dir, 'scripts'));
+  made.push(dir);
+  symlinkSync(join(ROOT, 'scripts'), join(dir, 'scripts'), 'junction');
   if (!fixture) {
-    symlinkSync(join(ROOT, 'content'), join(dir, 'content'));
+    symlinkSync(join(ROOT, 'content'), join(dir, 'content'), 'junction');
   } else {
     mkdirSync(join(dir, 'content', 'guides'), { recursive: true });
     for (const [name, text] of Object.entries(fixture)) writeFileSync(join(dir, 'content', 'guides', `${name}.md`), text);
@@ -69,7 +72,7 @@ const sections = (html) => [...html.matchAll(/<section class="topic" id="([a-z0-
 const related = (html) => {
   const m = /<nav class="guide-related"[^>]*>([\s\S]*?)<\/nav>/.exec(html);
   if (!m) return null;
-  return { heading: /<h2>([^<]*)<\/h2>/.exec(m[1])[1], slugs: [...m[1].matchAll(/<a href="\/guides\/([a-z0-9-]+)\/">/g)].map((x) => x[1]) };
+  return { heading: /<h2[^>]*>([^<]*)<\/h2>/.exec(m[1])[1], slugs: [...m[1].matchAll(/<a href="\/guides\/([a-z0-9-]+)\/">/g)].map((x) => x[1]) };
 };
 
 test('every guide appears exactly once on /guides/', () => {
@@ -166,7 +169,7 @@ test('front matter on the real guides: topic is one the config knows, minutes is
   for (const g of repoGuides) {
     if (g.topic) assert.ok(known.has(g.topic), `${g.slug}: unknown topic "${g.topic}"`); else loose.push(g.slug);
     if (g.minutes) assert.ok(/^\d+$/.test(g.minutes) && Number(g.minutes) >= 1 && Number(g.minutes) <= 600, `${g.slug}: minutes "${g.minutes}"`);
-    const raw = readFileSync(`content/guides/${g.slug}.md`, 'utf8');
+    const raw = readFileSync(`content/guides/${g.slug}.md`, 'utf8').replace(/\r\n/g, '\n');
     assert.doesNotMatch(/^---\n([\s\S]*?)\n---/.exec(raw)[1], DASH, `${g.slug}: dash in front matter`);
   }
   if (loose.length) t.diagnostic(`No topic yet (listed under More guides): ${loose.join(', ')}`);
@@ -177,6 +180,7 @@ test('the config is sound: topic ids are unique, labels and blurbs have no dashe
   assert.equal(new Set(ids).size, ids.length);
   for (const x of cfg.TOPICS) {
     assert.match(x.id, /^[a-z]+(-[a-z]+)*$/);
+    assert.ok(!['main', 'more', 'topics'].includes(x.id), `${x.id} is used by the page itself`);
     assert.ok(x.label && x.blurb, `${x.id} needs a label and a blurb`);
     assert.doesNotMatch(`${x.label} ${x.blurb}`, DASH);
   }

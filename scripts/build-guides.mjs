@@ -1,8 +1,10 @@
 // Turns content/guides/*.md into /guides/ pages and sitemap.xml. Runs on every Vercel deploy.
 // The engine writes each guide as markdown with front matter (title, description, path, date,
 // optional image and imageAlt), then one "# heading", the body, and "## question" answers.
+// Optional lines the engine does not write yet: topic, minutes and keywords (see scripts/guide-config.mjs and the README).
 import { readdirSync, readFileSync, writeFileSync, mkdirSync, rmSync, existsSync } from "node:fs";
 import { marked } from "marked";
+import { TOPICS, timeLabel } from "./guide-config.mjs";
 
 // www is the primary host: Vercel redirects the bare domain to it, so canonicals and the sitemap name www.
 const SITE = "https://www.gridpulsemedia.com";
@@ -21,7 +23,9 @@ function parse(file, dir = DIR) {
     const kv = /^([A-Za-z0-9]+):\s*(.*)$/.exec(line);
     if (!kv) continue;
     let v = kv[2].trim();
-    if (v.startsWith('"')) v = JSON.parse(v);
+    if (v.startsWith('"')) {
+      try { v = JSON.parse(v); } catch { throw new Error(`${dir}/${file}: ${kv[1]} is not valid quoted text (a quote inside it needs a backslash)`); }
+    }
     meta[kv[1]] = v;
   }
   for (const k of dir === DIR ? ["title", "description", "date"] : ["title", "description"]) if (!meta[k]) throw new Error(`${file}: missing ${k}`);
@@ -92,7 +96,31 @@ const foot = `</main>
 const dateText = (d) => new Date(`${d}T12:00:00Z`).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" });
 
 const files = existsSync(DIR) ? readdirSync(DIR).filter((f) => f.endsWith(".md")) : [];
-const guides = files.map((f) => parse(f)).sort((a, b) => (a.meta.date < b.meta.date ? 1 : -1));
+// Newest first, then by title, so the order never depends on the file system.
+const guides = files.map((f) => parse(f)).sort((a, b) => (a.meta.date < b.meta.date ? 1 : a.meta.date > b.meta.date ? -1 : a.heading.localeCompare(b.heading)));
+
+// topic, minutes and keywords are optional front matter. The engine writes guides without them, so a guide with no
+// topic (or one the config does not know) is listed under "More guides" and named in the build log.
+const TOPIC = new Map(TOPICS.map((t) => [t.id, t]));
+for (const g of guides) {
+  const t = g.meta.topic;
+  g.topic = (t && TOPIC.get(t)) || null;
+  if (!t) console.warn(`guide ${g.slug}: no topic, listed under More guides`);
+  else if (!g.topic) console.warn(`guide ${g.slug}: topic "${t}" is not in scripts/guide-config.mjs, listed under More guides`);
+  const m = g.meta.minutes;
+  g.minutes = m && /^\d+$/.test(m) && Number(m) >= 1 && Number(m) <= 600 ? Number(m) : null;
+  if (!g.minutes) console.warn(`guide ${g.slug}: ${m ? `minutes "${m}" is not a whole number from 1 to 600` : "no minutes"}, no time shown`);
+}
+// Up to three more from the same topic, otherwise the newest others.
+function related(g) {
+  const same = g.topic ? guides.filter((o) => o !== g && o.topic === g.topic).slice(0, 3) : [];
+  if (same.length) return { heading: `More in ${g.topic.label}`, list: same };
+  return { heading: "More guides", list: guides.filter((o) => o !== g).slice(0, 3) };
+}
+const relatedNav = (g) => {
+  const r = related(g);
+  return r.list.length ? `<nav class="guide-related" aria-labelledby="related-heading"><h2 id="related-heading">${esc(r.heading)}</h2><ul>${r.list.map((o) => `<li><a href="/guides/${o.slug}/">${esc(o.heading)}</a></li>`).join("")}</ul></nav>\n` : "";
+};
 
 rmSync("guides", { recursive: true, force: true });
 mkdirSync("guides", { recursive: true });
@@ -111,17 +139,24 @@ for (const g of guides) {
 <p class="guide-crumb"><a href="/guides/">All guides</a></p>
 <h1>${esc(g.heading)}</h1>
 <p class="guide-date"><time datetime="${g.meta.date}">${dateText(g.meta.date)}</time></p>
-${hero}<div class="guide-body">
+${g.minutes ? `<p class="guide-meta">${timeLabel(g.minutes)}</p>\n` : ""}${hero}<div class="guide-body">
 ${g.html}</div>
-<aside class="guide-cta"><h2>Want this handled for you?</h2><p>We plan, write and publish your marketing every month, so none of it falls on you.</p><a class="btn" href="/start/">Get started</a></aside>
+${relatedNav(g)}<aside class="guide-cta"><h2>Want this handled for you?</h2><p>We plan, write and publish your marketing every month, so none of it falls on you.</p><a class="btn" href="/start/">Get started</a></aside>
 </article>
 ${foot}`);
 }
 
+// One section per topic, in the order set in guide-config.mjs. Guides with no known topic go last under "More guides".
+const card = (g) => `<li class="guide-card"><a href="/guides/${g.slug}/"><h3>${esc(g.heading)}</h3></a><p>${esc(g.meta.description)}</p>${g.minutes ? `<p class="guide-meta">${timeLabel(g.minutes)}</p>` : ""}</li>`;
+const topicSection = (id, label, blurb, items) => `<section class="topic" id="${id}">\n<h2>${esc(label)}</h2>\n<p class="topic-blurb">${esc(blurb)}</p>\n<ul class="guide-cards">\n${items.map(card).join("\n")}\n</ul>\n</section>`;
+const groups = [
+  ...TOPICS.map((t) => ({ id: t.id, label: t.label, blurb: t.blurb, items: guides.filter((g) => g.topic === t) })),
+  { id: "more", label: "More guides", blurb: "Newer guides that have not been sorted into a topic yet.", items: guides.filter((g) => !g.topic) },
+].filter((s) => s.items.length);
 const list = guides.length
-  ? `<ul class="guide-list">\n${guides.map((g) => `<li><a href="/guides/${g.slug}/"><h2>${esc(g.heading)}</h2></a><p>${esc(g.meta.description)}</p><p class="guide-date"><time datetime="${g.meta.date}">${dateText(g.meta.date)}</time></p></li>`).join("\n")}\n</ul>`
+  ? `<div class="topics">\n${groups.map((s) => topicSection(s.id, s.label, s.blurb, s.items)).join("\n")}\n</div>`
   : `<p class="guide-empty">The first guides are on the way.</p>`;
-writeFileSync("guides/index.html", `${head("Local Business Marketing Guides | Grid Pulse Media", "Plain-language guides for local business owners on getting found online, keeping listings matching and posting on a 90-day plan.", "/guides/")}<section class="wrap guide">
+writeFileSync("guides/index.html", `${head("Local Business Marketing Guides | Grid Pulse Media", "Plain-language guides for local business owners on getting found online, keeping listings matching and posting on a 90-day plan.", "/guides/")}<section class="wrap guide guide-index">
 <h1>Guides</h1>
 <p class="lede">Plain-language help for local business owners on getting found online and keeping your marketing going.</p>
 <div class="guide-body"><p>These guides cover the everyday parts of marketing a local business: setting up and keeping your Google Business Profile accurate, getting found when customers search nearby, asking for and answering reviews, deciding how often to post, and knowing what to write on your blog. Each one is written for owners who are short on time, with plain steps you can act on this week.</p><p>If you would rather not do any of it yourself, Grid Pulse Media plans, writes and posts all of this for you on a 90-day plan. See <a href="/services/">what we run for you</a> or <a href="/start/">get started</a>.</p></div>
