@@ -2,7 +2,8 @@
 // Topic, minutes and keywords are optional front matter. A guide without them (the engine writes guides without them)
 // still has to build, show up on /guides/ and get related links, so the fallback is tested with a fixture.
 //
-// Learning paths (ordered guides with a page of their own) are tested here too: the real config against the real guides,
+// The search box and chips on /guides/ ship hidden and only appear when the page script runs, so that markup is checked here too
+// (the filter itself is in tests/guides-filter.test.js). Learning paths (ordered guides with a page of their own) are tested here too: the real config against the real guides,
 // and a fixture with its own PATHS for the cases the real ones do not have (a missing slug, a guide in two paths).
 //
 // Each build runs in its own temp folder, so this file never fights tests/services.test.js over the guides/ folder
@@ -97,7 +98,7 @@ const repoGuides = GUIDE_FILES.map((f) => ({ slug: f.replace(/\.md$/, ''), ...fr
 
 // The sections on /guides/: id, and the guide links inside each.
 const sections = (html) => [...html.matchAll(/<section class="topic" id="([a-z0-9-]+)"[^>]*>([\s\S]*?)<\/section>/g)]
-  .map((m) => ({ id: m[1], html: m[2], slugs: [...m[2].matchAll(/<li class="guide-card"><a href="\/guides\/([a-z0-9-]+)\/">/g)].map((x) => x[1]) }));
+  .map((m) => ({ id: m[1], html: m[2], slugs: [...m[2].matchAll(/<li class="guide-card"[^>]*><a href="\/guides\/([a-z0-9-]+)\/">/g)].map((x) => x[1]) }));
 const related = (html) => {
   const m = /<nav class="guide-related"[^>]*>([\s\S]*?)<\/nav>/.exec(html);
   if (!m) return null;
@@ -380,4 +381,87 @@ test('a guide called "paths" would collide with /guides/paths/, so the build sto
   assert.notEqual(reserved.status, 0);
   assert.match(reserved.log, /paths/);
   assert.match(reserved.log, /reserved|collide|cannot/i);
+});
+
+// ---- Search and filter controls on /guides/ ----
+
+const finderOf = (html) => /<div class="guide-finder"([^>]*)>/.exec(html);
+const timeChips = (html) => [...html.matchAll(/<button type="button" class="chip" data-time="(any|\d+)" aria-pressed="(true|false)">([^<]*)<\/button>/g)].map((m) => ({ time: m[1], pressed: m[2] === 'true', text: m[3] }));
+const topicChips = (html) => [...html.matchAll(/<button type="button" class="chip" data-topic="([a-z0-9-]+)"(?: data-label="([^"]*)")? aria-pressed="(true|false)">([^<]*)<\/button>/g)].map((m) => ({ topic: m[1], label: m[2] ?? null, pressed: m[3] === 'true', text: m[4] }));
+const cardAttrs = (html) => [...html.matchAll(/<li class="guide-card"([^>]*)><a href="\/guides\/([a-z0-9-]+)\/">/g)]
+  .map((m) => ({ slug: m[2], topic: /data-topic="([^"]*)"/.exec(m[1])?.[1] ?? null, minutes: /data-minutes="([^"]*)"/.exec(m[1])?.[1] ?? null, keywords: /data-keywords="([^"]*)"/.exec(m[1])?.[1] ?? null }));
+
+test('the time chips are in the config: up to 15 minutes, an hour, an afternoon, each reaching at least one real guide', () => {
+  assert.ok(Array.isArray(cfg.TIME_CHIPS));
+  assert.deepEqual(cfg.TIME_CHIPS.map((c) => c.minutes), [15, 60, 180]);
+  for (const c of cfg.TIME_CHIPS) {
+    assert.ok(Number.isInteger(c.minutes) && c.minutes > 0 && c.label, 'a minutes number and a label');
+    assert.doesNotMatch(c.label, DASH);
+    assert.ok(repoGuides.some((g) => g.minutes && Number(g.minutes) <= c.minutes), `no guide fits "${c.label}"`);
+  }
+  for (const x of cfg.TOPICS) if (x.short) { assert.ok(x.short.length <= 20, `${x.id}: short name is long for a chip`); assert.doesNotMatch(x.short, DASH); }
+});
+
+test('/guides/ ships the search box and chips hidden, so nothing dead shows when the script does not run', () => {
+  const html = repo.read('guides/index.html');
+  const finder = finderOf(html);
+  assert.ok(finder, 'the controls block is there');
+  assert.match(finder[1], /\bhidden\b/);
+  assert.equal([...html.matchAll(/<input type="search"/g)].length, 1);
+  assert.match(html, /<label for="guide-search"[^>]*>[^<]+<\/label>/);
+  assert.match(html, /<input type="search" id="guide-search" class="finder-input"/);
+  assert.match(html, /<p class="finder-status" role="status"><\/p>/);
+  assert.match(html, /<button type="button" class="finder-clear" hidden>[^<]+<\/button>/);
+});
+
+test('the time chips are Any time (on) then the chips from the config, and the topic chips are All (on) then each topic that has guides', () => {
+  const html = repo.read('guides/index.html');
+  assert.deepEqual(timeChips(html), [{ time: 'any', pressed: true, text: 'Any time' }, ...cfg.TIME_CHIPS.map((c) => ({ time: String(c.minutes), pressed: false, text: c.label }))]);
+  const used = cfg.TOPICS.filter((x) => repoGuides.some((g) => g.topic === x.id));
+  assert.deepEqual(topicChips(html), [{ topic: 'all', label: null, pressed: true, text: 'All' }, ...used.map((x) => ({ topic: x.id, label: x.label, pressed: false, text: x.short || x.label }))]);
+});
+
+test('every guide card says its topic, minutes and keywords, so the page script can filter without re-reading the guides', () => {
+  const html = repo.read('guides/index.html');
+  const cards = cardAttrs(html);
+  assert.equal(cards.length, repoGuides.length);
+  for (const g of repoGuides) {
+    const c = cards.find((x) => x.slug === g.slug);
+    assert.equal(c.topic, g.topic || 'more', g.slug);
+    assert.equal(c.minutes, g.minutes || null, g.slug);
+    assert.equal(c.keywords, g.keywords || null, g.slug);
+  }
+  const f = cardAttrs(fx.read('guides/index.html'));
+  assert.deepEqual(f.find((x) => x.slug === 'reviews-a'), { slug: 'reviews-a', topic: 'reviews', minutes: '20', keywords: 'gmb, google my business' });
+  assert.deepEqual(f.find((x) => x.slug === 'engine-shaped'), { slug: 'engine-shaped', topic: 'more', minutes: null, keywords: null });
+  assert.deepEqual(f.find((x) => x.slug === 'typo-topic'), { slug: 'typo-topic', topic: 'more', minutes: '10', keywords: 'gmb, google my business' });
+});
+
+test('the controls come first, then Start here, then the topics, and the page loads its script', () => {
+  const html = repo.read('guides/index.html');
+  assert.ok(html.indexOf('class="guide-finder"') < html.indexOf('class="start-here"'));
+  assert.ok(html.indexOf('class="start-here"') < html.indexOf('class="topics"'));
+  assert.match(html, /<section class="start-here" id="start"/);
+  assert.match(html, /<script type="module" src="\/guides\.js"><\/script>/);
+});
+
+test('only /guides/ gets the controls and the script, not a guide, a path page or the services list', () => {
+  for (const p of ['guides/how-to-answer-a-google-review/index.html', `guides/paths/${cfg.PATHS[0].id}/index.html`, 'services/index.html', 'faq/index.html']) {
+    const html = repo.read(p);
+    assert.ok(!html.includes('guides.js'), p);
+    assert.ok(!html.includes('guide-finder'), p);
+  }
+});
+
+test('the intro text and its links to /services/ and /start/ are still on /guides/, after the topics', () => {
+  const html = repo.read('guides/index.html');
+  assert.match(html, /<a href="\/services\/">what we run for you<\/a> or <a href="\/start\/">get started<\/a>/);
+  assert.ok(html.indexOf('what we run for you') > html.indexOf('class="topics"'));
+  assert.match(html, /<p class="lede">/);
+});
+
+test('with no guides there are no controls to show', () => {
+  const none = build({});
+  assert.equal(none.status, 0, none.log);
+  assert.equal(finderOf(none.read('guides/index.html')), null);
 });

@@ -39,3 +39,27 @@ test('tap targets on phones are at least 44 px and the dialog fits a phone scree
   assert.match(css, /\.site-footer a \{[^}]*min-height: 44px/);
   assert.match(css, /max-height: calc\(100dvh - 32px\)/);
 });
+
+test('the search box, the chips and the clear button are at least 44 px tall, and the search text is at least 16 px so phones do not zoom', () => {
+  assert.match(css, /\.chip \{[^}]*min-height: 44px/);
+  assert.match(css, /\.finder-input \{[^}]*min-height: 44px/);
+  assert.match(css, /\.finder-input \{[^}]*font-size: (1[6-9]|[2-9]\d)px/);
+  assert.match(css, /\.finder-clear \{[^}]*min-height: 44px/);
+});
+
+test('the step line and the Previous and Next links on a guide in a path are at least 44 px tall', () => {
+  assert.match(css, /\.guide-path a \{[^}]*min-height: 44px/);
+  assert.match(css, /\.guide-path-nav a \{[^}]*min-height: 44px/);
+});
+
+test('cards, sections and controls the page script hides stay hidden (their display rules must not beat the hidden attribute)', () => {
+  for (const sel of ['.guide-finder', '.guide-card', '.topic', '.start-here', '.finder-clear']) {
+    const re = new RegExp(sel.replace('.', '\\.') + '\\[hidden\\][^{]*\\{[^}]*display: none');
+    assert.match(css, re, sel);
+  }
+});
+
+test('the chips wrap on a phone instead of running off the side, and nothing in the controls has a fixed width', () => {
+  assert.match(css, /\.finder-chips \{[^}]*flex-wrap: wrap/);
+  assert.doesNotMatch(css, /\.(chip|finder-input|guide-finder|finder-chips)\s*\{[^}]*[^-]width: \d+px/);
+});
