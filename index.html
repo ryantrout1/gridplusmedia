@@ -342,9 +342,9 @@
   var slides = document.querySelectorAll('[data-slide]');
   var dots = document.querySelectorAll('.hero-dot');
   var hero = document.querySelector('.hero');
-  if (!slides.length || !hero) return;
-  var cur = 0, timer = null;
-  var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var bar = document.querySelector('.hero-dots');
+  if (!slides.length || !hero || !bar) return;
+  var cur = 0;
   function show(n) {
     cur = (n + slides.length) % slides.length;
     for (var i = 0; i < slides.length; i++) {
@@ -355,17 +355,18 @@
       if (on) dots[i].setAttribute('aria-current', 'true'); else dots[i].removeAttribute('aria-current');
     }
   }
-  function stop() { if (timer) { clearInterval(timer); timer = null; } }
-  function start() { if (still || timer) return; timer = setInterval(function () { show(cur + 1); }, 7000); }
+  // The dot's fill animation is the timer: when it finishes, move on.
+  bar.addEventListener('animationend', function () { show(cur + 1); });
   for (var i = 0; i < dots.length; i++) {
-    (function (n) { dots[n].addEventListener('click', function () { show(n); stop(); }); })(i);
+    (function (n) { dots[n].addEventListener('click', function () { show(n); }); })(i);
   }
-  hero.addEventListener('mouseenter', stop);
-  hero.addEventListener('mouseleave', start);
-  hero.addEventListener('focusin', stop);
-  document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else start(); });
+  function pause() { hero.classList.add('is-paused'); }
+  function resume() { hero.classList.remove('is-paused'); }
+  hero.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') pause(); });
+  hero.addEventListener('pointerleave', resume);
+  hero.addEventListener('focusin', function (e) { if (e.target.matches && e.target.matches(':focus-visible')) pause(); });
+  hero.addEventListener('focusout', resume);
   show(0);
-  start();
 })();
 </script>
 </body>
