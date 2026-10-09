@@ -660,3 +660,23 @@ html:not(.js) .lane-us svg path { stroke-dashoffset: 0; }
   .lane-us svg path { stroke-dashoffset: 0 !important; }
   .hero-dot.is-active::after { animation: none; transform: scaleX(1); }
 }
+
+/* Flip cards: plain English on the front, industry terms on the back */
+.inc-card.has-flip { padding: 0; display: flex; perspective: 1200px; }
+.flip-inner { display: block; flex: 1; min-width: 0; }
+.flip-face { padding: 26px 28px; display: flex; flex-direction: column; gap: 10px; border-radius: 17px; }
+.flip-back { background: var(--sand); border-top: 1px solid var(--line); }
+.flip-back .eyebrow { color: var(--clay); }
+.flip-btn { align-self: flex-start; min-height: 44px; margin-top: auto; padding: 0; border: 0; background: none; font: inherit; font-size: 16px; font-weight: 700; color: var(--clay); cursor: pointer; text-decoration: underline; text-underline-offset: 4px; }
+.flip-btn:hover { color: var(--ink); }
+.flip-btn:focus-visible { outline: 3px solid var(--forest); outline-offset: 3px; border-radius: 4px; }
+html:not(.js) .flip-btn { display: none; }
+.js .flip-inner { display: grid; transform-style: preserve-3d; transition: transform 0.65s cubic-bezier(0.3, 0.7, 0.2, 1); }
+.js .flip-face { grid-area: 1 / 1; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-top: 0; }
+.js .flip-front { background: #fff; }
+.js .flip-back { transform: rotateY(180deg); }
+.js .has-flip.is-flipped .flip-inner { transform: rotateY(180deg); }
+.flip-front .flip-btn { margin-top: auto; padding-top: 8px; }
+@media (prefers-reduced-motion: reduce) {
+  .js .flip-inner { transition: none; }
+}

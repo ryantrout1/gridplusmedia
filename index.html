@@ -193,42 +193,104 @@
         </ul>
         <p class="inc-line">A plan without a goal is just a posting calendar.</p>
       </article>
-      <article class="inc-card">
-        <h3>Show up in nearby searches</h3>
-        <p>When someone nearby searches for what you do, you show up and the details are right.</p>
-        <ul class="inc-list">
-          <li>A complete, active Google profile</li>
-          <li>Hours and address matching on every directory</li>
-          <li>Your keywords tracked, including AI recommendations</li>
-        </ul>
+      <article class="inc-card has-flip">
+        <div class="flip-inner">
+          <div class="flip-face flip-front">
+            <h3>Show up in nearby searches</h3>
+            <p>When someone nearby searches for what you do, you show up and the details are right.</p>
+            <ul class="inc-list">
+              <li>A complete, active Google profile</li>
+              <li>Hours and address matching on every directory</li>
+              <li>Your keywords tracked, including AI recommendations</li>
+            </ul>
+            <button type="button" class="flip-btn" aria-expanded="false">How others describe this</button>
+          </div>
+          <div class="flip-face flip-back" aria-hidden="true">
+            <span class="eyebrow">In industry terms</span>
+            <h3>Local SEO</h3>
+            <ul class="inc-list">
+            <li>Google Business Profile setup and optimization</li>
+            <li>Citation and directory listing management, with your name, address and phone kept consistent</li>
+            <li>Keyword research and rank tracking, including AI search visibility</li>
+            <li>Keywords chosen for your whole business, with no package limits</li>
+            </ul>
+            <button type="button" class="flip-btn">Back to plain English</button>
+          </div>
+        </div>
       </article>
-      <article class="inc-card">
-        <h3>A website that looks like you</h3>
-        <p>Designed around your business, not a template, and kept current.</p>
-        <ul class="inc-list">
-          <li>Custom design, a couple of rounds of changes</li>
-          <li>Pages people search for</li>
-          <li>Kept current after launch</li>
-        </ul>
+      <article class="inc-card has-flip">
+        <div class="flip-inner">
+          <div class="flip-face flip-front">
+            <h3>A website that looks like you</h3>
+            <p>Designed around your business, not a template, and kept current.</p>
+            <ul class="inc-list">
+              <li>Custom design, a couple of rounds of changes</li>
+              <li>Pages people search for</li>
+              <li>Kept current after launch</li>
+            </ul>
+            <button type="button" class="flip-btn" aria-expanded="false">How others describe this</button>
+          </div>
+          <div class="flip-face flip-back" aria-hidden="true">
+            <span class="eyebrow">In industry terms</span>
+            <h3>Website design and on-page SEO</h3>
+            <ul class="inc-list">
+            <li>Custom website design with revision rounds</li>
+            <li>Pages built around your target keywords (on-page SEO)</li>
+            <li>Ongoing website updates and maintenance</li>
+            </ul>
+            <button type="button" class="flip-btn">Back to plain English</button>
+          </div>
+        </div>
       </article>
-      <article class="inc-card">
-        <h3>You never have to think up a post</h3>
-        <p>Posts and articles written to your plan. You review and approve everything before it goes out.</p>
-        <ul class="inc-list">
-          <li>Posts about your specials, events and news</li>
-          <li>Articles on a steady schedule</li>
-          <li>Every post starts from what you tell us</li>
-          <li>You see it all ahead of time and approve it</li>
-        </ul>
+      <article class="inc-card has-flip">
+        <div class="flip-inner">
+          <div class="flip-face flip-front">
+            <h3>You never have to think up a post</h3>
+            <p>Posts and articles written to your plan. You review and approve everything before it goes out.</p>
+            <ul class="inc-list">
+              <li>Posts about your specials, events and news</li>
+              <li>Articles on a steady schedule</li>
+              <li>Every post starts from what you tell us</li>
+              <li>You see it all ahead of time and approve it</li>
+            </ul>
+            <button type="button" class="flip-btn" aria-expanded="false">How others describe this</button>
+          </div>
+          <div class="flip-face flip-back" aria-hidden="true">
+            <span class="eyebrow">In industry terms</span>
+            <h3>Content and social media management</h3>
+            <ul class="inc-list">
+            <li>Content calendar built from your 90-day plan</li>
+            <li>Social posts and blog articles written for you</li>
+            <li>Scheduling and publishing</li>
+            <li>Client approval workflow before anything goes live</li>
+            </ul>
+            <button type="button" class="flip-btn">Back to plain English</button>
+          </div>
+        </div>
       </article>
-      <article class="inc-card">
-        <h3>Every review answered</h3>
-        <p>A reply in your voice for every review and comment. You approve it first.</p>
-        <ul class="inc-list">
-          <li>A reply written for every review and comment</li>
-          <li>You approve each one first</li>
-          <li>Stop approving whenever you're comfortable</li>
-        </ul>
+      <article class="inc-card has-flip">
+        <div class="flip-inner">
+          <div class="flip-face flip-front">
+            <h3>Every review answered</h3>
+            <p>A reply in your voice for every review and comment. You approve it first.</p>
+            <ul class="inc-list">
+              <li>A reply written for every review and comment</li>
+              <li>You approve each one first</li>
+              <li>Stop approving whenever you're comfortable</li>
+            </ul>
+            <button type="button" class="flip-btn" aria-expanded="false">How others describe this</button>
+          </div>
+          <div class="flip-face flip-back" aria-hidden="true">
+            <span class="eyebrow">In industry terms</span>
+            <h3>Reputation management</h3>
+            <ul class="inc-list">
+            <li>Review response management, written in your voice</li>
+            <li>Comment and engagement replies</li>
+            <li>Owner approval workflow, which you can relax over time</li>
+            </ul>
+            <button type="button" class="flip-btn">Back to plain English</button>
+          </div>
+        </div>
       </article>
     </div>
   </div>
@@ -356,6 +418,27 @@
   hero.addEventListener('focusin', function (e) { if (e.target.matches && e.target.matches(':focus-visible')) pause(); });
   hero.addEventListener('focusout', resume);
   show(0);
+})();
+</script>
+<script>
+(function () {
+  var cards = document.querySelectorAll('.has-flip');
+  Array.prototype.forEach.call(cards, function (card) {
+    var front = card.querySelector('.flip-front'), back = card.querySelector('.flip-back');
+    var fb = front.querySelector('.flip-btn'), bb = back.querySelector('.flip-btn');
+    function set(flipped) {
+      card.classList.toggle('is-flipped', flipped);
+      fb.setAttribute('aria-expanded', flipped ? 'true' : 'false');
+      front.setAttribute('aria-hidden', flipped ? 'true' : 'false');
+      back.setAttribute('aria-hidden', flipped ? 'false' : 'true');
+      if (flipped) { front.setAttribute('inert', ''); back.removeAttribute('inert'); }
+      else { back.setAttribute('inert', ''); front.removeAttribute('inert'); }
+      setTimeout(function () { (flipped ? bb : fb).focus({ preventScroll: true }); }, 350);
+    }
+    back.setAttribute('inert', '');
+    fb.addEventListener('click', function () { set(true); });
+    bb.addEventListener('click', function () { set(false); });
+  });
 })();
 </script>
 </body>
