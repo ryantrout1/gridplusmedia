@@ -82,13 +82,13 @@ test('the plan band says it is one plan across the website, Google profile and s
   assert.doesNotMatch(band[1] + text, /everywhere/i);
 });
 
-// The home page carries one short why line under the hero. No dashes in it.
-test('home page has the why line and no dashes in it', () => {
+// The home page leads with the why as its headline. No dashes in it.
+test('home page headline is the why line and has no dashes', () => {
   const html = readFileSync('index.html', 'utf8');
-  const m = /<p class="why-line">([^<]+)<\/p>/.exec(html);
-  assert.ok(m, 'why line missing');
+  const m = /<h1>([^<]+)<\/h1>/.exec(html);
+  assert.ok(m, 'h1 missing');
   assert.match(m[1], /Good businesses shouldn't disappear because marketing is hard\./);
   assert.ok(!/[‒–—―]/.test(m[1]));
-  assert.ok(html.indexOf('class="why"') > html.indexOf('class="hero"'));
-  assert.ok(html.indexOf('class="why"') < html.indexOf('class="channels"'));
+  assert.ok(html.indexOf('<h1>') > html.indexOf('class="hero"'));
+  assert.ok(html.indexOf('<h1>') < html.indexOf('class="channels"'));
 });

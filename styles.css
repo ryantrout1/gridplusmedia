@@ -221,9 +221,6 @@ p { margin: 0; }
 }
 
 /* Channels */
-.why { padding: clamp(40px, 6vw, 64px) 0 8px; }
-.why-line { margin: 0 auto; max-width: 720px; text-align: center; font-family: var(--serif); font-size: clamp(22px, 3vw, 28px); line-height: 1.3; color: var(--forest); }
-.why-sub { margin: 14px auto 0; max-width: 560px; text-align: center; font-size: 17px; line-height: 1.55; color: var(--muted); }
 .channels { padding: 40px 0 56px; border-bottom: 1px solid var(--line); }
 .channels .eyebrow { color: var(--muted); margin-bottom: 20px; display: block; }
 .channel-grid {
@@ -612,37 +609,54 @@ p { margin: 0; }
 .hero.is-paused .hero-dot::after { animation-play-state: paused; }
 @keyframes hero-fill { to { transform: scaleX(1); } }
 .hero-dot:focus-visible { outline: 3px solid var(--forest); outline-offset: -4px; border-radius: 8px; }
-/* Entrance: copy rises in, card follows, details land one by one */
+
+/* Entrance: copy rises in, card follows, each part lands in turn */
 .js .hero-slide .hero-copy > *, .js .hero-slide .tell { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1); }
 .js .hero-slide.is-active .hero-copy > *, .js .hero-slide.is-active .tell { opacity: 1; transform: none; }
 .js .hero-slide.is-active .hero-copy > :nth-child(1) { transition-delay: 0.2s; }
 .js .hero-slide.is-active .hero-copy > :nth-child(2) { transition-delay: 0.32s; }
 .js .hero-slide.is-active .hero-copy > :nth-child(3) { transition-delay: 0.44s; }
 .js .hero-slide.is-active .tell { transition-delay: 0.3s; }
-.js .hero-slide .tell-note, .js .hero-slide .tell-list li, .js .hero-slide .tell-rows li, .js .hero-slide .tell-foot { opacity: 0; transform: translateY(8px); transition: opacity 0.5s ease, transform 0.5s ease; }
-.js .hero-slide.is-active .tell-note, .js .hero-slide.is-active .tell-list li, .js .hero-slide.is-active .tell-rows li, .js .hero-slide.is-active .tell-foot { opacity: 1; transform: none; }
-.js .hero-slide.is-active .tell-note { transition-delay: 0.55s; }
-.js .hero-slide.is-active :is(.tell-list, .tell-rows) li:nth-child(1) { transition-delay: 0.7s; }
-.js .hero-slide.is-active :is(.tell-list, .tell-rows) li:nth-child(2) { transition-delay: 0.82s; }
-.js .hero-slide.is-active :is(.tell-list, .tell-rows) li:nth-child(3) { transition-delay: 0.94s; }
-.js .hero-slide.is-active :is(.tell-list, .tell-rows) li:nth-child(4) { transition-delay: 1.06s; }
-.js .hero-slide.is-active .tell-foot { transition-delay: 1.2s; }
-/* Check marks draw themselves */
-.tell-list svg path { stroke-dasharray: 24; stroke-dashoffset: 24; transition: stroke-dashoffset 0.5s ease; }
-.js .hero-slide.is-active .tell-list li:nth-child(1) svg path { stroke-dashoffset: 0; transition-delay: 0.95s; }
-.js .hero-slide.is-active .tell-list li:nth-child(2) svg path { stroke-dashoffset: 0; transition-delay: 1.07s; }
-.js .hero-slide.is-active .tell-list li:nth-child(3) svg path { stroke-dashoffset: 0; transition-delay: 1.19s; }
-.js .hero-slide.is-active .tell-list li:nth-child(4) svg path { stroke-dashoffset: 0; transition-delay: 1.31s; }
-html:not(.js) .tell-list svg path { stroke-dashoffset: 0; }
-.tell-list-one { grid-template-columns: minmax(0, 1fr); }
-.tell-rows { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
-.tell-rows li { display: flex; align-items: center; gap: 14px; border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; font-size: 17px; }
-.tell-day { font-weight: 700; color: var(--muted); min-width: 36px; }
-.tell-what { flex: 1; }
-.tell-chip { font-size: 14px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: var(--sand); color: var(--clay); white-space: nowrap; }
-.tell-chip.is-ok { background: #E3EBE4; color: var(--forest); }
+.js .hero-slide .r { opacity: 0; transform: translateY(8px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.js .hero-slide.is-active .r { opacity: 1; transform: none; transition-delay: calc(0.5s + var(--i, 0) * 0.14s); }
+
+/* Slide 1: goal chips and a week of bars */
+.goals { display: flex; flex-wrap: wrap; gap: 10px; }
+.goal { padding: 9px 16px; border: 1px solid var(--line); border-radius: 999px; font-size: 17px; background: var(--cream); color: var(--muted); transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease; }
+.js .hero-slide.is-active .goal.is-on { background: var(--forest); border-color: var(--forest); color: var(--cream); transition-delay: 1.3s; }
+html:not(.js) .goal.is-on { background: var(--forest); border-color: var(--forest); color: var(--cream); }
+.weekbars { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 10px; align-items: end; height: 130px; padding-top: 8px; }
+.wb { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 6px; height: 100%; }
+.wb i { display: block; width: 100%; max-width: 34px; height: var(--h); background: var(--line); border-radius: 8px 8px 3px 3px; transform-origin: bottom; }
+.wb em { font-style: normal; font-size: 13px; font-weight: 700; color: var(--muted); }
+.wb.slow i { background: repeating-linear-gradient(45deg, var(--clay) 0 5px, #D98A62 5px 10px); }
+.wb.slow em { color: var(--clay); }
+.js .hero-slide .wb i { transform: scaleY(0.05); transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.js .hero-slide.is-active .wb i { transform: none; transition-delay: calc(0.9s + var(--k) * 0.07s); }
+
+/* Slide 2: you and us lanes */
+.lanes { display: flex; flex-direction: column; gap: 10px; }
+.lane-head, .lane { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; }
+.lane-head span { font-size: 14px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--muted); padding-left: 4px; }
+.lane-head span:last-child { color: var(--forest); }
+.lane span { border-radius: 12px; padding: 14px 16px; font-size: 17px; line-height: 1.3; display: flex; align-items: center; gap: 8px; }
+.lane-you { background: var(--sand); color: var(--muted); }
+.lane-us { background: #E3EBE4; color: var(--forest); font-weight: 600; }
+.lane-us svg { width: 18px; height: 18px; flex: none; }
+
+/* Slide 3: weekly note */
+.receipt { background: var(--cream); border-radius: 14px; padding: 20px 22px; display: flex; flex-direction: column; gap: 14px; }
+.receipt > b { font-family: var(--serif); font-size: 26px; line-height: 1.2; }
+.receipt ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.receipt li { display: flex; align-items: baseline; gap: 8px; font-size: 17px; }
+.receipt li i { flex: 1; border-bottom: 2px dotted var(--line); transform: translateY(-4px); }
+.receipt li b { font-family: var(--serif); font-size: 20px; color: var(--forest); }
+
+.tell-list svg path, .lane-us svg path { stroke-dasharray: 24; stroke-dashoffset: 24; transition: stroke-dashoffset 0.5s ease; }
+.js .hero-slide.is-active .lane-us svg path { stroke-dashoffset: 0; transition-delay: calc(0.75s + var(--i, 0) * 0.14s); }
+html:not(.js) .lane-us svg path { stroke-dashoffset: 0; }
 @media (prefers-reduced-motion: reduce) {
   .js .hero-slide, .js .hero-slide.is-active, .js .hero-slide *, .js .hero-slide.is-active * { transition: none !important; transform: none !important; }
-  .tell-list svg path { stroke-dashoffset: 0 !important; }
+  .lane-us svg path { stroke-dashoffset: 0 !important; }
   .hero-dot.is-active::after { animation: none; transform: scaleX(1); }
 }
