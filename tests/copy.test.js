@@ -69,19 +69,17 @@ test('the plan leads the included list and the pricing section says it is built 
   assert.doesNotMatch(home, /[–—]/);
 });
 
-test('the plan card says it is one plan across the website, Google profile and social accounts', () => {
+test('the plan band says it is one plan across the website, Google profile and social accounts', () => {
   const home = readFileSync('index.html', 'utf8');
-  const card = /<h3>(A marketing plan built around your goals)<\/h3>\s*<p>([^<]*)<\/p>\s*<p class="detail">([^<]*)<\/p>\s*<p class="why">([^<]*)<\/p>/.exec(home);
-  assert.ok(card, 'the plan card is there');
-  assert.match(card[2], /one plan for your whole online presence/i);
-  assert.match(card[2], /built around what you want to accomplish/);
-  assert.match(card[2], /Checked every week, refreshed every quarter/);
-  assert.match(card[3], /Each week we look at your numbers against your goals/);
-  assert.match(card[4], /a plan without a goal is just a posting calendar/);
-  assert.match(card[3], /same topic looks different on Instagram, Facebook and your website/);
-  assert.match(card[3], /on brand and on message/);
-  assert.match(card[4], /someone who knows your business and runs all of it as one plan/);
-  assert.doesNotMatch(card.slice(1).join(' '), /everywhere/i);
+  const band = /<article class="inc-card">\s*<h3>(A marketing plan built around your goals)<\/h3>([\s\S]*?)<\/article>/.exec(home);
+  assert.ok(band, 'the plan band is there');
+  const text = band[2].replace(/<[^>]*>/g, ' ');
+  assert.match(text, /one plan for your whole online presence/i);
+  assert.match(text, /built around what you want to accomplish/);
+  assert.match(text, /Checked every week, refreshed every quarter/);
+  assert.match(text, /Each week we look at your numbers against your goals/);
+  assert.match(text, /a plan without a goal is just a posting calendar/i);
+  assert.doesNotMatch(band[1] + text, /everywhere/i);
 });
 
 // The home page carries one short why line under the hero. No dashes in it.

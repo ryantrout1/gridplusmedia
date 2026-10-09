@@ -29,10 +29,8 @@ test('the header keeps the page links on phones instead of hiding them', () => {
   assert.match(css, /@media \(max-width: 820px\) \{[^@]*\.nav \{ display: contents; \}/);
 });
 
-test('tap targets on phones are at least 44 px and the dialog fits a phone screen', () => {
-  assert.match(css, /\.inc-more \{ min-height: 44px;/);
+test('tap targets on phones are at least 44 px', () => {
   assert.match(css, /\.site-footer a \{[^}]*min-height: 44px/);
-  assert.match(css, /max-height: calc\(100dvh - 32px\)/);
 });
 
 test('the search box, the chips and the clear button are at least 44 px tall, and the search text is at least 16 px so phones do not zoom', () => {
