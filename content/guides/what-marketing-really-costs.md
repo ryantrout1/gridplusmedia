@@ -47,7 +47,7 @@ Be honest about the first one. It is usually the biggest.
 
 ## What we charge
 
-At Grid Pulse Media it is $349 a month plus a one time $699 setup. There is a three month minimum, and after that it is month to month. Your website is yours to keep either way.
+At Grid Pulse Media it is $349 a month plus a one time $699 setup. Start with three months, and after that it is month to month. Each quarter we meet for an hour to plan the next one, and you approve the plan before it starts. Your website is yours to keep either way.
 
 The monthly price pays for a marketing plan built around your goals to run:
 
