@@ -47,12 +47,12 @@ test('the 90-day plan FAQ leads with what the plan is and how the channels work 
 
 test('the home page does not say the 90-day plan is built on the setup call, and says what the plan is', () => {
   const home = readFileSync('index.html', 'utf8');
-  const step = /<h3>(Setup call[^<]*)<\/h3>\s*<p>([^<]*)<\/p>/.exec(home);
+  const step = /<h3>(A call, then your[\s\S]*?)<\/h3>\s*<p>([^<]*)<\/p>/.exec(home);
   assert.ok(step, 'step 1 is there');
-  assert.equal(step[1], 'Setup call, then your 90-day marketing plan');
+  assert.equal(step[1].replace(/<[^>]*>/g, ''), 'A call, then your 90-day plan');
   assert.doesNotMatch(step[2], /then map out the next 90 days/);
-  assert.match(step[2], /Once you start, we build one plan for your whole online presence/);
-  assert.match(step[2], /website, Google profile, Instagram and Facebook, all working together/);
+  assert.match(step[2], /Once you start, we write a plan for your whole online presence/);
+  assert.match(step[2], /You read it and ask for changes/);
   assert.doesNotMatch(step[2], /everywhere/i);
   for (const re of ON_THE_CALL) assert.doesNotMatch(home, re);
 });
