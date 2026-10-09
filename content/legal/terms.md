@@ -17,7 +17,7 @@ We use AI tools to help write and organize the work. Everything starts from fact
 
 ## Price and billing
 
-The price is $349 per month plus a one-time $699 setup fee, unless we agree something different with you in writing. The setup fee covers your custom website and the setup call.
+The price is $349 per month plus a one-time $999 setup fee, unless we agree something different with you in writing. The setup fee covers your custom website and the setup call.
 
 ## Minimum term and canceling
 
