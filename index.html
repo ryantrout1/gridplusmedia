@@ -203,7 +203,7 @@
               <li>Hours and address matching on every directory</li>
               <li>Your keywords tracked, including AI recommendations</li>
             </ul>
-            <button type="button" class="flip-btn" aria-expanded="false">How others describe this</button>
+            <button type="button" class="flip-btn" aria-expanded="false">See industry terms</button>
           </div>
           <div class="flip-face flip-back" aria-hidden="true">
             <span class="eyebrow">In industry terms</span>
@@ -228,7 +228,7 @@
               <li>Pages people search for</li>
               <li>Kept current after launch</li>
             </ul>
-            <button type="button" class="flip-btn" aria-expanded="false">How others describe this</button>
+            <button type="button" class="flip-btn" aria-expanded="false">See industry terms</button>
           </div>
           <div class="flip-face flip-back" aria-hidden="true">
             <span class="eyebrow">In industry terms</span>
@@ -253,7 +253,7 @@
               <li>Every post starts from what you tell us</li>
               <li>You see it all ahead of time and approve it</li>
             </ul>
-            <button type="button" class="flip-btn" aria-expanded="false">How others describe this</button>
+            <button type="button" class="flip-btn" aria-expanded="false">See industry terms</button>
           </div>
           <div class="flip-face flip-back" aria-hidden="true">
             <span class="eyebrow">In industry terms</span>
@@ -278,7 +278,7 @@
               <li>You approve each one first</li>
               <li>Stop approving whenever you're comfortable</li>
             </ul>
-            <button type="button" class="flip-btn" aria-expanded="false">How others describe this</button>
+            <button type="button" class="flip-btn" aria-expanded="false">See industry terms</button>
           </div>
           <div class="flip-face flip-back" aria-hidden="true">
             <span class="eyebrow">In industry terms</span>
@@ -422,23 +422,46 @@
 </script>
 <script>
 (function () {
+  var all = document.querySelectorAll('.included-grid > .inc-card');
   var cards = document.querySelectorAll('.has-flip');
+  var canHover = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   Array.prototype.forEach.call(cards, function (card) {
     var front = card.querySelector('.flip-front'), back = card.querySelector('.flip-back');
     var fb = front.querySelector('.flip-btn'), bb = back.querySelector('.flip-btn');
-    function set(flipped) {
-      card.classList.toggle('is-flipped', flipped);
-      fb.setAttribute('aria-expanded', flipped ? 'true' : 'false');
-      front.setAttribute('aria-hidden', flipped ? 'true' : 'false');
-      back.setAttribute('aria-hidden', flipped ? 'false' : 'true');
-      if (flipped) { front.setAttribute('inert', ''); back.removeAttribute('inert'); }
+    var flipped = false;
+    function set(on, moveFocus) {
+      if (on === flipped) return;
+      flipped = on;
+      card.classList.toggle('is-flipped', on);
+      fb.setAttribute('aria-expanded', on ? 'true' : 'false');
+      front.setAttribute('aria-hidden', on ? 'true' : 'false');
+      back.setAttribute('aria-hidden', on ? 'false' : 'true');
+      if (on) { front.setAttribute('inert', ''); back.removeAttribute('inert'); }
       else { back.setAttribute('inert', ''); front.removeAttribute('inert'); }
-      setTimeout(function () { (flipped ? bb : fb).focus({ preventScroll: true }); }, 350);
+      if (moveFocus) setTimeout(function () { (on ? bb : fb).focus({ preventScroll: true }); }, 350);
     }
     back.setAttribute('inert', '');
-    fb.addEventListener('click', function () { set(true); });
-    bb.addEventListener('click', function () { set(false); });
+    fb.addEventListener('click', function (e) { e.stopPropagation(); set(true, true); });
+    bb.addEventListener('click', function (e) { e.stopPropagation(); set(false, true); });
+    if (canHover) {
+      card.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') set(true, false); });
+      card.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') set(false, false); });
+    } else {
+      // Touch: tap anywhere on the card to turn it over.
+      card.addEventListener('click', function () { set(!flipped, false); });
+    }
   });
+  // Cards rise in as they scroll into view; on touch screens each gives a small peek so people know it turns.
+  if (!('IntersectionObserver' in window)) { Array.prototype.forEach.call(all, function (c) { c.classList.add('is-in'); }); return; }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (!en.isIntersecting) return;
+      en.target.classList.add('is-in');
+      if (!canHover && en.target.classList.contains('has-flip')) en.target.classList.add('is-peek');
+      io.unobserve(en.target);
+    });
+  }, { threshold: 0.2 });
+  Array.prototype.forEach.call(all, function (c, i) { c.style.setProperty('--d', (i % 4) * 0.08 + 's'); io.observe(c); });
 })();
 </script>
 </body>
