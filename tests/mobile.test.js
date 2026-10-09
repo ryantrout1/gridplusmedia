@@ -29,11 +29,6 @@ test('the header keeps the page links on phones instead of hiding them', () => {
   assert.match(css, /@media \(max-width: 820px\) \{[^@]*\.nav \{ display: contents; \}/);
 });
 
-test('the banner demo grid cannot be wider than a 320 px screen', () => {
-  assert.match(css, /minmax\(min\(280px, 100%\), 1fr\)/);
-  assert.doesNotMatch(css, /repeat\(auto-fit, minmax\(280px, 1fr\)\)/);
-});
-
 test('tap targets on phones are at least 44 px and the dialog fits a phone screen', () => {
   assert.match(css, /\.inc-more \{ min-height: 44px;/);
   assert.match(css, /\.site-footer a \{[^}]*min-height: 44px/);
