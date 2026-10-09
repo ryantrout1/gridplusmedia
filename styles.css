@@ -695,3 +695,9 @@ html:not(.js) .flip-btn { display: none; }
   .js .included-grid > .inc-card.is-in, .js .has-flip.is-peek .flip-inner { animation: none; }
   .js .inc-card.has-flip:hover { transform: none; }
 }
+
+/* An odd last question spans the row so the grid stays even */
+@media (min-width: 701px) {
+  .faq-grid > div:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .faq-grid > div:last-child:nth-child(odd) p { max-width: 760px; }
+}
